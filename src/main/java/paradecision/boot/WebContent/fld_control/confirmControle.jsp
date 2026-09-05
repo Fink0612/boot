@@ -1,0 +1,66 @@
+<script>
+function abreConfirmMensagem(txtConfirm, codConfirm){
+	document.getElementById("codConfirm").value = codConfirm;
+	var confirmMensagem = document.getElementById("confirmMensagem"); 
+	confirmMensagem.innerHTML = txtConfirm;
+	document.getElementById("confMsg").style.visibility = "visible";
+}
+function fechaConfirmMensagem(){
+	document.getElementById("confMsg").style.visibility = "hidden";
+}
+</script>
+<style>
+	#confMsg {
+		position: absolute;
+		left: 30%;
+		top: 40%;
+		padding: 30px;
+		visibility: hidden;
+		background: #fcfcfc;
+		border: 2px solid #006e6e;
+		border-radius: 20px;
+		box-shadow: 5px 5px;
+		width: 300px;
+		text-align: center;
+		font-family: verdana;
+		font-weight: bold;
+		font-size: 14px;
+		color: #006e6e;
+	}
+	.btnTipo {
+		border: 2px solid #006e6e;
+		border-radius: 4px;
+		display: inline-block;
+		cursor: pointer;
+		font-family: Verdana;
+		font-weight: bold;
+		font-size: 12px;
+		padding: 6px 10px;
+		text-decoration: none;
+		background: #99e6e6;
+		color: #000000;
+		width: 70px;
+	}
+	.btnTipo:hover {
+		border: 2px solid #00b386;
+		border-radius: 4px;
+		display: inline-block;
+		cursor: pointer;
+		font-family: Verdana;
+		font-weight: bold;
+		font-size: 12px;
+		padding: 6px 10px;
+		text-decoration: none;
+		background: #2eb8b8;
+		color: #ffffff;
+		width: 70px;
+	}
+</style>
+<div id="confMsg" class="alert alert-primary" role="alert">
+<input type="hidden" name="codConfirm" id="codConfirm" />
+<span id="confirmMensagem"></span>
+<br/><br/>
+<input type="button" value="Sim" class="btnTipo" 
+	onclick="var codConfirm = document.getElementById('codConfirm').value; rodarConfirmMetodo(codConfirm);">
+<input type="button" id="btnConfirm" value="Não" class="btnTipo" onclick="fechaConfirmMensagem();"> 
+</div>

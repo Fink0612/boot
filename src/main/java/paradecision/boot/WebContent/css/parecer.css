@@ -1,0 +1,69 @@
+@charset "ISO-8859-1";
+
+#tabParec td, th {
+    padding-left: 10px;
+}
+
+#tabParec ul {
+    list-style: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 2px solid #d6d6c2;
+	border-radius: 20px;
+	background-color: #d6d6c2;
+}
+
+#tabParec ul li {
+    display: inline;
+}
+
+#tabParec ul li a {
+	width: 22px;
+	text-align: center;
+	text-decoration: none;
+    display: inline-block;
+	font-weight: bold;
+	font-family: "verdana";
+	font-size: 14px;
+    color: #FFF;
+	border-radius: 6px;
+}
+
+#tabParec ul li a.nchk {
+    padding: 7px 3px 7px 3px;
+}
+
+#tabParec ul li a.chk {
+    padding: 3px 1px 4px 1px;
+    border: 3px solid #6A0606;
+    border-top: 5px solid #6A0606;
+    border-bottom: 5px solid #6A0606;
+}
+
+#tabParec ul li a:hover {
+    padding: 3px 1px 3px 1px;
+	border: 2px solid #0101DF;
+    border-top: 4px solid #0101DF;
+    border-bottom: 4px solid #0101DF;
+}
+/* Parecer Vermelho */
+#tabParec ul li a.vm {
+    background-color: #FE2E2E;
+}
+
+/* Parecer Verde */
+#tabParec ul li a.vd {
+    background-color: #64FE2E;
+}
+
+/* Parecer Azul */
+#tabParec ul li a.az {
+    background-color: #81DAF5;
+}
+
+/* Parecer Laranja */
+#tabParec ul li a.lr {
+    background-color: #FE9A2E;
+}
