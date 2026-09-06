@@ -144,7 +144,6 @@ public class UsuarioRepository {
       stmt.setString(4, oUsuarioModel.getA02_codigo_link());
       stmt.setString(5, oUsuarioModel.getA02_email());
       stmt.setInt(6, oUsuarioModel.getA02_status());
-      System.out.println(stmt);
       stmt.execute();
       stmt.close();
     } catch (Exception e) {

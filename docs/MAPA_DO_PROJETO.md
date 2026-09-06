@@ -163,7 +163,7 @@ Os assets próprios ficam em `static/compartilhado`, `static/autenticacao` e `st
 
 ## Banco, execução e testes
 
-O acesso permanece em JDBC, com configuração em `compartilhado/infra/ConnectionFactory.java`. O repositório não contém o esquema/carga SQL. Não foi feita alteração de tabelas para esta separação em camadas.
+O acesso permanece em JDBC. A ConnectionFactory lê `config/banco-local.properties` ou as variáveis DB_URL, DB_USER e DB_PASSWORD. O esquema local reconstruído está em `banco/schema.sql`; veja `banco/README.md`.
 
 Use JDK 21 e `mvnw.cmd clean package`. O POM permanece com Spring Boot, Web MVC, Thymeleaf e MySQL Connector. Os testes em `src/test/java/paradecision/boot` cobrem templates, fluxos HTTP com services reais, arquitetura e cálculo concorrente, sem depender do MySQL real.
 

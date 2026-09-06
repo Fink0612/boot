@@ -2,11 +2,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
 <script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
 <script type="text/javascript" th:src="@{/compartilhado/js/funcoesCadastro.js}" th:inline="javascript"></script>
+<link rel="stylesheet" th:href="@{/compartilhado/css/principal.css}" />
 </head>
 <body>
 
@@ -30,7 +32,7 @@
 <tr><td><label for="f_a06_descricao">Descrição: </label></td>
 <td><textarea name="f_a06_descricao" id="f_a06_descricao" rows="4" cols="40"></textarea></td></tr>
 </table>
-<span>------------------------------------------------</span><br/>
+<hr><br/>
 <input type="button" id="salvar" value="Salvar e Sair" onclick="salvarCadastroFator(2)" />
 <input type="button" id="cancelar" value="Cancelar e Sair" onclick="cancelarCadastroFator()" />
 <br/>

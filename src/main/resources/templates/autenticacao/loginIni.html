@@ -2,16 +2,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
-<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet" th:href="@{/compartilhado/css/principal.css}" />
 <script type="text/javascript" th:src="@{/autenticacao/js/funcoesLogin.js}" th:inline="javascript"></script>
 </head>
-<body>
+<body class="auth-page">
 
-<div class="card" id="telaLogin">
-  <div class="card-body">
+<main class="auth-layout">
+<section class="auth-story"><span class="eyebrow">ESPAÇO DE COLABORAÇÃO</span><h1>Grandes decisões<br>começam com<br><em>boas conversas.</em></h1><p>Reúna perspectivas, organize ideias e encontre o melhor caminho com sua equipe.</p><div class="decision-art" aria-hidden="true"><span class="art-orbit"></span><div class="art-card"><span class="art-label">DA IDEIA À DECISÃO</span><strong>Mais perspectivas.<br>Mais clareza.</strong><div class="art-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="art-foot">Conecte · Analise · Decida</span></div><span class="art-badge">↗ Em equipe, vamos além</span></div><span class="story-footer">ZEEN STORM / INTELIGÊNCIA COLETIVA</span></section>
+<section class="auth-panel"><div class="card" id="telaLogin">
+  <div class="card-body"><span class="eyebrow">SEU ESPAÇO DE DECISÃO</span><h2>Um novo começo.</h2><p class="auth-description">Defina sua senha para acessar seu espaço.</p>
   <form id="pdLoginForm" action="../autenticacao/loginIni" method="post">
   <input type="hidden" name="pdUsuario" id="pdUsuario" value="" />
   <input type="hidden" name="liCodini" id="liCodini" value="" />
@@ -23,12 +24,13 @@
     <label class="form-label">Confirmar Nova Senha: </label>
     <input type="password" name="pdConfNovaSenha" id="pdConfNovaSenha" onkeypress="submeterForm(2, event);" th:value="${pagina.txt_pdConfNovaSenha}" class="form-control" placeholder="Confirmação da Nova Senha..." />
   </div>
-  <button type="button" onclick="enviarPdLoginIni(1);" class="btn btn-paradecision btn-block">Enviar</button>
+  <button type="button" onclick="enviarPdLoginIni(1);" class="btn btn-paradecision btn-block">Salvar nova senha ↗</button>
   <div id="pdMensagens" th:style="${'display:' + pagina.txt_pdMsgDisplay + ';'}"><br/><th:block th:text="${pagina.txt_pdMensagens}"></th:block></div>
   <th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
   </form>
   </div>
 </div>
+<p class="auth-note">Um lugar para transformar ideias em decisões.</p></section></main>
 <script type="text/javascript" th:inline="javascript">
 	var jsPdAcao = [[${pagina.txt_pdAcao}]];
 	document.getElementById("pdUsuario").value = parent.document.getElementById("pdUsuSessao").value;

@@ -2,7 +2,7 @@
 
 Aplicação de tomada de decisão colaborativa: usuários pertencem a empresas, organizam agendas, cadastram fatores e registram pareceres de certeza e contradição. O projeto foi organizado para estudar Spring MVC em grupo, com controllers, services, repositories, entidades e DTOs separados por módulo.
 
-O frontend usa **Spring MVC + Thymeleaf**. São 38 templates HTML, incluindo cinco fragmentos compartilhados. Não há JSP, Jasper ou JSTL. Este é um monólito modular: um projeto Maven, uma aplicação Spring e um JAR.
+O frontend usa **Spring MVC + Thymeleaf**, com CSS próprio e responsivo, sem Bootstrap. O visual compartilhado fica em `static/compartilhado/css/principal.css`. São 38 templates HTML, incluindo cinco fragmentos compartilhados. Não há JSP, Jasper ou JSTL. Este é um monólito modular: um projeto Maven, uma aplicação Spring e um JAR.
 
 - [Mapa completo dos módulos, camadas e rotas](docs/MAPA_DO_PROJETO.md)
 - [O que mudou e como foi validado](docs/MIGRACAO_FRONTEND.md)
@@ -10,7 +10,7 @@ O frontend usa **Spring MVC + Thymeleaf**. São 38 templates HTML, incluindo cin
 
 ## Executar
 
-Requisitos: JDK 21 e o MySQL usado pelo legado. O Maven Wrapper está incluído.
+Requisitos: JDK 21 e MySQL 8.4. Para preparar o banco local no Windows, execute ` .\scripts\preparar-banco.ps1`. Veja [Banco local](banco/README.md). O Maven Wrapper está incluído.
 
 ```powershell
 # Nesta máquina existe este JDK 21. Em outro computador, ajuste o caminho.
@@ -20,7 +20,7 @@ $env:JAVA_HOME = "$env:USERPROFILE\.jdks\ms-21.0.9"
 
 Abra [a aplicação local](http://localhost:8080/). A entrada carrega a tela de login; as telas internas recebem os campos de navegação dos formulários anteriores.
 
-A configuração JDBC continua em `src/main/java/paradecision/boot/compartilhado/infra/ConnectionFactory.java`, como no backend original. O repositório não inclui script SQL de criação/carga do banco. A página inicial pode ser exibida sem consultar o MySQL; login e cadastros dependem dele.
+A configuração JDBC local fica em `config/banco-local.properties`, fora do Git. O esquema está em `banco/schema.sql`. Login e cadastros dependem do MySQL.
 
 ## Validar e empacotar
 

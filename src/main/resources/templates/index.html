@@ -3,19 +3,18 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
-<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet" th:href="@{/compartilhado/css/principal.css}" />
 <script type="text/javascript" th:src="@{/compartilhado/js/funcoesGerais.js}" th:inline="javascript"></script>
 <title>Zeen Storm</title>
 </head>
 
-<body>
+<body class="app-shell">
 <input type="hidden" name="pdCodini" id="pdCodini" />
 <th:block th:replace="~{compartilhado/header :: conteudo}"></th:block>
 
-<iframe id="indIFrame" src="" width="100%" style="height:90vh;">
+<iframe id="indIFrame" src="" width="100%" title="Área de trabalho">
     Your browser doesn't support iframes
 </iframe>
 <script type="text/javascript" th:inline="javascript">
