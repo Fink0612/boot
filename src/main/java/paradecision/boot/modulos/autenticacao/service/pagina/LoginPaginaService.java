@@ -3,7 +3,7 @@ package paradecision.boot.modulos.autenticacao.service.pagina;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-import paradecision.boot.compartilhado.dto.DadosFormulario;
+import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 import paradecision.boot.modulos.empresas.entity.Empresa;
 import paradecision.boot.modulos.empresas.entity.EmpresaUsuarioPerfil;
 import paradecision.boot.modulos.usuarios.dto.UsuarioEmpresasDados;

@@ -46,3 +46,7 @@ Os testes HTTP exercitam controllers e services reais com repositories simulados
 | Cabeçalho, confirmação e campos de navegação | `templates/compartilhado/` |
 
 Para adicionar uma tela, crie seu template no módulo, um `@Controller` em `controller` que delegue a um service e retorne o nome do template, e atualize a navegação em `static/compartilhado/js/funcoesFluxo.js`. Os services recebem dependências pelo construtor. Entidades contêm dados e não conhecem services, HTTP ou repositories.
+
+## Publicação no Render
+
+Docker e Blueprint preparados. Veja [o passo a passo](deploy/RENDER.md).

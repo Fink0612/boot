@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.stereotype.Repository;
-import paradecision.boot.compartilhado.infra.ConnectionFactory;
+import paradecision.boot.modulos.compartilhado.infra.ConnectionFactory;
 import paradecision.boot.modulos.empresas.entity.EmpresaUsuarioPerfil;
 
 @Repository

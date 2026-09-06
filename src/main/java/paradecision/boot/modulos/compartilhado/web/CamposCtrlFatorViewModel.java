@@ -1,4 +1,4 @@
-package paradecision.boot.compartilhado.web;
+package paradecision.boot.modulos.compartilhado.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;

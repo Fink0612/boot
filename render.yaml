@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: zeen-storm
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: DB_URL
+        value: jdbc:mysql://mysql-1b84e46-jonathanfink195-5c75.b.aivencloud.com:16979/defaultdb?sslMode=VERIFY_IDENTITY&serverTimezone=UTC&connectTimeout=10000&socketTimeout=30000&trustCertificateKeyStoreUrl=file:/app/aiven-truststore.p12&trustCertificateKeyStoreType=PKCS12&trustCertificateKeyStorePassword=changeit
+      - key: DB_USER
+        value: avnadmin
+      - key: DB_PASSWORD
+        sync: false

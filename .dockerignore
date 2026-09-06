@@ -1,0 +1,10 @@
+**
+!Dockerfile
+!.mvn/
+!.mvn/**
+!mvnw
+!pom.xml
+!src/
+!src/**
+!deploy/
+!deploy/aiven-ca.pem

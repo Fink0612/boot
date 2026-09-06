@@ -1,4 +1,4 @@
-package paradecision.boot.compartilhado.infra;
+package paradecision.boot.modulos.compartilhado.infra;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

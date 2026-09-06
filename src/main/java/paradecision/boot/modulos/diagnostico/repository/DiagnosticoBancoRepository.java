@@ -1,7 +1,7 @@
 package paradecision.boot.modulos.diagnostico.repository;
 
 import org.springframework.stereotype.Repository;
-import paradecision.boot.compartilhado.infra.ConnectionFactory;
+import paradecision.boot.modulos.compartilhado.infra.ConnectionFactory;
 import paradecision.boot.modulos.diagnostico.dto.DiagnosticoBanco;
 
 @Repository

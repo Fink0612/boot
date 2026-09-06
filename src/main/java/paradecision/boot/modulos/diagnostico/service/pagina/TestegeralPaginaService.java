@@ -3,7 +3,7 @@ package paradecision.boot.modulos.diagnostico.service.pagina;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-import paradecision.boot.compartilhado.dto.DadosFormulario;
+import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 
 /** Coordena o caso de uso e prepara os dados da tela, sem dependência HTTP. */
 @Service

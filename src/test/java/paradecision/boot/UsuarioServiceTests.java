@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
-import paradecision.boot.compartilhado.dto.DadosFormulario;
+import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 import paradecision.boot.modulos.usuarios.entity.Usuario;
 import paradecision.boot.modulos.usuarios.repository.UsuarioRepository;
 import paradecision.boot.modulos.usuarios.service.UsuarioService;

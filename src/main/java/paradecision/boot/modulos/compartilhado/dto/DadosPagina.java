@@ -1,4 +1,4 @@
-package paradecision.boot.compartilhado.dto;
+package paradecision.boot.modulos.compartilhado.dto;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

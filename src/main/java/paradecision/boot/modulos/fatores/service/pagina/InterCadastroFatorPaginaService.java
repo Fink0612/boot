@@ -3,8 +3,8 @@ package paradecision.boot.modulos.fatores.service.pagina;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-import paradecision.boot.compartilhado.dto.DadosFormulario;
-import paradecision.boot.compartilhado.util.MetodosUteis;
+import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
+import paradecision.boot.modulos.compartilhado.util.MetodosUteis;
 import paradecision.boot.modulos.fatores.entity.Fator;
 import paradecision.boot.modulos.fatores.service.FatorService;
 

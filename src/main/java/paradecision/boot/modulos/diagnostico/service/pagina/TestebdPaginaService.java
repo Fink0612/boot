@@ -3,7 +3,7 @@ package paradecision.boot.modulos.diagnostico.service.pagina;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-import paradecision.boot.compartilhado.dto.DadosFormulario;
+import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 import paradecision.boot.modulos.diagnostico.dto.DiagnosticoBanco;
 import paradecision.boot.modulos.diagnostico.service.AcessoBancoService;
 

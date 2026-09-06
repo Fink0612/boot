@@ -3,7 +3,7 @@ package paradecision.boot.modulos.agendas.service.pagina;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-import paradecision.boot.compartilhado.dto.DadosFormulario;
+import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 import paradecision.boot.modulos.agendas.entity.Agenda;
 import paradecision.boot.modulos.agendas.service.CalculoResultadoAgendaService;
 

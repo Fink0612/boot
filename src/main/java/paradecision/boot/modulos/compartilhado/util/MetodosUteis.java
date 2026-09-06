@@ -1,4 +1,4 @@
-package paradecision.boot.compartilhado.util;
+package paradecision.boot.modulos.compartilhado.util;
 
 import java.net.InetAddress;
 import java.text.ParseException;
