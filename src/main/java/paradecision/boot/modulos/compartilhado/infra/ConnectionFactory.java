@@ -32,10 +32,10 @@ public class ConnectionFactory {
               StandardCharsets.UTF_8
       )) {
         config.load(leitor);
-      } catch (IOException e) {
+      } catch (IOException excecao) {
         throw new IllegalStateException(
                 "Não foi possível ler a configuração do banco",
-                e
+                excecao
         );
       }
     }
@@ -97,14 +97,14 @@ public class ConnectionFactory {
               senha
       );
 
-    } catch (SQLException e) {
+    } catch (SQLException excecao) {
 
       erro =
               "Problemas na conexão com a fonte de dados "
                       + "(SQLState: "
-                      + e.getSQLState()
+                      + excecao.getSQLState()
                       + "): "
-                      + e.getMessage();
+                      + excecao.getMessage();
 
       System.err.println(erro);
 

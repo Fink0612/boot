@@ -24,58 +24,58 @@ public class EmpresaUsuariosPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Empresa oEmpresaModel = new Empresa();
-    Usuario oUsuarioModel = new Usuario();
-    EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel = new EmpresaUsuarioPerfil();
-    EmpresaUsuariosDados oEmpresaUsuariosModel = new EmpresaUsuariosDados();
+    Empresa dadosEmpresa = new Empresa();
+    Usuario dadosUsuario = new Usuario();
+    EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil = new EmpresaUsuarioPerfil();
+    EmpresaUsuariosDados dadosEmpresaUsuarios = new EmpresaUsuariosDados();
 
     int achouUsuario = 0;
-    long eu_ct_A01_CODIGO = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
-    String eu_ct_A01_NOME = formulario.valor("ct_A01_NOME");
-    oEmpresaModel.setA01_codigo(eu_ct_A01_CODIGO);
-    oEmpresaModel.setA01_nome(eu_ct_A01_NOME);
-    oEmpresaUsuariosModel.setoEmpresaModel(oEmpresaModel);
-    oEmpresaUsuariosModel = empresaUsuariosService.selectUsuariosDaEmpresa(oEmpresaUsuariosModel);
-    if (oEmpresaUsuariosModel.getArrUsuarioModel().size() > 0) {
+    long codigoEmpresaUsuariosEmpresaControle = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
+    String nomeEmpresaUsuariosEmpresaControle = formulario.valor("ct_A01_NOME");
+    dadosEmpresa.setA01_codigo(codigoEmpresaUsuariosEmpresaControle);
+    dadosEmpresa.setA01_nome(nomeEmpresaUsuariosEmpresaControle);
+    dadosEmpresaUsuarios.setoEmpresaModel(dadosEmpresa);
+    dadosEmpresaUsuarios = empresaUsuariosService.selectUsuariosDaEmpresa(dadosEmpresaUsuarios);
+    if (dadosEmpresaUsuarios.getArrUsuarioModel().size() > 0) {
       achouUsuario = 1;
     }
 
-    String eu_ct_A03_PERFIL_PARAVIVERBEM = formulario.valor("ct_A03_PERFIL_PARAVIVERBEM");
-    String eu_ct_A03_PERFIL_ADMINISTRADOR = formulario.valor("ct_A03_PERFIL_ADMINISTRADOR");
+    String perfilParaviverbemPerfilEmpresaUsuarioUsuariosEmpresaControle = formulario.valor("ct_A03_PERFIL_PARAVIVERBEM");
+    String perfilAdministradorPerfilEmpresaUsuarioUsuariosEmpresaControle = formulario.valor("ct_A03_PERFIL_ADMINISTRADOR");
     String displayLink = "none";
     String displaySoTexto = "inline";
-    if (eu_ct_A03_PERFIL_PARAVIVERBEM.equals("1") || eu_ct_A03_PERFIL_ADMINISTRADOR.equals("1")) {
+    if (perfilParaviverbemPerfilEmpresaUsuarioUsuariosEmpresaControle.equals("1") || perfilAdministradorPerfilEmpresaUsuarioUsuariosEmpresaControle.equals("1")) {
       displayLink = "inline";
       displaySoTexto = "none";
     }
     if (achouUsuario == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-      arrUsuarioModel = oEmpresaUsuariosModel.getArrUsuarioModel();
-      for (int i = 0; i < arrUsuarioModel.size(); i++) {
+      ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+      listaUsuario = dadosEmpresaUsuarios.getArrUsuarioModel();
+      for (int indiceElemento = 0; indiceElemento < listaUsuario.size(); indiceElemento++) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
-        oUsuarioModel = oEmpresaUsuariosModel.getArrUsuarioModel().get(i);
-        oEmpresaUsuarioPerfilModel = oEmpresaUsuariosModel.getArrEmpresaUsuarioPerfilModel().get(i);
+        dadosUsuario = dadosEmpresaUsuarios.getArrUsuarioModel().get(indiceElemento);
+        dadosEmpresaUsuarioPerfil = dadosEmpresaUsuarios.getArrEmpresaUsuarioPerfilModel().get(indiceElemento);
 
         linha2.put("displayLink", String.valueOf(displayLink));
 
-        linha2.put("oUsuarioModel_A02_codigo", String.valueOf(oUsuarioModel.getA02_codigo()));
+        linha2.put("oUsuarioModel_A02_codigo", String.valueOf(dadosUsuario.getA02_codigo()));
 
-        linha2.put("oUsuarioModel_A02_nome", String.valueOf(oUsuarioModel.getA02_nome()));
+        linha2.put("oUsuarioModel_A02_nome", String.valueOf(dadosUsuario.getA02_nome()));
 
         linha2.put("displaySoTexto", String.valueOf(displaySoTexto));
 
-        linha2.put("oUsuarioModel_A02_nome2", String.valueOf(oUsuarioModel.getA02_nome()));
+        linha2.put("oUsuarioModel_A02_nome2", String.valueOf(dadosUsuario.getA02_nome()));
 
         linha2.put(
             "oEmpresaUsuarioPerfilModel_A03_perfil_chefe",
-            String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_chefe()));
+            String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_chefe()));
 
         linha2.put(
             "oEmpresaUsuarioPerfilModel_A03_perfil_padrao",
-            String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_padrao()));
+            String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_padrao()));
       }
     }
 

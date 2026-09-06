@@ -7,89 +7,89 @@ import java.util.Random;
 
 public abstract class MetodosUteis {
 
-  public static String vChave = "HOENIRTYRMAGNISNOTRAVARFORSETISKULDNEHALLENIAKVASIR";
+  public static String chaveCodificacaoLegada = "HOENIRTYRMAGNISNOTRAVARFORSETISKULDNEHALLENIAKVASIR";
 
-  public static String gerarCodigo(int tam) {
-    Random rnd = new Random();
-    String cod = "";
-    String txtAux = "";
-    int qtd = (tam / 10);
-    if (tam % 10 > 0) qtd++;
-    for (int i = 0; i < qtd; i++) {
-      txtAux = Double.toString(rnd.nextDouble());
-      txtAux = txtAux.replace("0.", "");
-      cod += txtAux;
+  public static String gerarCodigo(int tamanhoSolicitado) {
+    Random geradorAleatorio = new Random();
+    String codigoGerado = "";
+    String textoAuxiliar = "";
+    int quantidadeBlocos = (tamanhoSolicitado / 10);
+    if (tamanhoSolicitado % 10 > 0) quantidadeBlocos++;
+    for (int indiceElemento = 0; indiceElemento < quantidadeBlocos; indiceElemento++) {
+      textoAuxiliar = Double.toString(geradorAleatorio.nextDouble());
+      textoAuxiliar = textoAuxiliar.replace("0.", "");
+      codigoGerado += textoAuxiliar;
     }
-    cod = cod.substring(0, tam);
-    return cod;
+    codigoGerado = codigoGerado.substring(0, tamanhoSolicitado);
+    return codigoGerado;
   }
 
-  public static String padronizarMaiusculoCE(String txt) {
+  public static String padronizarMaiusculoCE(String textoRecebido) {
     // Obs.: padr�o COM espa�os
     // retirando espa�os iniciais e finais, e deixando "CAIXA-ALTA"
-    String auxTxt = txt.toUpperCase().trim();
+    String textoNormalizado = textoRecebido.toUpperCase().trim();
     // retirando espa�os extras internos a String
-    String espExt = "  ";
-    int posic = auxTxt.indexOf(espExt);
-    while (posic >= 0) {
-      auxTxt = auxTxt.replaceAll(espExt, " ");
-      posic = auxTxt.indexOf(espExt);
+    String espacosExcedentes = "  ";
+    int posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
+    while (posicaoEncontrada >= 0) {
+      textoNormalizado = textoNormalizado.replaceAll(espacosExcedentes, " ");
+      posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
     }
-    return auxTxt;
+    return textoNormalizado;
   }
 
-  public static String padronizarMinusculoSE(String txt) {
+  public static String padronizarMinusculoSE(String textoRecebido) {
     // Obs.: padr�o SEM espa�os
     // retirando espa�os iniciais e finais, e deixando "caixa-baixa"
-    String auxTxt = txt.toLowerCase().trim();
+    String textoNormalizado = textoRecebido.toLowerCase().trim();
     // retirando espa�os internos a String
-    String espExt = " ";
-    int posic = auxTxt.indexOf(espExt);
-    while (posic >= 0) {
-      auxTxt = auxTxt.replaceAll(espExt, "");
-      posic = auxTxt.indexOf(espExt);
+    String espacosExcedentes = " ";
+    int posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
+    while (posicaoEncontrada >= 0) {
+      textoNormalizado = textoNormalizado.replaceAll(espacosExcedentes, "");
+      posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
     }
-    return auxTxt;
+    return textoNormalizado;
   }
 
-  public static String padronizarMinusculoCE(String txt) {
+  public static String padronizarMinusculoCE(String textoRecebido) {
     // Obs.: padr�o COM espa�os
     // retirando espa�os iniciais e finais, e deixando "caixa-baixa"
-    String auxTxt = txt.toLowerCase().trim();
+    String textoNormalizado = textoRecebido.toLowerCase().trim();
     // retirando espa�os extras internos a String
-    String espExt = "  ";
-    int posic = auxTxt.indexOf(espExt);
-    while (posic >= 0) {
-      auxTxt = auxTxt.replaceAll(espExt, " ");
-      posic = auxTxt.indexOf(espExt);
+    String espacosExcedentes = "  ";
+    int posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
+    while (posicaoEncontrada >= 0) {
+      textoNormalizado = textoNormalizado.replaceAll(espacosExcedentes, " ");
+      posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
     }
-    return auxTxt;
+    return textoNormalizado;
   }
 
-  public static String padronizarEspacos(String txt) {
+  public static String padronizarEspacos(String textoRecebido) {
     // Obs.: padr�o COM espa�os
     // retirando espa�os iniciais e finais
-    String auxTxt = txt.trim();
+    String textoNormalizado = textoRecebido.trim();
     // retirando espa�os extras internos a String
-    String espExt = "  ";
-    int posic = auxTxt.indexOf(espExt);
-    while (posic >= 0) {
-      auxTxt = auxTxt.replaceAll(espExt, " ");
-      posic = auxTxt.indexOf(espExt);
+    String espacosExcedentes = "  ";
+    int posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
+    while (posicaoEncontrada >= 0) {
+      textoNormalizado = textoNormalizado.replaceAll(espacosExcedentes, " ");
+      posicaoEncontrada = textoNormalizado.indexOf(espacosExcedentes);
     }
-    return auxTxt;
+    return textoNormalizado;
   }
 
-  public static java.sql.Date retornaDate(String strDt, String formatDt) {
+  public static java.sql.Date retornaDate(String dataTexto, String formatoData) {
     // Neste caso, se a data estiver em formato errado, retornar� nulo
     // Exemplo de chamada a este m�todo:
     // Date variavel_Date = MetodosUteis.retornaDate(variavel_String_de_Data, "yyyy-MM-dd");
     java.util.Date dataUtil = new java.util.Date();
     java.sql.Date dataSql = null;
     try {
-      dataUtil = new SimpleDateFormat(formatDt).parse(strDt);
+      dataUtil = new SimpleDateFormat(formatoData).parse(dataTexto);
       dataSql = new java.sql.Date(dataUtil.getTime());
-    } catch (ParseException e) {
+    } catch (ParseException excecao) {
     }
     return dataSql;
   }
@@ -100,107 +100,107 @@ public abstract class MetodosUteis {
     java.sql.Date dataSql = null;
     try {
       dataSql = new java.sql.Date(dataUtil.getTime());
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
     return dataSql;
   }
 
   public static String getDatNowBD() {
-    String ret = "";
+    String resultadoOperacao = "";
     // Retorna a data atual (de hoje)
     java.util.Date dataUtil = new java.util.Date();
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    ret = formatter.format(dataUtil);
-    return ret;
+    SimpleDateFormat formatadorData = new SimpleDateFormat("yyyy-MM-dd");
+    resultadoOperacao = formatadorData.format(dataUtil);
+    return resultadoOperacao;
   }
 
-  public static int retornaInt(String strVal) {
-    int ret = -1;
+  public static int retornaInt(String valorTexto) {
+    int resultadoOperacao = -1;
     try {
-      int numVal = Integer.parseInt(strVal);
-      ret = numVal;
-    } catch (Exception e) {
+      int valorNumerico = Integer.parseInt(valorTexto);
+      resultadoOperacao = valorNumerico;
+    } catch (Exception excecao) {
     }
-    return ret;
+    return resultadoOperacao;
   }
 
-  public static long retornaLong(String strVal) {
-    long ret = -1;
+  public static long retornaLong(String valorTexto) {
+    long resultadoOperacao = -1;
     try {
-      long numVal = Long.parseLong(strVal);
-      ret = numVal;
-    } catch (Exception e) {
+      long valorNumerico = Long.parseLong(valorTexto);
+      resultadoOperacao = valorNumerico;
+    } catch (Exception excecao) {
     }
-    return ret;
+    return resultadoOperacao;
   }
 
-  public static double retornaDouble(String strVal) {
-    double ret = -1;
+  public static double retornaDouble(String valorTexto) {
+    double resultadoOperacao = -1;
     try {
-      double numVal = Double.parseDouble(strVal);
-      ret = numVal;
-    } catch (Exception e) {
+      double valorNumerico = Double.parseDouble(valorTexto);
+      resultadoOperacao = valorNumerico;
+    } catch (Exception excecao) {
     }
-    return ret;
+    return resultadoOperacao;
   }
 
-  public static String getCorNivelCert(int numParec) {
-    String ret = "";
-    if (numParec <= 3) {
-      ret = "vm"; // vermelho
-    } else if (numParec <= 5) {
-      ret = "lr"; // laranja
-    } else if (numParec <= 8) {
-      ret = "vd"; // verde
-    } else if (numParec <= 10) {
-      ret = "az"; // azul
+  public static String getCorNivelCert(int quantidadePareceres) {
+    String resultadoOperacao = "";
+    if (quantidadePareceres <= 3) {
+      resultadoOperacao = "vm"; // vermelho
+    } else if (quantidadePareceres <= 5) {
+      resultadoOperacao = "lr"; // laranja
+    } else if (quantidadePareceres <= 8) {
+      resultadoOperacao = "vd"; // verde
+    } else if (quantidadePareceres <= 10) {
+      resultadoOperacao = "az"; // azul
     }
-    return ret;
+    return resultadoOperacao;
   }
 
-  public static String getCorNivelContr(int numParec) {
-    String ret = "";
-    if (numParec >= 7) {
-      ret = "vm"; // vermelho
-    } else if (numParec >= 5) {
-      ret = "lr"; // laranja
-    } else if (numParec >= 2) {
-      ret = "vd"; // verde
-    } else if (numParec >= 0) {
-      ret = "az"; // azul
+  public static String getCorNivelContr(int quantidadePareceres) {
+    String resultadoOperacao = "";
+    if (quantidadePareceres >= 7) {
+      resultadoOperacao = "vm"; // vermelho
+    } else if (quantidadePareceres >= 5) {
+      resultadoOperacao = "lr"; // laranja
+    } else if (quantidadePareceres >= 2) {
+      resultadoOperacao = "vd"; // verde
+    } else if (quantidadePareceres >= 0) {
+      resultadoOperacao = "az"; // azul
     }
-    return ret;
+    return resultadoOperacao;
   }
 
   public static String retornaTxtStatusAgenda(String sttAg) {
-    String ret = "";
+    String resultadoOperacao = "";
     if (sttAg == null) {
-      ret = "Aguardando Encaminhamento";
+      resultadoOperacao = "Aguardando Encaminhamento";
     } else if (sttAg.equals("")) {
-      ret = "Aguardando Encaminhamento";
+      resultadoOperacao = "Aguardando Encaminhamento";
     } else if (sttAg.equals("0")) {
-      ret = "Aguardando Encaminhamento";
+      resultadoOperacao = "Aguardando Encaminhamento";
     } else if (sttAg.equals("1")) {
-      ret = "Aguardando Fatores";
+      resultadoOperacao = "Aguardando Fatores";
     } else if (sttAg.equals("2")) {
-      ret = "Aguardando Pareceres";
+      resultadoOperacao = "Aguardando Pareceres";
     } else if (sttAg.equals("9")) {
-      ret = "Fechada";
+      resultadoOperacao = "Fechada";
     } else {
-      ret = "Indefinido";
+      resultadoOperacao = "Indefinido";
     }
-    return ret;
+    return resultadoOperacao;
   }
 
   public static String getIpAddress() {
-    String ret = "";
+    String resultadoOperacao = "";
     InetAddress addr = null;
     try {
       addr = InetAddress.getLocalHost();
-      ret = addr.getHostAddress();
-    } catch (Exception e) {
-      ret = "N�o foi poss�vel resgatar o IP desta m�quina.";
+      resultadoOperacao = addr.getHostAddress();
+    } catch (Exception excecao) {
+      resultadoOperacao = "N�o foi poss�vel resgatar o IP desta m�quina.";
     }
-    return ret;
+    return resultadoOperacao;
   }
 }

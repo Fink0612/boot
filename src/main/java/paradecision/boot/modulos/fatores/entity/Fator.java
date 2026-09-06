@@ -4,103 +4,103 @@ import java.sql.Date;
 
 public class Fator {
 
-  private long a06_codigo;
-  private String a06_titulo;
-  private String a06_descricao;
-  private int a06_num_sequencia;
-  private long a04_codigo;
-  private long a02_codigo;
-  private double a06_certeza_resultante_fator;
-  private double a06_contradicao_resultante_fator;
-  private String a06_resultado_fator;
-  private Date a06_dt_cadastro;
-  private Date a06_dt_ultima_alteracao;
+  private long codigoFator;
+  private String tituloFator;
+  private String descricaoFator;
+  private int numeroSequenciaFator;
+  private long codigoAgenda;
+  private long codigoUsuario;
+  private double certezaResultanteFatorFator;
+  private double contradicaoResultanteFatorFator;
+  private String resultadoFatorFator;
+  private Date dataCadastroFator;
+  private Date dataUltimaAlteracaoFator;
 
   public long getA06_codigo() {
-    return a06_codigo;
+    return codigoFator;
   }
 
-  public void setA06_codigo(long a06_codigo) {
-    this.a06_codigo = a06_codigo;
+  public void setA06_codigo(long codigoFator) {
+    this.codigoFator = codigoFator;
   }
 
   public String getA06_titulo() {
-    return a06_titulo;
+    return tituloFator;
   }
 
-  public void setA06_titulo(String a06_titulo) {
-    this.a06_titulo = a06_titulo;
+  public void setA06_titulo(String tituloFator) {
+    this.tituloFator = tituloFator;
   }
 
   public String getA06_descricao() {
-    return a06_descricao;
+    return descricaoFator;
   }
 
-  public void setA06_descricao(String a06_descricao) {
-    this.a06_descricao = a06_descricao;
+  public void setA06_descricao(String descricaoFator) {
+    this.descricaoFator = descricaoFator;
   }
 
   public int getA06_num_sequencia() {
-    return a06_num_sequencia;
+    return numeroSequenciaFator;
   }
 
-  public void setA06_num_sequencia(int a06_num_sequencia) {
-    this.a06_num_sequencia = a06_num_sequencia;
+  public void setA06_num_sequencia(int numeroSequenciaFator) {
+    this.numeroSequenciaFator = numeroSequenciaFator;
   }
 
   public long getA04_codigo() {
-    return a04_codigo;
+    return codigoAgenda;
   }
 
-  public void setA04_codigo(long a04_codigo) {
-    this.a04_codigo = a04_codigo;
+  public void setA04_codigo(long codigoAgenda) {
+    this.codigoAgenda = codigoAgenda;
   }
 
   public long getA02_codigo() {
-    return a02_codigo;
+    return codigoUsuario;
   }
 
-  public void setA02_codigo(long a02_codigo) {
-    this.a02_codigo = a02_codigo;
+  public void setA02_codigo(long codigoUsuario) {
+    this.codigoUsuario = codigoUsuario;
   }
 
   public double getA06_certeza_resultante_fator() {
-    return a06_certeza_resultante_fator;
+    return certezaResultanteFatorFator;
   }
 
-  public void setA06_certeza_resultante_fator(double a06_certeza_resultante_fator) {
-    this.a06_certeza_resultante_fator = a06_certeza_resultante_fator;
+  public void setA06_certeza_resultante_fator(double certezaResultanteFatorFator) {
+    this.certezaResultanteFatorFator = certezaResultanteFatorFator;
   }
 
   public double getA06_contradicao_resultante_fator() {
-    return a06_contradicao_resultante_fator;
+    return contradicaoResultanteFatorFator;
   }
 
-  public void setA06_contradicao_resultante_fator(double a06_contradicao_resultante_fator) {
-    this.a06_contradicao_resultante_fator = a06_contradicao_resultante_fator;
+  public void setA06_contradicao_resultante_fator(double contradicaoResultanteFatorFator) {
+    this.contradicaoResultanteFatorFator = contradicaoResultanteFatorFator;
   }
 
   public String getA06_resultado_fator() {
-    return a06_resultado_fator;
+    return resultadoFatorFator;
   }
 
-  public void setA06_resultado_fator(String a06_resultado_fator) {
-    this.a06_resultado_fator = a06_resultado_fator;
+  public void setA06_resultado_fator(String resultadoFatorFator) {
+    this.resultadoFatorFator = resultadoFatorFator;
   }
 
   public Date getA06_dt_cadastro() {
-    return a06_dt_cadastro;
+    return dataCadastroFator;
   }
 
-  public void setA06_dt_cadastro(Date a06_dt_cadastro) {
-    this.a06_dt_cadastro = a06_dt_cadastro;
+  public void setA06_dt_cadastro(Date dataCadastroFator) {
+    this.dataCadastroFator = dataCadastroFator;
   }
 
   public Date getA06_dt_ultima_alteracao() {
-    return a06_dt_ultima_alteracao;
+    return dataUltimaAlteracaoFator;
   }
 
-  public void setA06_dt_ultima_alteracao(Date a06_dt_ultima_alteracao) {
-    this.a06_dt_ultima_alteracao = a06_dt_ultima_alteracao;
+  public void setA06_dt_ultima_alteracao(Date dataUltimaAlteracaoFator) {
+    this.dataUltimaAlteracaoFator = dataUltimaAlteracaoFator;
   }
 }

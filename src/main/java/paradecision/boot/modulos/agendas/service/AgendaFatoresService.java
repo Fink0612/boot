@@ -12,13 +12,13 @@ public class AgendaFatoresService {
     this.agendaFatoresRepository = agendaFatoresRepository;
   }
 
-  public AgendaFatoresDados selectFatoresDaAgenda(AgendaFatoresDados oAgendaFatoresModel) {
-    oAgendaFatoresModel = agendaFatoresRepository.selectFatoresDaAgenda(oAgendaFatoresModel);
-    return oAgendaFatoresModel;
+  public AgendaFatoresDados selectFatoresDaAgenda(AgendaFatoresDados dadosAgendaFatores) {
+    dadosAgendaFatores = agendaFatoresRepository.selectFatoresDaAgenda(dadosAgendaFatores);
+    return dadosAgendaFatores;
   }
 
-  public String updateGrausFatoresDaAgenda(AgendaFatoresDados oAgendaFatoresModel) {
-    String msgAction = agendaFatoresRepository.updateGrausFatoresDaAgenda(oAgendaFatoresModel);
-    return msgAction;
+  public String updateGrausFatoresDaAgenda(AgendaFatoresDados dadosAgendaFatores) {
+    String mensagemAcao = agendaFatoresRepository.updateGrausFatoresDaAgenda(dadosAgendaFatores);
+    return mensagemAcao;
   }
 }

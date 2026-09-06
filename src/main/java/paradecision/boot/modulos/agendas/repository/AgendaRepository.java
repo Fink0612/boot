@@ -11,123 +11,123 @@ import paradecision.boot.modulos.agendas.entity.Agenda;
 @Repository
 public class AgendaRepository {
 
-  public long insertAgenda(Agenda oAgendaModel) {
-    long res = 0;
-    Connection con = new ConnectionFactory().getConnection();
+  public long insertAgenda(Agenda dadosAgenda) {
+    long resultadoProcessamento = 0;
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
 
-    String sql = "INSERT INTO AGENDA_04 (A04_TITULO, A04_DESCRICAO, ";
-    sql += "A04_STATUS_DT_LIMITE, A04_DATA_LIMITE, A04_RESULTADO, ";
-    sql +=
+    String instrucaoSql = "INSERT INTO AGENDA_04 (A04_TITULO, A04_DESCRICAO, ";
+    instrucaoSql += "A04_STATUS_DT_LIMITE, A04_DATA_LIMITE, A04_RESULTADO, ";
+    instrucaoSql +=
         "A04_CERTEZA_RESULTADO, A04_CONTRADICAO_RESULTADO, A01_CODIGO, A04_STATUS, A04_DT_CADASTRO)"
             + " ";
-    sql += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate())";
+    instrucaoSql += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate())";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-      stmt.setString(1, oAgendaModel.getA04_titulo());
-      stmt.setString(2, oAgendaModel.getA04_descricao());
-      stmt.setInt(3, oAgendaModel.getA04_status_dt_limite());
-      stmt.setDate(4, oAgendaModel.getA04_data_limite());
-      stmt.setString(5, oAgendaModel.getA04_resultado());
-      stmt.setDouble(6, oAgendaModel.getA04_certeza_resultado());
-      stmt.setDouble(7, oAgendaModel.getA04_contradicao_resultado());
-      stmt.setLong(8, oAgendaModel.getA01_codigo());
-      stmt.setInt(9, oAgendaModel.getA04_status());
-      stmt.executeUpdate();
-      ResultSet rs = stmt.getGeneratedKeys();
-      if (rs.first()) {
-        res = rs.getLong(1);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql, PreparedStatement.RETURN_GENERATED_KEYS);
+      comandoPreparado.setString(1, dadosAgenda.getA04_titulo());
+      comandoPreparado.setString(2, dadosAgenda.getA04_descricao());
+      comandoPreparado.setInt(3, dadosAgenda.getA04_status_dt_limite());
+      comandoPreparado.setDate(4, dadosAgenda.getA04_data_limite());
+      comandoPreparado.setString(5, dadosAgenda.getA04_resultado());
+      comandoPreparado.setDouble(6, dadosAgenda.getA04_certeza_resultado());
+      comandoPreparado.setDouble(7, dadosAgenda.getA04_contradicao_resultado());
+      comandoPreparado.setLong(8, dadosAgenda.getA01_codigo());
+      comandoPreparado.setInt(9, dadosAgenda.getA04_status());
+      comandoPreparado.executeUpdate();
+      ResultSet resultadoConsulta = comandoPreparado.getGeneratedKeys();
+      if (resultadoConsulta.first()) {
+        resultadoProcessamento = resultadoConsulta.getLong(1);
       }
-      stmt.close();
-    } catch (Exception e) {
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a cria��o de dados no BD...(AP)");
     }
-    fechaCon(con);
-    return res;
+    fechaCon(conexaoBanco);
+    return resultadoProcessamento;
   }
 
-  public String updateAgenda(Agenda oAgendaModel) {
-    String res = "OK";
-    Connection con = new ConnectionFactory().getConnection();
+  public String updateAgenda(Agenda dadosAgenda) {
+    String resultadoProcessamento = "OK";
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
 
-    String sql = "UPDATE AGENDA_04 SET ";
-    sql += "A04_TITULO=?, A04_DESCRICAO=?, A04_STATUS_DT_LIMITE=?, ";
-    sql += "A04_DATA_LIMITE=?, A04_DT_ULTIMA_ALTERACAO=sysdate() ";
-    sql += "WHERE A04_CODIGO=?;";
+    String instrucaoSql = "UPDATE AGENDA_04 SET ";
+    instrucaoSql += "A04_TITULO=?, A04_DESCRICAO=?, A04_STATUS_DT_LIMITE=?, ";
+    instrucaoSql += "A04_DATA_LIMITE=?, A04_DT_ULTIMA_ALTERACAO=sysdate() ";
+    instrucaoSql += "WHERE A04_CODIGO=?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setString(1, oAgendaModel.getA04_titulo());
-      stmt.setString(2, oAgendaModel.getA04_descricao());
-      stmt.setInt(3, oAgendaModel.getA04_status_dt_limite());
-      stmt.setDate(4, oAgendaModel.getA04_data_limite());
-      stmt.setLong(5, oAgendaModel.getA04_codigo());
-      stmt.execute();
-      stmt.close();
-    } catch (Exception e) {
-      res = "NOK";
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setString(1, dadosAgenda.getA04_titulo());
+      comandoPreparado.setString(2, dadosAgenda.getA04_descricao());
+      comandoPreparado.setInt(3, dadosAgenda.getA04_status_dt_limite());
+      comandoPreparado.setDate(4, dadosAgenda.getA04_data_limite());
+      comandoPreparado.setLong(5, dadosAgenda.getA04_codigo());
+      comandoPreparado.execute();
+      comandoPreparado.close();
+    } catch (Exception excecao) {
+      resultadoProcessamento = "NOK";
       System.out.println(":: ERRO :: Problemas com a altera��o de dados no BD...(AP-U1)");
     }
-    fechaCon(con);
-    return res;
+    fechaCon(conexaoBanco);
+    return resultadoProcessamento;
   }
 
-  public Agenda selectAgenda(Agenda oAgendaModel) {
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM AGENDA_04 WHERE A04_CODIGO=?;";
+  public Agenda selectAgenda(Agenda dadosAgenda) {
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM AGENDA_04 WHERE A04_CODIGO=?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oAgendaModel.getA04_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oAgendaModel.setA04_titulo(rs.getString("A04_TITULO"));
-        oAgendaModel.setA04_descricao(rs.getString("A04_DESCRICAO"));
-        oAgendaModel.setA04_status_dt_limite(rs.getInt("A04_STATUS_DT_LIMITE"));
-        oAgendaModel.setA04_data_limite(rs.getDate("A04_DATA_LIMITE"));
-        oAgendaModel.setA04_resultado(rs.getString("A04_RESULTADO"));
-        oAgendaModel.setA04_certeza_resultado(rs.getDouble("A04_CERTEZA_RESULTADO"));
-        oAgendaModel.setA04_contradicao_resultado(rs.getDouble("A04_CONTRADICAO_RESULTADO"));
-        oAgendaModel.setA04_dt_cadastro(rs.getDate("A04_DT_CADASTRO"));
-        oAgendaModel.setA04_dt_ultima_alteracao(rs.getDate("A04_DT_ULTIMA_ALTERACAO"));
-        oAgendaModel.setA01_codigo(rs.getLong("A01_CODIGO"));
-        oAgendaModel.setA04_status(rs.getInt("A04_STATUS"));
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosAgenda.getA04_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosAgenda.setA04_titulo(resultadoConsulta.getString("A04_TITULO"));
+        dadosAgenda.setA04_descricao(resultadoConsulta.getString("A04_DESCRICAO"));
+        dadosAgenda.setA04_status_dt_limite(resultadoConsulta.getInt("A04_STATUS_DT_LIMITE"));
+        dadosAgenda.setA04_data_limite(resultadoConsulta.getDate("A04_DATA_LIMITE"));
+        dadosAgenda.setA04_resultado(resultadoConsulta.getString("A04_RESULTADO"));
+        dadosAgenda.setA04_certeza_resultado(resultadoConsulta.getDouble("A04_CERTEZA_RESULTADO"));
+        dadosAgenda.setA04_contradicao_resultado(resultadoConsulta.getDouble("A04_CONTRADICAO_RESULTADO"));
+        dadosAgenda.setA04_dt_cadastro(resultadoConsulta.getDate("A04_DT_CADASTRO"));
+        dadosAgenda.setA04_dt_ultima_alteracao(resultadoConsulta.getDate("A04_DT_ULTIMA_ALTERACAO"));
+        dadosAgenda.setA01_codigo(resultadoConsulta.getLong("A01_CODIGO"));
+        dadosAgenda.setA04_status(resultadoConsulta.getInt("A04_STATUS"));
       }
-      stmt.close();
-    } catch (Exception e) {
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AP)");
     }
-    fechaCon(con);
-    return oAgendaModel;
+    fechaCon(conexaoBanco);
+    return dadosAgenda;
   }
 
-  public String updateStatusAgenda(Agenda oAgendaModel) {
-    String msgAction = "";
-    Connection con = new ConnectionFactory().getConnection();
+  public String updateStatusAgenda(Agenda dadosAgenda) {
+    String mensagemAcao = "";
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
 
-    String sql = "UPDATE AGENDA_04 ";
-    sql += "SET A04_STATUS=? ";
-    sql += "WHERE A04_CODIGO=?;";
+    String instrucaoSql = "UPDATE AGENDA_04 ";
+    instrucaoSql += "SET A04_STATUS=? ";
+    instrucaoSql += "WHERE A04_CODIGO=?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setInt(1, oAgendaModel.getA04_status());
-      stmt.setLong(2, oAgendaModel.getA04_codigo());
-      stmt.execute();
-      stmt.close();
-      msgAction = "OK";
-    } catch (Exception e) {
-      msgAction = "NOK";
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setInt(1, dadosAgenda.getA04_status());
+      comandoPreparado.setLong(2, dadosAgenda.getA04_codigo());
+      comandoPreparado.execute();
+      comandoPreparado.close();
+      mensagemAcao = "OK";
+    } catch (Exception excecao) {
+      mensagemAcao = "NOK";
       System.out.println(":: ERRO :: Problemas com a atualiza��o de dados no BD...(AP-U2)");
     }
-    fechaCon(con);
-    return msgAction;
+    fechaCon(conexaoBanco);
+    return mensagemAcao;
   }
 
   // ......PARA LIDAR COM O BANCO DE DADOS..........
 
-  private void fechaCon(Connection con) {
-    if (con == null) return;
+  private void fechaCon(Connection conexaoBanco) {
+    if (conexaoBanco == null) return;
     try {
-      con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      conexaoBanco.close();
+    } catch (SQLException excecao) {
+      excecao.printStackTrace();
     }
   }
 }

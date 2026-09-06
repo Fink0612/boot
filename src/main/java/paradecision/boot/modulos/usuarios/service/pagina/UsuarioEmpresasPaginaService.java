@@ -23,37 +23,37 @@ public class UsuarioEmpresasPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Usuario oUsuarioModel = new Usuario();
-    Empresa oEmpresaModel = new Empresa();
+    Usuario dadosUsuario = new Usuario();
+    Empresa dadosEmpresa = new Empresa();
 
-    UsuarioEmpresasDados oUsuarioEmpresasModel = new UsuarioEmpresasDados();
+    UsuarioEmpresasDados dadosUsuarioEmpresas = new UsuarioEmpresasDados();
 
     int achouEmpresa = 0;
-    long ue_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
-    oUsuarioModel.setA02_codigo(ue_ct_A02_CODIGO);
-    oUsuarioEmpresasModel.setoUsuarioModel(oUsuarioModel);
-    oUsuarioEmpresasModel = usuarioEmpresasService.selectEmpresasDoUsuario(oUsuarioEmpresasModel);
-    if (oUsuarioEmpresasModel.getArrEmpresaModel().size() > 0) {
+    long codigoUsuarioEmpresasUsuarioControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    dadosUsuario.setA02_codigo(codigoUsuarioEmpresasUsuarioControle);
+    dadosUsuarioEmpresas.setoUsuarioModel(dadosUsuario);
+    dadosUsuarioEmpresas = usuarioEmpresasService.selectEmpresasDoUsuario(dadosUsuarioEmpresas);
+    if (dadosUsuarioEmpresas.getArrEmpresaModel().size() > 0) {
       achouEmpresa = 1;
     }
 
     if (achouEmpresa == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      ArrayList<Empresa> arrEmpresaModel = new ArrayList<Empresa>();
-      arrEmpresaModel = oUsuarioEmpresasModel.getArrEmpresaModel();
-      for (int i = 0; i < arrEmpresaModel.size(); i++) {
+      ArrayList<Empresa> listaEmpresa = new ArrayList<Empresa>();
+      listaEmpresa = dadosUsuarioEmpresas.getArrEmpresaModel();
+      for (int indiceElemento = 0; indiceElemento < listaEmpresa.size(); indiceElemento++) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
-        oEmpresaModel = oUsuarioEmpresasModel.getArrEmpresaModel().get(i);
+        dadosEmpresa = dadosUsuarioEmpresas.getArrEmpresaModel().get(indiceElemento);
 
-        linha2.put("oEmpresaModel_A01_codigo", String.valueOf(oEmpresaModel.getA01_codigo()));
+        linha2.put("oEmpresaModel_A01_codigo", String.valueOf(dadosEmpresa.getA01_codigo()));
 
-        linha2.put("oEmpresaModel_A01_nome", String.valueOf(oEmpresaModel.getA01_nome()));
+        linha2.put("oEmpresaModel_A01_nome", String.valueOf(dadosEmpresa.getA01_nome()));
 
-        linha2.put("ue_ct_A02_CODIGO", String.valueOf(ue_ct_A02_CODIGO));
+        linha2.put("ue_ct_A02_CODIGO", String.valueOf(codigoUsuarioEmpresasUsuarioControle));
 
-        linha2.put("oEmpresaModel_A01_nome2", String.valueOf(oEmpresaModel.getA01_nome()));
+        linha2.put("oEmpresaModel_A01_nome2", String.valueOf(dadosEmpresa.getA01_nome()));
       }
     }
 

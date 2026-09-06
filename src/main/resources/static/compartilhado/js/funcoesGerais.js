@@ -5,9 +5,9 @@ function apagarSessao() {
 }
 
 function sairSessao() {
-	var boolSair = true;
+	var saidaConfirmada = true;
 	//boolSair = confirm("Deseja sair do Sistema ParaDecision2?");
-	if (boolSair) {
+	if (saidaConfirmada) {
 		apagarSessao();
 		var urlAtual = window.location.href;
 		var novaUrl = urlAtual.split('?')[0];

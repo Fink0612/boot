@@ -14,61 +14,61 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 @Repository
 public class EmpresaUsuariosRepository {
 
-  public EmpresaUsuariosDados selectUsuariosDaEmpresa(EmpresaUsuariosDados oEmpresaUsuariosModel) {
-    Usuario oUsuarioModel;
-    EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel;
-    ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-    ArrayList<EmpresaUsuarioPerfil> arrEmpresaUsuarioPerfilModel =
+  public EmpresaUsuariosDados selectUsuariosDaEmpresa(EmpresaUsuariosDados dadosEmpresaUsuarios) {
+    Usuario dadosUsuario;
+    EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil;
+    ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+    ArrayList<EmpresaUsuarioPerfil> listaEmpresaUsuarioPerfil =
         new ArrayList<EmpresaUsuarioPerfil>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM USUARIO_02 AS U ";
-    sql += "INNER JOIN EMPRESA_USUARIO_PERFIL_03 AS EU ON ";
-    sql += "((U.A02_CODIGO = EU.A02_CODIGO) AND (EU.A01_CODIGO = ?));";
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM USUARIO_02 AS U ";
+    instrucaoSql += "INNER JOIN EMPRESA_USUARIO_PERFIL_03 AS EU ON ";
+    instrucaoSql += "((U.A02_CODIGO = EU.A02_CODIGO) AND (EU.A01_CODIGO = ?));";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oEmpresaUsuariosModel.getoEmpresaModel().getA01_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oUsuarioModel = new Usuario();
-        oUsuarioModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oUsuarioModel.setA02_dt_cadastro(rs.getDate("A02_DT_CADASTRO"));
-        oUsuarioModel.setA02_dt_ultima_alteracao(rs.getDate("A02_DT_ULTIMA_ALTERACAO"));
-        oUsuarioModel.setA02_nome(rs.getString("A02_NOME"));
-        oUsuarioModel.setA02_usuario(rs.getString("A02_USUARIO"));
-        oUsuarioModel.setA02_senha(rs.getString("A02_SENHA"));
-        oUsuarioModel.setA02_codigo_link(rs.getString("A02_CODIGO_LINK"));
-        oUsuarioModel.setA02_email(rs.getString("A02_EMAIL"));
-        oUsuarioModel.setA02_status(rs.getInt("A02_STATUS"));
-        arrUsuarioModel.add(oUsuarioModel);
-        oEmpresaUsuarioPerfilModel = new EmpresaUsuarioPerfil();
-        oEmpresaUsuarioPerfilModel.setA01_codigo(rs.getLong("A01_CODIGO"));
-        oEmpresaUsuarioPerfilModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oEmpresaUsuarioPerfilModel.setA03_dt_cadastro(rs.getDate("A03_DT_CADASTRO"));
-        oEmpresaUsuarioPerfilModel.setA03_perfil_paraviverbem(rs.getInt("A03_PERFIL_PARAVIVERBEM"));
-        oEmpresaUsuarioPerfilModel.setA03_perfil_administrador(
-            rs.getInt("A03_PERFIL_ADMINISTRADOR"));
-        oEmpresaUsuarioPerfilModel.setA03_perfil_chefe(rs.getInt("A03_PERFIL_CHEFE"));
-        oEmpresaUsuarioPerfilModel.setA03_perfil_padrao(rs.getInt("A03_PERFIL_PADRAO"));
-        arrEmpresaUsuarioPerfilModel.add(oEmpresaUsuarioPerfilModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosEmpresaUsuarios.getoEmpresaModel().getA01_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosUsuario = new Usuario();
+        dadosUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosUsuario.setA02_dt_cadastro(resultadoConsulta.getDate("A02_DT_CADASTRO"));
+        dadosUsuario.setA02_dt_ultima_alteracao(resultadoConsulta.getDate("A02_DT_ULTIMA_ALTERACAO"));
+        dadosUsuario.setA02_nome(resultadoConsulta.getString("A02_NOME"));
+        dadosUsuario.setA02_usuario(resultadoConsulta.getString("A02_USUARIO"));
+        dadosUsuario.setA02_senha(resultadoConsulta.getString("A02_SENHA"));
+        dadosUsuario.setA02_codigo_link(resultadoConsulta.getString("A02_CODIGO_LINK"));
+        dadosUsuario.setA02_email(resultadoConsulta.getString("A02_EMAIL"));
+        dadosUsuario.setA02_status(resultadoConsulta.getInt("A02_STATUS"));
+        listaUsuario.add(dadosUsuario);
+        dadosEmpresaUsuarioPerfil = new EmpresaUsuarioPerfil();
+        dadosEmpresaUsuarioPerfil.setA01_codigo(resultadoConsulta.getLong("A01_CODIGO"));
+        dadosEmpresaUsuarioPerfil.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosEmpresaUsuarioPerfil.setA03_dt_cadastro(resultadoConsulta.getDate("A03_DT_CADASTRO"));
+        dadosEmpresaUsuarioPerfil.setA03_perfil_paraviverbem(resultadoConsulta.getInt("A03_PERFIL_PARAVIVERBEM"));
+        dadosEmpresaUsuarioPerfil.setA03_perfil_administrador(
+            resultadoConsulta.getInt("A03_PERFIL_ADMINISTRADOR"));
+        dadosEmpresaUsuarioPerfil.setA03_perfil_chefe(resultadoConsulta.getInt("A03_PERFIL_CHEFE"));
+        dadosEmpresaUsuarioPerfil.setA03_perfil_padrao(resultadoConsulta.getInt("A03_PERFIL_PADRAO"));
+        listaEmpresaUsuarioPerfil.add(dadosEmpresaUsuarioPerfil);
       }
-      oEmpresaUsuariosModel.setArrUsuarioModel(arrUsuarioModel);
-      oEmpresaUsuariosModel.setArrEmpresaUsuarioPerfilModel(arrEmpresaUsuarioPerfilModel);
-      stmt.close();
-    } catch (Exception e) {
+      dadosEmpresaUsuarios.setArrUsuarioModel(listaUsuario);
+      dadosEmpresaUsuarios.setArrEmpresaUsuarioPerfilModel(listaEmpresaUsuarioPerfil);
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(EUP)");
     }
-    fechaCon(con);
-    return oEmpresaUsuariosModel;
+    fechaCon(conexaoBanco);
+    return dadosEmpresaUsuarios;
   }
 
   // ......PARA LIDAR COM O BANCO DE DADOS..........
 
-  private void fechaCon(Connection con) {
-    if (con == null) return;
+  private void fechaCon(Connection conexaoBanco) {
+    if (conexaoBanco == null) return;
     try {
-      con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      conexaoBanco.close();
+    } catch (SQLException excecao) {
+      excecao.printStackTrace();
     }
   }
 }

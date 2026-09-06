@@ -35,114 +35,114 @@ public class AgendaFatoresPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Agenda oAgendaModel = new Agenda();
+    Agenda dadosAgenda = new Agenda();
 
-    AgendaUsuarioPerfil oAgendaUsuarioPerfilModel = new AgendaUsuarioPerfil();
+    AgendaUsuarioPerfil dadosAgendaUsuarioPerfil = new AgendaUsuarioPerfil();
 
-    long au_ct_A04_CODIGO = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
-    String au_A04_TITULO = "";
-    String au_A04_STATUS_DT_LIMITE = "";
-    String au_A04_DATA_LIMITE = "";
-    String au_A04_STATUS = "";
-    String au_A04_TXT_STATUS = "";
-    oAgendaModel.setA04_codigo(au_ct_A04_CODIGO);
-    oAgendaModel = agendaService.selectAgenda(oAgendaModel);
+    long codigoAgendaAgendaUsuariosControle = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
+    String tituloAgendaAgendaUsuarios = "";
+    String statusDataLimiteAgendaAgendaUsuarios = "";
+    String dataLimiteAgendaAgendaUsuarios = "";
+    String statusAgendaAgendaUsuarios = "";
+    String textoStatusAgendaAgendaUsuarios = "";
+    dadosAgenda.setA04_codigo(codigoAgendaAgendaUsuariosControle);
+    dadosAgenda = agendaService.selectAgenda(dadosAgenda);
     try {
-      if (oAgendaModel.getA01_codigo() > 0) {
-        au_A04_TITULO = oAgendaModel.getA04_titulo();
-        au_A04_STATUS_DT_LIMITE = Long.toString(oAgendaModel.getA04_status_dt_limite());
-        if (au_A04_STATUS_DT_LIMITE.equals("1")) {
-          au_A04_DATA_LIMITE = oAgendaModel.getA04_data_limite().toString();
+      if (dadosAgenda.getA01_codigo() > 0) {
+        tituloAgendaAgendaUsuarios = dadosAgenda.getA04_titulo();
+        statusDataLimiteAgendaAgendaUsuarios = Long.toString(dadosAgenda.getA04_status_dt_limite());
+        if (statusDataLimiteAgendaAgendaUsuarios.equals("1")) {
+          dataLimiteAgendaAgendaUsuarios = dadosAgenda.getA04_data_limite().toString();
         }
-        au_A04_STATUS = Integer.toString(oAgendaModel.getA04_status());
-        au_A04_TXT_STATUS = MetodosUteis.retornaTxtStatusAgenda(au_A04_STATUS);
+        statusAgendaAgendaUsuarios = Integer.toString(dadosAgenda.getA04_status());
+        textoStatusAgendaAgendaUsuarios = MetodosUteis.retornaTxtStatusAgenda(statusAgendaAgendaUsuarios);
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
-    long au_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
-    int au_A05_PERFIL_TITULAR = 0;
-    int au_A05_PERFIL_FACILITADOR = 0;
-    int au_A05_PERFIL_ESPECIALISTA = 0;
-    int au_A05_PERFIL_ANALISTA = 0;
-    oAgendaUsuarioPerfilModel.setA02_codigo(au_ct_A02_CODIGO);
-    oAgendaUsuarioPerfilModel.setA04_codigo(au_ct_A04_CODIGO);
-    oAgendaUsuarioPerfilModel =
-        agendaUsuarioPerfilService.selectAgendaUsuarioPerfil(oAgendaUsuarioPerfilModel);
+    long codigoUsuarioAgendaUsuariosControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    int perfilTitularParticipacaoAgendaAgendaUsuarios = 0;
+    int perfilFacilitadorParticipacaoAgendaAgendaUsuarios = 0;
+    int perfilEspecialistaParticipacaoAgendaAgendaUsuarios = 0;
+    int perfilAnalistaParticipacaoAgendaAgendaUsuarios = 0;
+    dadosAgendaUsuarioPerfil.setA02_codigo(codigoUsuarioAgendaUsuariosControle);
+    dadosAgendaUsuarioPerfil.setA04_codigo(codigoAgendaAgendaUsuariosControle);
+    dadosAgendaUsuarioPerfil =
+        agendaUsuarioPerfilService.selectAgendaUsuarioPerfil(dadosAgendaUsuarioPerfil);
     try {
-      if (oAgendaUsuarioPerfilModel.getA05_codigo() > 0) {
-        au_A05_PERFIL_TITULAR = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_titular();
-        au_A05_PERFIL_FACILITADOR =
-            oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_facilitador();
-        au_A05_PERFIL_ESPECIALISTA =
-            oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_especialista();
-        au_A05_PERFIL_ANALISTA = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_analista();
+      if (dadosAgendaUsuarioPerfil.getA05_codigo() > 0) {
+        perfilTitularParticipacaoAgendaAgendaUsuarios = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_titular();
+        perfilFacilitadorParticipacaoAgendaAgendaUsuarios =
+            dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_facilitador();
+        perfilEspecialistaParticipacaoAgendaAgendaUsuarios =
+            dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_especialista();
+        perfilAnalistaParticipacaoAgendaAgendaUsuarios = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_analista();
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
-    AgendaFatoresDados oAgendaFatoresModel = new AgendaFatoresDados();
+    AgendaFatoresDados dadosAgendaFatores = new AgendaFatoresDados();
 
     int achouFator = 0;
-    oAgendaFatoresModel.setoAgendaModel(oAgendaModel);
-    oAgendaFatoresModel = agendaFatoresService.selectFatoresDaAgenda(oAgendaFatoresModel);
-    if (oAgendaFatoresModel.getArrFatorModel().size() > 0) {
+    dadosAgendaFatores.setoAgendaModel(dadosAgenda);
+    dadosAgendaFatores = agendaFatoresService.selectFatoresDaAgenda(dadosAgendaFatores);
+    if (dadosAgendaFatores.getArrFatorModel().size() > 0) {
       achouFator = 1;
     }
 
     if (achouFator == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      Fator oFatorModel;
-      ArrayList<Fator> arrFatorModel = new ArrayList<Fator>();
-      arrFatorModel = oAgendaFatoresModel.getArrFatorModel();
-      Usuario oUsuarioModel;
-      ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-      arrUsuarioModel = oAgendaFatoresModel.getArrUsuarioModel();
+      Fator dadosFator;
+      ArrayList<Fator> listaFator = new ArrayList<Fator>();
+      listaFator = dadosAgendaFatores.getArrFatorModel();
+      Usuario dadosUsuario;
+      ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+      listaUsuario = dadosAgendaFatores.getArrUsuarioModel();
       String displayLink = "";
       String displaySoTexto = "";
-      for (int i = 0; i < arrFatorModel.size(); i++) {
+      for (int indiceElemento = 0; indiceElemento < listaFator.size(); indiceElemento++) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
-        oFatorModel = oAgendaFatoresModel.getArrFatorModel().get(i);
-        oUsuarioModel = oAgendaFatoresModel.getArrUsuarioModel().get(i);
+        dadosFator = dadosAgendaFatores.getArrFatorModel().get(indiceElemento);
+        dadosUsuario = dadosAgendaFatores.getArrUsuarioModel().get(indiceElemento);
         displayLink = "none";
         displaySoTexto = "inline";
-        if (au_ct_A02_CODIGO == oUsuarioModel.getA02_codigo()) {
+        if (codigoUsuarioAgendaUsuariosControle == dadosUsuario.getA02_codigo()) {
           displayLink = "inline";
           displaySoTexto = "none";
         }
 
         linha2.put("displayLink", String.valueOf(displayLink));
 
-        linha2.put("oFatorModel_A06_codigo", String.valueOf(oFatorModel.getA06_codigo()));
+        linha2.put("oFatorModel_A06_codigo", String.valueOf(dadosFator.getA06_codigo()));
 
-        linha2.put("oFatorModel_A06_titulo", String.valueOf(oFatorModel.getA06_titulo()));
+        linha2.put("oFatorModel_A06_titulo", String.valueOf(dadosFator.getA06_titulo()));
 
         linha2.put("displaySoTexto", String.valueOf(displaySoTexto));
 
-        linha2.put("oFatorModel_A06_titulo2", String.valueOf(oFatorModel.getA06_titulo()));
+        linha2.put("oFatorModel_A06_titulo2", String.valueOf(dadosFator.getA06_titulo()));
 
-        linha2.put("oUsuarioModel_A02_nome", String.valueOf(oUsuarioModel.getA02_nome()));
+        linha2.put("oUsuarioModel_A02_nome", String.valueOf(dadosUsuario.getA02_nome()));
 
-        linha2.put("oFatorModel_A06_descricao", String.valueOf(oFatorModel.getA06_descricao()));
+        linha2.put("oFatorModel_A06_descricao", String.valueOf(dadosFator.getA06_descricao()));
       }
     }
-    pagina.put("au_A04_TITULO", String.valueOf(au_A04_TITULO));
+    pagina.put("au_A04_TITULO", String.valueOf(tituloAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_STATUS_DT_LIMITE", String.valueOf(au_A04_STATUS_DT_LIMITE));
+    pagina.put("au_A04_STATUS_DT_LIMITE", String.valueOf(statusDataLimiteAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_DATA_LIMITE", String.valueOf(au_A04_DATA_LIMITE));
+    pagina.put("au_A04_DATA_LIMITE", String.valueOf(dataLimiteAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_STATUS", String.valueOf(au_A04_STATUS));
+    pagina.put("au_A04_STATUS", String.valueOf(statusAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_TXT_STATUS", String.valueOf(au_A04_TXT_STATUS));
+    pagina.put("au_A04_TXT_STATUS", String.valueOf(textoStatusAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_TITULAR", String.valueOf(au_A05_PERFIL_TITULAR));
+    pagina.put("au_A05_PERFIL_TITULAR", String.valueOf(perfilTitularParticipacaoAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_FACILITADOR", String.valueOf(au_A05_PERFIL_FACILITADOR));
+    pagina.put("au_A05_PERFIL_FACILITADOR", String.valueOf(perfilFacilitadorParticipacaoAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_ESPECIALISTA", String.valueOf(au_A05_PERFIL_ESPECIALISTA));
+    pagina.put("au_A05_PERFIL_ESPECIALISTA", String.valueOf(perfilEspecialistaParticipacaoAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_ANALISTA", String.valueOf(au_A05_PERFIL_ANALISTA));
+    pagina.put("au_A05_PERFIL_ANALISTA", String.valueOf(perfilAnalistaParticipacaoAgendaAgendaUsuarios));
 
     return pagina;
   }

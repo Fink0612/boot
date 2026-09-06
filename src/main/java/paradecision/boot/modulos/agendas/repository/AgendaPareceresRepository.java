@@ -14,51 +14,51 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 @Repository
 public class AgendaPareceresRepository {
 
-  public AgendaPareceresDados selectPareceresDaAgenda(AgendaPareceresDados oAgendaPareceresModel) {
-    Usuario oUsuarioModel;
-    ParecerFatorUsuario oParecerFatorUsuarioModel;
-    ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-    ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel =
+  public AgendaPareceresDados selectPareceresDaAgenda(AgendaPareceresDados dadosAgendaPareceres) {
+    Usuario dadosUsuario;
+    ParecerFatorUsuario dadosParecerFatorUsuario;
+    ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+    ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario =
         new ArrayList<ParecerFatorUsuario>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM VW_FATORES_PARECERES WHERE A04_CODIGO = ?;";
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM VW_FATORES_PARECERES WHERE A04_CODIGO = ?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oAgendaPareceresModel.getoAgendaModel().getA04_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oUsuarioModel = new Usuario();
-        oUsuarioModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oUsuarioModel.setA02_nome(rs.getString("A02_NOME"));
-        arrUsuarioModel.add(oUsuarioModel);
-        oParecerFatorUsuarioModel = new ParecerFatorUsuario();
-        oParecerFatorUsuarioModel.setA07_codigo(rs.getLong("A07_CODIGO"));
-        oParecerFatorUsuarioModel.setA06_codigo(rs.getLong("A06_CODIGO"));
-        oParecerFatorUsuarioModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oParecerFatorUsuarioModel.setA07_num_sequencia(rs.getInt("A07_NUM_SEQUENCIA"));
-        oParecerFatorUsuarioModel.setA07_certeza(rs.getDouble("A07_CERTEZA"));
-        oParecerFatorUsuarioModel.setA07_contradicao(rs.getDouble("A07_CONTRADICAO"));
-        oParecerFatorUsuarioModel.setA07_dt_cadastro(rs.getDate("A07_DT_CADASTRO"));
-        arrParecerFatorUsuarioModel.add(oParecerFatorUsuarioModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosAgendaPareceres.getoAgendaModel().getA04_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosUsuario = new Usuario();
+        dadosUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosUsuario.setA02_nome(resultadoConsulta.getString("A02_NOME"));
+        listaUsuario.add(dadosUsuario);
+        dadosParecerFatorUsuario = new ParecerFatorUsuario();
+        dadosParecerFatorUsuario.setA07_codigo(resultadoConsulta.getLong("A07_CODIGO"));
+        dadosParecerFatorUsuario.setA06_codigo(resultadoConsulta.getLong("A06_CODIGO"));
+        dadosParecerFatorUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosParecerFatorUsuario.setA07_num_sequencia(resultadoConsulta.getInt("A07_NUM_SEQUENCIA"));
+        dadosParecerFatorUsuario.setA07_certeza(resultadoConsulta.getDouble("A07_CERTEZA"));
+        dadosParecerFatorUsuario.setA07_contradicao(resultadoConsulta.getDouble("A07_CONTRADICAO"));
+        dadosParecerFatorUsuario.setA07_dt_cadastro(resultadoConsulta.getDate("A07_DT_CADASTRO"));
+        listaParecerFatorUsuario.add(dadosParecerFatorUsuario);
       }
-      oAgendaPareceresModel.setArrUsuarioModel(arrUsuarioModel);
-      oAgendaPareceresModel.setArrParecerFatorUsuarioModel(arrParecerFatorUsuarioModel);
-      stmt.close();
-    } catch (Exception e) {
+      dadosAgendaPareceres.setArrUsuarioModel(listaUsuario);
+      dadosAgendaPareceres.setArrParecerFatorUsuarioModel(listaParecerFatorUsuario);
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AFP)");
     }
-    fechaCon(con);
-    return oAgendaPareceresModel;
+    fechaCon(conexaoBanco);
+    return dadosAgendaPareceres;
   }
 
   // ......PARA LIDAR COM O BANCO DE DADOS..........
 
-  private void fechaCon(Connection con) {
-    if (con == null) return;
+  private void fechaCon(Connection conexaoBanco) {
+    if (conexaoBanco == null) return;
     try {
-      con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      conexaoBanco.close();
+    } catch (SQLException excecao) {
+      excecao.printStackTrace();
     }
   }
 }

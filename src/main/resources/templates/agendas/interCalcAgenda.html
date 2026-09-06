@@ -30,18 +30,18 @@
 </form>
 
 <script type="text/javascript" th:inline="javascript">
-var okMetodo = [[${pagina.okMetodo}]];
+var operacaoConcluida = [[${pagina.okMetodo}]];
 //alert("cod: " + [[${pagina.lng_a04_codigo}]]);
 var cjInterMensagem = document.getElementById("cjInterMensagem"); 
 cjInterMensagem.style.display = "";
-if (okMetodo == 1) {
+if (operacaoConcluida == 1) {
 	//var interMensagem = document.getElementById("interMensagem"); 
 	//interMensagem.innerHTML = [[${pagina.msgAcaoOK}]];
 	//var interBotaoOK = document.getElementById("interBotaoOK"); 
 	//interBotaoOK.style.display = "";
-	var proximoFrame = "../agendas/AgendaFatoresResultados";
+	var rotaProximaTela = "../agendas/AgendaFatoresResultados";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCalcAgendaForm").action = proximoFrame;
+	document.getElementById("interCalcAgendaForm").action = rotaProximaTela;
 	document.getElementById("interCalcAgendaForm").submit();
 } else {
 	var interMensagem = document.getElementById("interMensagem"); 

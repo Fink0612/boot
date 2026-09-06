@@ -1,143 +1,143 @@
-function verifCheckCerteza(valCol, valLin, qtdTotLin) {
-	var nomCmp = "chk_CERTEZA_" + valCol + "_" + valLin;
-	var cmpChk = document.getElementById(nomCmp);
-	var cmpAux;
-	var cmpCerteza = document.getElementById("afp_A07_CERTEZA_" + valLin);
-	if(cmpChk.checked) {
+function verifCheckCerteza(indiceColunaSelecionada, indiceLinhaSelecionada, quantidadeTotalLinhas) {
+	var nomeCampo = "chk_CERTEZA_" + indiceColunaSelecionada + "_" + indiceLinhaSelecionada;
+	var campoSelecao = document.getElementById(nomeCampo);
+	var campoAuxiliar;
+	var campoCerteza = document.getElementById("afp_A07_CERTEZA_" + indiceLinhaSelecionada);
+	if(campoSelecao.checked) {
 		//alert(cmpCerteza);
-		cmpCerteza.value = Number(cmpChk.value) * 10;
-		var ii;
-		for (ii = 0; ii <= 10; ii++) {
-			if (ii != valCol) {
-				nomCmp = "chk_CERTEZA_" + ii + "_" + valLin;
-				cmpAux = document.getElementById(nomCmp);
-				if(cmpAux.checked) {
-					cmpAux.checked = false;
+		campoCerteza.value = Number(campoSelecao.value) * 10;
+		var indiceRegistro;
+		for (indiceRegistro = 0; indiceRegistro <= 10; indiceRegistro++) {
+			if (indiceRegistro != indiceColunaSelecionada) {
+				nomeCampo = "chk_CERTEZA_" + indiceRegistro + "_" + indiceLinhaSelecionada;
+				campoAuxiliar = document.getElementById(nomeCampo);
+				if(campoAuxiliar.checked) {
+					campoAuxiliar.checked = false;
 				}
 			}
 		}
 	} else {
-		cmpCerteza.value = "";
+		campoCerteza.value = "";
 	}
 }
 
-function verifCheckContradicao(valCol, valLin, qtdTotLin) {
-	var nomCmp = "chk_CONTRADICAO_" + valCol + "_" + valLin;
-	var cmpChk = document.getElementById(nomCmp);
-	var cmpAux;
-	var cmpContradicao = document.getElementById("afp_A07_CONTRADICAO_" + valLin);
-	if(cmpChk.checked) {
-		cmpContradicao.value = Number(cmpChk.value) * 10;
-		var ii;
-		for (ii = 0; ii <= 10; ii++) {
-			if (ii != valCol) {
-				nomCmp = "chk_CONTRADICAO_" + ii + "_" + valLin;
-				cmpAux = document.getElementById(nomCmp);
-				if(cmpAux.checked) {
-					cmpAux.checked = false;
+function verifCheckContradicao(indiceColunaSelecionada, indiceLinhaSelecionada, quantidadeTotalLinhas) {
+	var nomeCampo = "chk_CONTRADICAO_" + indiceColunaSelecionada + "_" + indiceLinhaSelecionada;
+	var campoSelecao = document.getElementById(nomeCampo);
+	var campoAuxiliar;
+	var campoContradicao = document.getElementById("afp_A07_CONTRADICAO_" + indiceLinhaSelecionada);
+	if(campoSelecao.checked) {
+		campoContradicao.value = Number(campoSelecao.value) * 10;
+		var indiceRegistro;
+		for (indiceRegistro = 0; indiceRegistro <= 10; indiceRegistro++) {
+			if (indiceRegistro != indiceColunaSelecionada) {
+				nomeCampo = "chk_CONTRADICAO_" + indiceRegistro + "_" + indiceLinhaSelecionada;
+				campoAuxiliar = document.getElementById(nomeCampo);
+				if(campoAuxiliar.checked) {
+					campoAuxiliar.checked = false;
 				}
 			}
 		}
 	} else {
-		cmpContradicao.value = "";
+		campoContradicao.value = "";
 	}
 }
 
-function selecCerteza(numVal, numCmp, numCol) {
-	var cmp = document.getElementById("afp_A07_CERTEZA_" + numCmp);
-	var anc;
-	if (cmp.value == numVal) {
-		cmp.value = "";
-		anc = document.getElementById("CertL" + numCmp + "C" + numCol);
-		var classes = anc.className;
-		var arrClass = classes.split(" ");
-		clsFinal = "nchk ";
-		for (ii = 1; ii < arrClass.length; ii++) {
-			clsFinal += arrClass[ii] + " ";
+function selecCerteza(valorNumerico, indiceCampoParecer, indiceColunaParecer) {
+	var campoFormulario = document.getElementById("afp_A07_CERTEZA_" + indiceCampoParecer);
+	var linkNavegacao;
+	if (campoFormulario.value == valorNumerico) {
+		campoFormulario.value = "";
+		linkNavegacao = document.getElementById("CertL" + indiceCampoParecer + "C" + indiceColunaParecer);
+		var classes = linkNavegacao.className;
+		var elementosDaClasse = classes.split(" ");
+		classesCssAtualizadas = "nchk ";
+		for (indiceRegistro = 1; indiceRegistro < elementosDaClasse.length; indiceRegistro++) {
+			classesCssAtualizadas += elementosDaClasse[indiceRegistro] + " ";
 		}
-		clsFinal = clsFinal.trim();
-		anc.className = clsFinal;
+		classesCssAtualizadas = classesCssAtualizadas.trim();
+		linkNavegacao.className = classesCssAtualizadas;
 	} else {
-		cmp.value = numVal;
+		campoFormulario.value = valorNumerico;
 		//-------------------------------------
-		anc = document.getElementById("CertL" + numCmp + "C" + numCol);
-		var classes = anc.className;
-		var arrClass = classes.split(" ");
-		clsFinal = "chk ";
-		for (ii = 1; ii < arrClass.length; ii++) {
-			clsFinal += arrClass[ii] + " ";
+		linkNavegacao = document.getElementById("CertL" + indiceCampoParecer + "C" + indiceColunaParecer);
+		var classes = linkNavegacao.className;
+		var elementosDaClasse = classes.split(" ");
+		classesCssAtualizadas = "chk ";
+		for (indiceRegistro = 1; indiceRegistro < elementosDaClasse.length; indiceRegistro++) {
+			classesCssAtualizadas += elementosDaClasse[indiceRegistro] + " ";
 		}
-		clsFinal = clsFinal.trim();
+		classesCssAtualizadas = classesCssAtualizadas.trim();
 		//alert("[" + clsFinal + "]");
-		anc.className = clsFinal;
+		linkNavegacao.className = classesCssAtualizadas;
 		//-------------------------------------
-		for (ii = 0; ii <= 10; ii++) {
-			if (ii != numCol) {
-				anc = document.getElementById("CertL" + numCmp + "C" + ii);
-				classes = anc.className;
-				arrClass = classes.split(" ");
-				clsFinal = "nchk ";
-				for (kk = 1; kk < arrClass.length; kk++) {
-					clsFinal += arrClass[kk] + " ";
+		for (indiceRegistro = 0; indiceRegistro <= 10; indiceRegistro++) {
+			if (indiceRegistro != indiceColunaParecer) {
+				linkNavegacao = document.getElementById("CertL" + indiceCampoParecer + "C" + indiceRegistro);
+				classes = linkNavegacao.className;
+				elementosDaClasse = classes.split(" ");
+				classesCssAtualizadas = "nchk ";
+				for (indiceNivelParecer = 1; indiceNivelParecer < elementosDaClasse.length; indiceNivelParecer++) {
+					classesCssAtualizadas += elementosDaClasse[indiceNivelParecer] + " ";
 				}
-				anc.className = clsFinal;
-				clsFinal = clsFinal.trim();
+				linkNavegacao.className = classesCssAtualizadas;
+				classesCssAtualizadas = classesCssAtualizadas.trim();
 				//alert("[" + clsFinal + "]");
-				anc.className = clsFinal;
+				linkNavegacao.className = classesCssAtualizadas;
 			}
 		}
 	}
 }
 
-function selecContradicao(numVal, numCmp, numCol) {
-	var cmp = document.getElementById("afp_A07_CONTRADICAO_" + numCmp);
-	var anc;
-	if (cmp.value == numVal) {
-		cmp.value = "";
-		anc = document.getElementById("ContL" + numCmp + "C" + numCol);
-		var classes = anc.className;
-		var arrClass = classes.split(" ");
-		clsFinal = "nchk ";
-		for (ii = 1; ii < arrClass.length; ii++) {
-			clsFinal += arrClass[ii] + " ";
+function selecContradicao(valorNumerico, indiceCampoParecer, indiceColunaParecer) {
+	var campoFormulario = document.getElementById("afp_A07_CONTRADICAO_" + indiceCampoParecer);
+	var linkNavegacao;
+	if (campoFormulario.value == valorNumerico) {
+		campoFormulario.value = "";
+		linkNavegacao = document.getElementById("ContL" + indiceCampoParecer + "C" + indiceColunaParecer);
+		var classes = linkNavegacao.className;
+		var elementosDaClasse = classes.split(" ");
+		classesCssAtualizadas = "nchk ";
+		for (indiceRegistro = 1; indiceRegistro < elementosDaClasse.length; indiceRegistro++) {
+			classesCssAtualizadas += elementosDaClasse[indiceRegistro] + " ";
 		}
-		clsFinal = clsFinal.trim();
-		anc.className = clsFinal;
+		classesCssAtualizadas = classesCssAtualizadas.trim();
+		linkNavegacao.className = classesCssAtualizadas;
 	} else {
-		cmp.value = numVal;
+		campoFormulario.value = valorNumerico;
 		//-------------------------------------
-		anc = document.getElementById("ContL" + numCmp + "C" + numCol);
-		var classes = anc.className;
-		var arrClass = classes.split(" ");
-		clsFinal = "chk ";
-		for (ii = 1; ii < arrClass.length; ii++) {
-			clsFinal += arrClass[ii] + " ";
+		linkNavegacao = document.getElementById("ContL" + indiceCampoParecer + "C" + indiceColunaParecer);
+		var classes = linkNavegacao.className;
+		var elementosDaClasse = classes.split(" ");
+		classesCssAtualizadas = "chk ";
+		for (indiceRegistro = 1; indiceRegistro < elementosDaClasse.length; indiceRegistro++) {
+			classesCssAtualizadas += elementosDaClasse[indiceRegistro] + " ";
 		}
-		clsFinal = clsFinal.trim();
+		classesCssAtualizadas = classesCssAtualizadas.trim();
 		//alert("[" + clsFinal + "]");
-		anc.className = clsFinal;
+		linkNavegacao.className = classesCssAtualizadas;
 		//-------------------------------------
-		for (ii = 0; ii <= 10; ii++) {
-			if (ii != numCol) {
-				anc = document.getElementById("ContL" + numCmp + "C" + ii);
-				classes = anc.className;
-				arrClass = classes.split(" ");
-				clsFinal = "nchk ";
-				for (kk = 1; kk < arrClass.length; kk++) {
-					clsFinal += arrClass[kk] + " ";
+		for (indiceRegistro = 0; indiceRegistro <= 10; indiceRegistro++) {
+			if (indiceRegistro != indiceColunaParecer) {
+				linkNavegacao = document.getElementById("ContL" + indiceCampoParecer + "C" + indiceRegistro);
+				classes = linkNavegacao.className;
+				elementosDaClasse = classes.split(" ");
+				classesCssAtualizadas = "nchk ";
+				for (indiceNivelParecer = 1; indiceNivelParecer < elementosDaClasse.length; indiceNivelParecer++) {
+					classesCssAtualizadas += elementosDaClasse[indiceNivelParecer] + " ";
 				}
-				anc.className = clsFinal;
-				clsFinal = clsFinal.trim();
+				linkNavegacao.className = classesCssAtualizadas;
+				classesCssAtualizadas = classesCssAtualizadas.trim();
 				//alert("[" + clsFinal + "]");
-				anc.className = clsFinal;
+				linkNavegacao.className = classesCssAtualizadas;
 			}
 		}
 	}
 }
 
 function verificarPareceresPendentes() {
-	var proximoFrame = "../agendas/AgendaUsuariosPareceresPendencia";
+	var rotaProximaTela = "../agendas/AgendaUsuariosPareceresPendencia";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }

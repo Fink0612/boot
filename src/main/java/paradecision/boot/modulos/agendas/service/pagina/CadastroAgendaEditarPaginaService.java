@@ -11,26 +11,26 @@ public class CadastroAgendaEditarPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    String ct_A04_CODIGO = formulario.valor("ct_A04_CODIGO");
-    String ct_A04_TITULO = formulario.valor("ct_A04_TITULO");
-    String ct_A04_DESCRICAO = formulario.valor("ct_A04_DESCRICAO");
-    String ct_A04_STATUS_DT_LIMITE = formulario.valor("ct_A04_STATUS_DT_LIMITE");
-    String ct_A04_DATA_LIMITE = formulario.valor("ct_A04_DATA_LIMITE");
-    if (ct_A04_CODIGO == null) ct_A04_CODIGO = "";
-    if (ct_A04_TITULO == null) ct_A04_TITULO = "";
-    if (ct_A04_DESCRICAO == null) ct_A04_DESCRICAO = "";
-    if (ct_A04_STATUS_DT_LIMITE == null) ct_A04_STATUS_DT_LIMITE = "";
-    if (ct_A04_DATA_LIMITE == null) ct_A04_DATA_LIMITE = "";
+    String codigoAgendaControle = formulario.valor("ct_A04_CODIGO");
+    String tituloAgendaControle = formulario.valor("ct_A04_TITULO");
+    String descricaoAgendaControle = formulario.valor("ct_A04_DESCRICAO");
+    String statusDataLimiteAgendaControle = formulario.valor("ct_A04_STATUS_DT_LIMITE");
+    String dataLimiteAgendaControle = formulario.valor("ct_A04_DATA_LIMITE");
+    if (codigoAgendaControle == null) codigoAgendaControle = "";
+    if (tituloAgendaControle == null) tituloAgendaControle = "";
+    if (descricaoAgendaControle == null) descricaoAgendaControle = "";
+    if (statusDataLimiteAgendaControle == null) statusDataLimiteAgendaControle = "";
+    if (dataLimiteAgendaControle == null) dataLimiteAgendaControle = "";
 
-    pagina.put("ct_A04_CODIGO", String.valueOf(ct_A04_CODIGO));
+    pagina.put("ct_A04_CODIGO", String.valueOf(codigoAgendaControle));
 
-    pagina.put("ct_A04_TITULO", String.valueOf(ct_A04_TITULO));
+    pagina.put("ct_A04_TITULO", String.valueOf(tituloAgendaControle));
 
-    pagina.put("ct_A04_DESCRICAO", String.valueOf(ct_A04_DESCRICAO));
+    pagina.put("ct_A04_DESCRICAO", String.valueOf(descricaoAgendaControle));
 
-    pagina.put("ct_A04_STATUS_DT_LIMITE", String.valueOf(ct_A04_STATUS_DT_LIMITE));
+    pagina.put("ct_A04_STATUS_DT_LIMITE", String.valueOf(statusDataLimiteAgendaControle));
 
-    pagina.put("ct_A04_DATA_LIMITE", String.valueOf(ct_A04_DATA_LIMITE));
+    pagina.put("ct_A04_DATA_LIMITE", String.valueOf(dataLimiteAgendaControle));
 
     return pagina;
   }

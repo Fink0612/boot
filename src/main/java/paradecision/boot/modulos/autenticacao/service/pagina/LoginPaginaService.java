@@ -26,13 +26,13 @@ public class LoginPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Usuario oUsuarioModel = new Usuario();
-    Empresa oEmpresaModel = new Empresa();
-    EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel = new EmpresaUsuarioPerfil();
+    Usuario dadosUsuario = new Usuario();
+    Empresa dadosEmpresa = new Empresa();
+    EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil = new EmpresaUsuarioPerfil();
 
-    UsuarioEmpresasDados oUsuarioEmpresasModel = new UsuarioEmpresasDados();
+    UsuarioEmpresasDados dadosUsuarioEmpresas = new UsuarioEmpresasDados();
 
-    int qtdEmpresas = 0;
+    int quantidadeEmpresas = 0;
     String txt_pdUsuario = formulario.valor("pdUsuario");
     String txt_pdSenha = formulario.valor("pdSenha");
     String txt_pdAcao = formulario.valor("pdAcao");
@@ -42,21 +42,21 @@ public class LoginPaginaService {
     if (txt_pdSenha == null) txt_pdSenha = "";
     if (txt_pdAcao == null) txt_pdAcao = "";
     if (txt_pdAcao.equals("envLogin")) {
-      oUsuarioModel.setA02_usuario(txt_pdUsuario);
-      oUsuarioModel.setA02_senha(txt_pdSenha);
-      oUsuarioModel = usuarioService.selectUserLogin(oUsuarioModel);
-      if (oUsuarioModel.getA02_codigo() == 0) {
+      dadosUsuario.setA02_usuario(txt_pdUsuario);
+      dadosUsuario.setA02_senha(txt_pdSenha);
+      dadosUsuario = usuarioService.selectUserLogin(dadosUsuario);
+      if (dadosUsuario.getA02_codigo() == 0) {
         txt_pdMensagens = "Usuario e/ou Senha Invalidos";
         txt_pdMsgDisplay = "";
       } else {
-        oUsuarioEmpresasModel.setoUsuarioModel(oUsuarioModel);
-        oUsuarioEmpresasModel =
-            usuarioEmpresasService.selectEmpresasDoUsuario(oUsuarioEmpresasModel);
-        qtdEmpresas = oUsuarioEmpresasModel.getArrEmpresaModel().size();
-        if (qtdEmpresas == 1) {
-          oEmpresaModel = oUsuarioEmpresasModel.getArrEmpresaModel().get(0);
-          oEmpresaUsuarioPerfilModel =
-              oUsuarioEmpresasModel.getArrEmpresaUsuarioPerfilModel().get(0);
+        dadosUsuarioEmpresas.setoUsuarioModel(dadosUsuario);
+        dadosUsuarioEmpresas =
+            usuarioEmpresasService.selectEmpresasDoUsuario(dadosUsuarioEmpresas);
+        quantidadeEmpresas = dadosUsuarioEmpresas.getArrEmpresaModel().size();
+        if (quantidadeEmpresas == 1) {
+          dadosEmpresa = dadosUsuarioEmpresas.getArrEmpresaModel().get(0);
+          dadosEmpresaUsuarioPerfil =
+              dadosUsuarioEmpresas.getArrEmpresaUsuarioPerfilModel().get(0);
         }
       }
     }
@@ -67,37 +67,37 @@ public class LoginPaginaService {
 
     pagina.put("txt_pdMensagens", String.valueOf(txt_pdMensagens));
 
-    pagina.put("oUsuarioModel_A02_nome", String.valueOf(oUsuarioModel.getA02_nome()));
+    pagina.put("oUsuarioModel_A02_nome", String.valueOf(dadosUsuario.getA02_nome()));
 
-    pagina.put("oUsuarioModel_A02_usuario", String.valueOf(oUsuarioModel.getA02_usuario()));
+    pagina.put("oUsuarioModel_A02_usuario", String.valueOf(dadosUsuario.getA02_usuario()));
 
-    pagina.put("oUsuarioModel_A02_nome2", String.valueOf(oUsuarioModel.getA02_nome()));
+    pagina.put("oUsuarioModel_A02_nome2", String.valueOf(dadosUsuario.getA02_nome()));
 
-    pagina.put("qtdEmpresas", String.valueOf(qtdEmpresas));
+    pagina.put("qtdEmpresas", String.valueOf(quantidadeEmpresas));
 
-    pagina.put("oUsuarioModel_A02_codigo", String.valueOf(oUsuarioModel.getA02_codigo()));
+    pagina.put("oUsuarioModel_A02_codigo", String.valueOf(dadosUsuario.getA02_codigo()));
 
-    pagina.put("oUsuarioModel_A02_usuario2", String.valueOf(oUsuarioModel.getA02_usuario()));
+    pagina.put("oUsuarioModel_A02_usuario2", String.valueOf(dadosUsuario.getA02_usuario()));
 
-    pagina.put("oEmpresaModel_A01_codigo", String.valueOf(oEmpresaModel.getA01_codigo()));
+    pagina.put("oEmpresaModel_A01_codigo", String.valueOf(dadosEmpresa.getA01_codigo()));
 
-    pagina.put("oEmpresaModel_A01_nome", String.valueOf(oEmpresaModel.getA01_nome()));
+    pagina.put("oEmpresaModel_A01_nome", String.valueOf(dadosEmpresa.getA01_nome()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_paraviverbem",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_paraviverbem()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_paraviverbem()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_administrador",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_administrador()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_administrador()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_chefe",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_chefe()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_chefe()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_padrao",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_padrao()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_padrao()));
 
     return pagina;
   }

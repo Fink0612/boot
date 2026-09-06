@@ -45,134 +45,134 @@ public class AgendaUsuariosPareceresPendenciaPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Agenda oAgendaModel = new Agenda();
+    Agenda dadosAgenda = new Agenda();
 
-    AgendaUsuarioPerfil oAgendaUsuarioPerfilModel = new AgendaUsuarioPerfil();
+    AgendaUsuarioPerfil dadosAgendaUsuarioPerfil = new AgendaUsuarioPerfil();
 
-    long au_ct_A04_CODIGO = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
-    String au_A04_TITULO = "";
-    String au_A04_STATUS_DT_LIMITE = "";
-    String au_A04_DATA_LIMITE = "";
-    String au_A04_STATUS = "";
-    String au_A04_TXT_STATUS = "";
-    oAgendaModel.setA04_codigo(au_ct_A04_CODIGO);
-    oAgendaModel = agendaService.selectAgenda(oAgendaModel);
+    long codigoAgendaAgendaUsuariosControle = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
+    String tituloAgendaAgendaUsuarios = "";
+    String statusDataLimiteAgendaAgendaUsuarios = "";
+    String dataLimiteAgendaAgendaUsuarios = "";
+    String statusAgendaAgendaUsuarios = "";
+    String textoStatusAgendaAgendaUsuarios = "";
+    dadosAgenda.setA04_codigo(codigoAgendaAgendaUsuariosControle);
+    dadosAgenda = agendaService.selectAgenda(dadosAgenda);
     try {
-      if (oAgendaModel.getA01_codigo() > 0) {
-        au_A04_TITULO = oAgendaModel.getA04_titulo();
-        au_A04_STATUS_DT_LIMITE = Long.toString(oAgendaModel.getA04_status_dt_limite());
-        if (au_A04_STATUS_DT_LIMITE.equals("1")) {
-          au_A04_DATA_LIMITE = oAgendaModel.getA04_data_limite().toString();
+      if (dadosAgenda.getA01_codigo() > 0) {
+        tituloAgendaAgendaUsuarios = dadosAgenda.getA04_titulo();
+        statusDataLimiteAgendaAgendaUsuarios = Long.toString(dadosAgenda.getA04_status_dt_limite());
+        if (statusDataLimiteAgendaAgendaUsuarios.equals("1")) {
+          dataLimiteAgendaAgendaUsuarios = dadosAgenda.getA04_data_limite().toString();
         }
-        au_A04_STATUS = Integer.toString(oAgendaModel.getA04_status());
-        au_A04_TXT_STATUS = MetodosUteis.retornaTxtStatusAgenda(au_A04_STATUS);
+        statusAgendaAgendaUsuarios = Integer.toString(dadosAgenda.getA04_status());
+        textoStatusAgendaAgendaUsuarios = MetodosUteis.retornaTxtStatusAgenda(statusAgendaAgendaUsuarios);
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
-    long au_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
-    int au_A05_PERFIL_TITULAR = 0;
-    int au_A05_PERFIL_FACILITADOR = 0;
-    int au_A05_PERFIL_ESPECIALISTA = 0;
-    int au_A05_PERFIL_ANALISTA = 0;
-    oAgendaUsuarioPerfilModel.setA02_codigo(au_ct_A02_CODIGO);
-    oAgendaUsuarioPerfilModel.setA04_codigo(au_ct_A04_CODIGO);
-    oAgendaUsuarioPerfilModel =
-        agendaUsuarioPerfilService.selectAgendaUsuarioPerfil(oAgendaUsuarioPerfilModel);
+    long codigoUsuarioAgendaUsuariosControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    int perfilTitularParticipacaoAgendaAgendaUsuarios = 0;
+    int perfilFacilitadorParticipacaoAgendaAgendaUsuarios = 0;
+    int perfilEspecialistaParticipacaoAgendaAgendaUsuarios = 0;
+    int perfilAnalistaParticipacaoAgendaAgendaUsuarios = 0;
+    dadosAgendaUsuarioPerfil.setA02_codigo(codigoUsuarioAgendaUsuariosControle);
+    dadosAgendaUsuarioPerfil.setA04_codigo(codigoAgendaAgendaUsuariosControle);
+    dadosAgendaUsuarioPerfil =
+        agendaUsuarioPerfilService.selectAgendaUsuarioPerfil(dadosAgendaUsuarioPerfil);
     try {
-      if (oAgendaUsuarioPerfilModel.getA05_codigo() > 0) {
-        au_A05_PERFIL_TITULAR = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_titular();
-        au_A05_PERFIL_FACILITADOR =
-            oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_facilitador();
-        au_A05_PERFIL_ESPECIALISTA =
-            oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_especialista();
-        au_A05_PERFIL_ANALISTA = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_analista();
+      if (dadosAgendaUsuarioPerfil.getA05_codigo() > 0) {
+        perfilTitularParticipacaoAgendaAgendaUsuarios = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_titular();
+        perfilFacilitadorParticipacaoAgendaAgendaUsuarios =
+            dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_facilitador();
+        perfilEspecialistaParticipacaoAgendaAgendaUsuarios =
+            dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_especialista();
+        perfilAnalistaParticipacaoAgendaAgendaUsuarios = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_analista();
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
-    AgendaUsuariosDados oAgendaUsuariosModel = new AgendaUsuariosDados();
+    AgendaUsuariosDados dadosAgendaUsuarios = new AgendaUsuariosDados();
 
     int achouUsuario = 0;
-    oAgendaUsuariosModel.setoAgendaModel(oAgendaModel);
-    oAgendaUsuariosModel = agendaUsuariosService.selectUsuariosDaAgenda(oAgendaUsuariosModel);
-    if (oAgendaUsuariosModel.getArrUsuarioModel().size() > 0) {
+    dadosAgendaUsuarios.setoAgendaModel(dadosAgenda);
+    dadosAgendaUsuarios = agendaUsuariosService.selectUsuariosDaAgenda(dadosAgendaUsuarios);
+    if (dadosAgendaUsuarios.getArrUsuarioModel().size() > 0) {
       achouUsuario = 1;
     }
 
     if (achouUsuario == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      AgendaFatoresDados oAgendaFatoresModel = new AgendaFatoresDados();
+      AgendaFatoresDados dadosAgendaFatores = new AgendaFatoresDados();
 
-      oAgendaFatoresModel.setoAgendaModel(oAgendaModel);
-      oAgendaFatoresModel = agendaFatoresService.selectFatoresDaAgenda(oAgendaFatoresModel);
-      int qtdFatores = oAgendaFatoresModel.getArrFatorModel().size();
-      int qtdPareceresFaltantes = 0;
-      int qtdPareceresUsuario = 0;
-      if (qtdFatores > 0) {
+      dadosAgendaFatores.setoAgendaModel(dadosAgenda);
+      dadosAgendaFatores = agendaFatoresService.selectFatoresDaAgenda(dadosAgendaFatores);
+      int quantidadeFatores = dadosAgendaFatores.getArrFatorModel().size();
+      int quantidadePareceresFaltantes = 0;
+      int quantidadePareceresUsuario = 0;
+      if (quantidadeFatores > 0) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
-        Usuario oUsuarioModel;
-        ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-        arrUsuarioModel = oAgendaUsuariosModel.getArrUsuarioModel();
-        for (int i = 0; i < arrUsuarioModel.size(); i++) {
+        Usuario dadosUsuario;
+        ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+        listaUsuario = dadosAgendaUsuarios.getArrUsuarioModel();
+        for (int indiceElemento = 0; indiceElemento < listaUsuario.size(); indiceElemento++) {
           Map<String, Object> linha3 = DadosPagina.novaLinha(linha2, "linhas3");
 
-          oUsuarioModel = oAgendaUsuariosModel.getArrUsuarioModel().get(i);
-          oAgendaUsuarioPerfilModel = oAgendaUsuariosModel.getArrAgendaUsuarioPerfilModel().get(i);
-          int tit = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_titular();
-          int espec = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_especialista();
+          dadosUsuario = dadosAgendaUsuarios.getArrUsuarioModel().get(indiceElemento);
+          dadosAgendaUsuarioPerfil = dadosAgendaUsuarios.getArrAgendaUsuarioPerfilModel().get(indiceElemento);
+          int tit = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_titular();
+          int espec = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_especialista();
           if (espec == 1 || tit == 1) {
             Map<String, Object> linha4 = DadosPagina.novaLinha(linha3, "linhas4");
 
-            AgendaUsuarioPareceresDados oAgendaUsuarioPareceresModel =
+            AgendaUsuarioPareceresDados dadosAgendaUsuarioPareceres =
                 new AgendaUsuarioPareceresDados();
 
-            oAgendaUsuarioPareceresModel.setoAgendaModel(oAgendaModel);
-            oAgendaUsuarioPareceresModel.setoUsuarioModel(oUsuarioModel);
-            oAgendaUsuarioPareceresModel =
-                agendaUsuarioPareceresService.selectPareceresAgUsu(oAgendaUsuarioPareceresModel);
-            ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel =
-                oAgendaUsuarioPareceresModel.getArrParecerFatorUsuarioModel();
-            qtdPareceresUsuario = arrParecerFatorUsuarioModel.size();
-            qtdPareceresFaltantes = qtdFatores;
-            if (qtdPareceresUsuario > 0) {
-              ParecerFatorUsuario oParecerFatorUsuarioModel;
-              for (int k = 0; k < qtdPareceresUsuario; k++) {
-                oParecerFatorUsuarioModel = arrParecerFatorUsuarioModel.get(k);
-                String str_a07_certeza = oParecerFatorUsuarioModel.getStr_a07_certeza();
-                String str_a07_contradicao = oParecerFatorUsuarioModel.getStr_a07_contradicao();
-                if (str_a07_contradicao != null && str_a07_certeza != null) {
-                  if (!(str_a07_contradicao.equals("")) && !(str_a07_certeza.equals(""))) {
-                    qtdPareceresFaltantes--;
+            dadosAgendaUsuarioPareceres.setoAgendaModel(dadosAgenda);
+            dadosAgendaUsuarioPareceres.setoUsuarioModel(dadosUsuario);
+            dadosAgendaUsuarioPareceres =
+                agendaUsuarioPareceresService.selectPareceresAgUsu(dadosAgendaUsuarioPareceres);
+            ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario =
+                dadosAgendaUsuarioPareceres.getArrParecerFatorUsuarioModel();
+            quantidadePareceresUsuario = listaParecerFatorUsuario.size();
+            quantidadePareceresFaltantes = quantidadeFatores;
+            if (quantidadePareceresUsuario > 0) {
+              ParecerFatorUsuario dadosParecerFatorUsuario;
+              for (int indiceParecerUsuario = 0; indiceParecerUsuario < quantidadePareceresUsuario; indiceParecerUsuario++) {
+                dadosParecerFatorUsuario = listaParecerFatorUsuario.get(indiceParecerUsuario);
+                String certezaParecerTexto = dadosParecerFatorUsuario.getStr_a07_certeza();
+                String contradicaoParecerTexto = dadosParecerFatorUsuario.getStr_a07_contradicao();
+                if (contradicaoParecerTexto != null && certezaParecerTexto != null) {
+                  if (!(contradicaoParecerTexto.equals("")) && !(certezaParecerTexto.equals(""))) {
+                    quantidadePareceresFaltantes--;
                   }
                 }
               }
             }
 
-            linha4.put("oUsuarioModel_A02_nome", String.valueOf(oUsuarioModel.getA02_nome()));
+            linha4.put("oUsuarioModel_A02_nome", String.valueOf(dadosUsuario.getA02_nome()));
 
-            linha4.put("qtdPareceresFaltantes", String.valueOf(qtdPareceresFaltantes));
+            linha4.put("qtdPareceresFaltantes", String.valueOf(quantidadePareceresFaltantes));
           }
         }
       }
     }
-    pagina.put("au_A04_TITULO", String.valueOf(au_A04_TITULO));
+    pagina.put("au_A04_TITULO", String.valueOf(tituloAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_STATUS_DT_LIMITE", String.valueOf(au_A04_STATUS_DT_LIMITE));
+    pagina.put("au_A04_STATUS_DT_LIMITE", String.valueOf(statusDataLimiteAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_DATA_LIMITE", String.valueOf(au_A04_DATA_LIMITE));
+    pagina.put("au_A04_DATA_LIMITE", String.valueOf(dataLimiteAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_STATUS", String.valueOf(au_A04_STATUS));
+    pagina.put("au_A04_STATUS", String.valueOf(statusAgendaAgendaUsuarios));
 
-    pagina.put("au_A04_TXT_STATUS", String.valueOf(au_A04_TXT_STATUS));
+    pagina.put("au_A04_TXT_STATUS", String.valueOf(textoStatusAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_TITULAR", String.valueOf(au_A05_PERFIL_TITULAR));
+    pagina.put("au_A05_PERFIL_TITULAR", String.valueOf(perfilTitularParticipacaoAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_FACILITADOR", String.valueOf(au_A05_PERFIL_FACILITADOR));
+    pagina.put("au_A05_PERFIL_FACILITADOR", String.valueOf(perfilFacilitadorParticipacaoAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_ESPECIALISTA", String.valueOf(au_A05_PERFIL_ESPECIALISTA));
+    pagina.put("au_A05_PERFIL_ESPECIALISTA", String.valueOf(perfilEspecialistaParticipacaoAgendaAgendaUsuarios));
 
-    pagina.put("au_A05_PERFIL_ANALISTA", String.valueOf(au_A05_PERFIL_ANALISTA));
+    pagina.put("au_A05_PERFIL_ANALISTA", String.valueOf(perfilAnalistaParticipacaoAgendaAgendaUsuarios));
 
     return pagina;
   }

@@ -25,55 +25,55 @@ public class EmpresaAgendasPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Usuario oUsuarioModel = new Usuario();
-    Empresa oEmpresaModel = new Empresa();
-    Agenda oAgendaModel = new Agenda();
-    EmpresaAgendasDados oEmpresaAgendasModel = new EmpresaAgendasDados();
+    Usuario dadosUsuario = new Usuario();
+    Empresa dadosEmpresa = new Empresa();
+    Agenda dadosAgenda = new Agenda();
+    EmpresaAgendasDados dadosEmpresaAgendas = new EmpresaAgendasDados();
 
     int achouAgenda = 0;
     String perfP = formulario.valor("ct_A03_PERFIL_PARAVIVERBEM");
     String perfA = formulario.valor("ct_A03_PERFIL_ADMINISTRADOR");
     String perfC = formulario.valor("ct_A03_PERFIL_CHEFE");
-    long ea_ct_A01_CODIGO = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
-    String ea_ct_A01_NOME = formulario.valor("ct_A01_NOME");
-    long ea_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
-    oUsuarioModel.setA02_codigo(ea_ct_A02_CODIGO);
-    oEmpresaModel.setA01_codigo(ea_ct_A01_CODIGO);
-    oEmpresaModel.setA01_nome(ea_ct_A01_NOME);
-    oEmpresaAgendasModel.setoEmpresaModel(oEmpresaModel);
-    oEmpresaAgendasModel.setoUsuarioModel(oUsuarioModel);
+    long codigoEmpresaAgendasEmpresaControle = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
+    String nomeEmpresaAgendasEmpresaControle = formulario.valor("ct_A01_NOME");
+    long codigoUsuarioAgendasEmpresaControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    dadosUsuario.setA02_codigo(codigoUsuarioAgendasEmpresaControle);
+    dadosEmpresa.setA01_codigo(codigoEmpresaAgendasEmpresaControle);
+    dadosEmpresa.setA01_nome(nomeEmpresaAgendasEmpresaControle);
+    dadosEmpresaAgendas.setoEmpresaModel(dadosEmpresa);
+    dadosEmpresaAgendas.setoUsuarioModel(dadosUsuario);
     if (perfP.equals("1") || perfA.equals("1") || perfC.equals("1")) {
-      oEmpresaAgendasModel = empresaAgendasService.selectAgendasDaEmpresa(oEmpresaAgendasModel);
+      dadosEmpresaAgendas = empresaAgendasService.selectAgendasDaEmpresa(dadosEmpresaAgendas);
     } else {
-      oEmpresaAgendasModel =
-          empresaAgendasService.selectAgendasDaEmpresaUsuario(oEmpresaAgendasModel);
+      dadosEmpresaAgendas =
+          empresaAgendasService.selectAgendasDaEmpresaUsuario(dadosEmpresaAgendas);
     }
-    if (oEmpresaAgendasModel.getArrAgendaModel().size() > 0) {
+    if (dadosEmpresaAgendas.getArrAgendaModel().size() > 0) {
       achouAgenda = 1;
     }
 
     if (achouAgenda == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      ArrayList<Agenda> arrAgendaModel = new ArrayList<Agenda>();
-      arrAgendaModel = oEmpresaAgendasModel.getArrAgendaModel();
-      for (int i = 0; i < arrAgendaModel.size(); i++) {
+      ArrayList<Agenda> listaAgenda = new ArrayList<Agenda>();
+      listaAgenda = dadosEmpresaAgendas.getArrAgendaModel();
+      for (int indiceElemento = 0; indiceElemento < listaAgenda.size(); indiceElemento++) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
-        oAgendaModel = oEmpresaAgendasModel.getArrAgendaModel().get(i);
-        int numStatus = oAgendaModel.getA04_status();
+        dadosAgenda = dadosEmpresaAgendas.getArrAgendaModel().get(indiceElemento);
+        int numStatus = dadosAgenda.getA04_status();
         String strStatus = Integer.toString(numStatus);
         String txtStatus = MetodosUteis.retornaTxtStatusAgenda(strStatus);
 
-        linha2.put("oAgendaModel_A04_codigo", String.valueOf(oAgendaModel.getA04_codigo()));
+        linha2.put("oAgendaModel_A04_codigo", String.valueOf(dadosAgenda.getA04_codigo()));
 
-        linha2.put("oAgendaModel_A04_titulo", String.valueOf(oAgendaModel.getA04_titulo()));
+        linha2.put("oAgendaModel_A04_titulo", String.valueOf(dadosAgenda.getA04_titulo()));
 
-        linha2.put("oAgendaModel_A04_status", String.valueOf(oAgendaModel.getA04_status()));
+        linha2.put("oAgendaModel_A04_status", String.valueOf(dadosAgenda.getA04_status()));
 
-        linha2.put("oAgendaModel_A04_titulo2", String.valueOf(oAgendaModel.getA04_titulo()));
+        linha2.put("oAgendaModel_A04_titulo2", String.valueOf(dadosAgenda.getA04_titulo()));
 
-        linha2.put("oAgendaModel_A04_descricao", String.valueOf(oAgendaModel.getA04_descricao()));
+        linha2.put("oAgendaModel_A04_descricao", String.valueOf(dadosAgenda.getA04_descricao()));
 
         linha2.put("txtStatus", String.valueOf(txtStatus));
       }

@@ -1,13 +1,13 @@
 // ######## ... FUNÇÕES DE CONFIRMAÇÃO ... ########
-function rodarConfirmMetodo(codConfirm) {
+function rodarConfirmMetodo(codigoConfirmacao) {
 	fechaConfirmMensagem();
-	if (codConfirm == "libAg") {
+	if (codigoConfirmacao == "libAg") {
 		liberarAgenda();
-	} else if (codConfirm == "encAg") {
+	} else if (codigoConfirmacao == "encAg") {
 		encaminharAgenda();
-	} else if (codConfirm == "encerrAg") {
+	} else if (codigoConfirmacao == "encerrAg") {
 		encerrarAgenda();
-	} else if (codConfirm == "calcResAg") {
+	} else if (codigoConfirmacao == "calcResAg") {
 		calcularResultadosAgenda();
 	}
 	

@@ -31,18 +31,18 @@
 
 <script type="text/javascript" th:inline="javascript">
 document.getElementById("ct_A04_CODIGO").value = [[${pagina.ct_A04_CODIGO}]];
-var okMetodo = [[${pagina.okMetodo}]];
-var proximoFrame = "#";
+var operacaoConcluida = [[${pagina.okMetodo}]];
+var rotaProximaTela = "#";
 var cjInterMensagem = document.getElementById("cjInterMensagem"); 
 cjInterMensagem.style.display = "";
-if (okMetodo == "OK") {
+if (operacaoConcluida == "OK") {
 	//var interMensagem = document.getElementById("interMensagem"); 
 	//interMensagem.innerHTML = "Agenda alterada com sucesso!";
 	//var interBotaoOK = document.getElementById("interBotaoOK"); 
 	//interBotaoOK.style.display = "";
-	proximoFrame = "../agendas/AgendaUsuarios";
+	rotaProximaTela = "../agendas/AgendaUsuarios";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCadastroAgendaForm").action = proximoFrame;
+	document.getElementById("interCadastroAgendaForm").action = rotaProximaTela;
 	document.getElementById("interCadastroAgendaForm").submit();
 } else {
 	var interMensagem = document.getElementById("interMensagem"); 

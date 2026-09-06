@@ -12,15 +12,15 @@ public class EmpresaAgendasService {
     this.empresaAgendasRepository = empresaAgendasRepository;
   }
 
-  public EmpresaAgendasDados selectAgendasDaEmpresa(EmpresaAgendasDados oEmpresaAgendasModel) {
-    oEmpresaAgendasModel = empresaAgendasRepository.selectAgendasDaEmpresa(oEmpresaAgendasModel);
-    return oEmpresaAgendasModel;
+  public EmpresaAgendasDados selectAgendasDaEmpresa(EmpresaAgendasDados dadosEmpresaAgendas) {
+    dadosEmpresaAgendas = empresaAgendasRepository.selectAgendasDaEmpresa(dadosEmpresaAgendas);
+    return dadosEmpresaAgendas;
   }
 
   public EmpresaAgendasDados selectAgendasDaEmpresaUsuario(
-      EmpresaAgendasDados oEmpresaAgendasModel) {
-    oEmpresaAgendasModel =
-        empresaAgendasRepository.selectAgendasDaEmpresaUsuario(oEmpresaAgendasModel);
-    return oEmpresaAgendasModel;
+      EmpresaAgendasDados dadosEmpresaAgendas) {
+    dadosEmpresaAgendas =
+        empresaAgendasRepository.selectAgendasDaEmpresaUsuario(dadosEmpresaAgendas);
+    return dadosEmpresaAgendas;
   }
 }

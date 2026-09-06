@@ -53,36 +53,36 @@
 </form>
 
 <script type="text/javascript" th:inline="javascript">
-var okRetorno = [[${pagina.okRetorno}]]
-if (okRetorno == "OK") {
+var retornoValido = [[${pagina.okRetorno}]]
+if (retornoValido == "OK") {
 	document.getElementById("u_A02_CODIGO").value = [[${pagina.u_A02_CODIGO}]];
 	document.getElementById("u_a02_nome").value = [[${pagina.oUsuarioModel_A02_nome}]];
 	document.getElementById("u_a02_usuario").value = [[${pagina.oUsuarioModel_A02_usuario}]];
 	document.getElementById("u_a02_senha").value = [[${pagina.oUsuarioModel_A02_senha}]];
 	document.getElementById("u_a02_email").value = [[${pagina.oUsuarioModel_A02_email}]];
-	var u_A02_STATUS = [[${pagina.oUsuarioModel_A02_status}]];
-	if (u_A02_STATUS == "1") {
+	var statusUsuarioFormularioUsuario = [[${pagina.oUsuarioModel_A02_status}]];
+	if (statusUsuarioFormularioUsuario == "1") {
 		document.getElementById("u_a02_status").checked = true;
 	} else {
 		document.getElementById("u_a02_status").checked = false;
 	}
 	//------------------------------------------
-	var u_A03_PERFIL_CHEFE = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_chefe}]];
-	if (u_A03_PERFIL_CHEFE == "1") {
+	var perfilChefePerfilEmpresaUsuarioFormularioUsuario = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_chefe}]];
+	if (perfilChefePerfilEmpresaUsuarioFormularioUsuario == "1") {
 		document.getElementById("eup_a03_perfil_chefe").checked = true;
 	} else {
 		document.getElementById("eup_a03_perfil_chefe").checked = false;
 	}
-	var u_A03_PERFIL_PADRAO = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_padrao}]];
-	if (u_A03_PERFIL_PADRAO == "1") {
+	var perfilPadraoPerfilEmpresaUsuarioFormularioUsuario = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_padrao}]];
+	if (perfilPadraoPerfilEmpresaUsuarioFormularioUsuario == "1") {
 		document.getElementById("eup_a03_perfil_padrao").checked = true;
 	} else {
 		document.getElementById("eup_a03_perfil_padrao").checked = false;
 	}
 }
 //----------------------------------------------------
-var u_A01_NOME = document.getElementById("u_A01_NOME");
-u_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var nomeEmpresaFormularioUsuario = document.getElementById("u_A01_NOME");
+nomeEmpresaFormularioUsuario.innerHTML = document.getElementById("ct_A01_NOME").value;
 </script>
 </body>
 </html>

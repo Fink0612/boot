@@ -13,21 +13,21 @@ public class ParecerFatorUsuarioService {
   }
 
   public ParecerFatorUsuario selectParecerFatorUsuario(
-      ParecerFatorUsuario oParecerFatorUsuarioModel) {
-    oParecerFatorUsuarioModel =
-        parecerFatorUsuarioRepository.selectParecerFatorUsuario(oParecerFatorUsuarioModel);
-    return oParecerFatorUsuarioModel;
+      ParecerFatorUsuario dadosParecerFatorUsuario) {
+    dadosParecerFatorUsuario =
+        parecerFatorUsuarioRepository.selectParecerFatorUsuario(dadosParecerFatorUsuario);
+    return dadosParecerFatorUsuario;
   }
 
-  public String insertParecerFatorUsuario(ParecerFatorUsuario oParecerFatorUsuarioModel) {
-    String okMetodo = "";
-    okMetodo = parecerFatorUsuarioRepository.insertParecerFatorUsuario(oParecerFatorUsuarioModel);
-    return okMetodo;
+  public String insertParecerFatorUsuario(ParecerFatorUsuario dadosParecerFatorUsuario) {
+    String operacaoConcluida = "";
+    operacaoConcluida = parecerFatorUsuarioRepository.insertParecerFatorUsuario(dadosParecerFatorUsuario);
+    return operacaoConcluida;
   }
 
-  public String updateParecerFatorUsuario(ParecerFatorUsuario oParecerFatorUsuarioModel) {
-    String okMetodo = "";
-    okMetodo = parecerFatorUsuarioRepository.updateParecerFatorUsuario(oParecerFatorUsuarioModel);
-    return okMetodo;
+  public String updateParecerFatorUsuario(ParecerFatorUsuario dadosParecerFatorUsuario) {
+    String operacaoConcluida = "";
+    operacaoConcluida = parecerFatorUsuarioRepository.updateParecerFatorUsuario(dadosParecerFatorUsuario);
+    return operacaoConcluida;
   }
 }

@@ -14,9 +14,9 @@ public class AgendaUsuarioPareceresService {
   }
 
   public AgendaUsuarioPareceresDados selectPareceresAgUsu(
-      AgendaUsuarioPareceresDados oAgendaUsuarioPareceresModel) {
-    oAgendaUsuarioPareceresModel =
-        agendaUsuarioPareceresRepository.selectPareceresAgUsu(oAgendaUsuarioPareceresModel);
-    return oAgendaUsuarioPareceresModel;
+      AgendaUsuarioPareceresDados dadosAgendaUsuarioPareceres) {
+    dadosAgendaUsuarioPareceres =
+        agendaUsuarioPareceresRepository.selectPareceresAgUsu(dadosAgendaUsuarioPareceres);
+    return dadosAgendaUsuarioPareceres;
   }
 }

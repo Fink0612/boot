@@ -12,18 +12,18 @@ public class FatorService {
     this.fatorRepository = fatorRepository;
   }
 
-  public String insertFator(Fator oFatorModel) {
-    String res = this.fatorRepository.insertFator(oFatorModel);
-    return res;
+  public String insertFator(Fator dadosFator) {
+    String resultadoProcessamento = this.fatorRepository.insertFator(dadosFator);
+    return resultadoProcessamento;
   }
 
-  public Fator selectFator(Fator oFatorModel) {
-    oFatorModel = this.fatorRepository.selectFator(oFatorModel);
-    return oFatorModel;
+  public Fator selectFator(Fator dadosFator) {
+    dadosFator = this.fatorRepository.selectFator(dadosFator);
+    return dadosFator;
   }
 
-  public String updateFator(Fator oFatorModel) {
-    String res = this.fatorRepository.updateFator(oFatorModel);
-    return res;
+  public String updateFator(Fator dadosFator) {
+    String resultadoProcessamento = this.fatorRepository.updateFator(dadosFator);
+    return resultadoProcessamento;
   }
 }

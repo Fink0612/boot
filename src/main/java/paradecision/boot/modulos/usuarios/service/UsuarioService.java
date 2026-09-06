@@ -12,53 +12,53 @@ public class UsuarioService {
     this.usuarioRepository = usuarioRepository;
   }
 
-  public Usuario selectUserLogin(Usuario oUsuarioModel) {
-    Usuario auxUsuarioModel = new Usuario();
-    auxUsuarioModel.setA02_usuario(oUsuarioModel.getA02_usuario());
-    auxUsuarioModel = this.usuarioRepository.selectUserLogin(auxUsuarioModel);
-    if (auxUsuarioModel.getA02_codigo() > 0) {
-      if (!(auxUsuarioModel.getA02_senha().equals(oUsuarioModel.getA02_senha()))) {
-        auxUsuarioModel = new Usuario();
+  public Usuario selectUserLogin(Usuario dadosUsuario) {
+    Usuario dadosUsuarioAuxiliares = new Usuario();
+    dadosUsuarioAuxiliares.setA02_usuario(dadosUsuario.getA02_usuario());
+    dadosUsuarioAuxiliares = this.usuarioRepository.selectUserLogin(dadosUsuarioAuxiliares);
+    if (dadosUsuarioAuxiliares.getA02_codigo() > 0) {
+      if (!(dadosUsuarioAuxiliares.getA02_senha().equals(dadosUsuario.getA02_senha()))) {
+        dadosUsuarioAuxiliares = new Usuario();
       }
     }
-    return auxUsuarioModel;
+    return dadosUsuarioAuxiliares;
   }
 
-  public Usuario selectUserIni(Usuario oUsuarioModel) {
-    Usuario auxUsuarioModel = new Usuario();
-    auxUsuarioModel.setA02_codigo_link(oUsuarioModel.getA02_codigo_link());
-    auxUsuarioModel = this.usuarioRepository.selectUserIni(auxUsuarioModel);
-    return auxUsuarioModel;
+  public Usuario selectUserIni(Usuario dadosUsuario) {
+    Usuario dadosUsuarioAuxiliares = new Usuario();
+    dadosUsuarioAuxiliares.setA02_codigo_link(dadosUsuario.getA02_codigo_link());
+    dadosUsuarioAuxiliares = this.usuarioRepository.selectUserIni(dadosUsuarioAuxiliares);
+    return dadosUsuarioAuxiliares;
   }
 
-  public Usuario selectUserByUser(Usuario oUsuarioModel) {
-    Usuario auxUsuarioModel = new Usuario();
-    auxUsuarioModel.setA02_usuario(oUsuarioModel.getA02_usuario());
-    auxUsuarioModel = this.usuarioRepository.selectUserLogin(auxUsuarioModel);
-    return auxUsuarioModel;
+  public Usuario selectUserByUser(Usuario dadosUsuario) {
+    Usuario dadosUsuarioAuxiliares = new Usuario();
+    dadosUsuarioAuxiliares.setA02_usuario(dadosUsuario.getA02_usuario());
+    dadosUsuarioAuxiliares = this.usuarioRepository.selectUserLogin(dadosUsuarioAuxiliares);
+    return dadosUsuarioAuxiliares;
   }
 
-  public Usuario selectUserByCode(Usuario oUsuarioModel) {
-    oUsuarioModel = this.usuarioRepository.selectUserByCode(oUsuarioModel);
-    return oUsuarioModel;
+  public Usuario selectUserByCode(Usuario dadosUsuario) {
+    dadosUsuario = this.usuarioRepository.selectUserByCode(dadosUsuario);
+    return dadosUsuario;
   }
 
-  public Usuario updateSenhaUsuario(Usuario oUsuarioModel) {
-    Usuario auxUsuarioModel = new Usuario();
-    this.usuarioRepository.updateSenhaUsuario(oUsuarioModel);
-    auxUsuarioModel.setA02_usuario(oUsuarioModel.getA02_usuario());
-    auxUsuarioModel = this.selectUserByUser(auxUsuarioModel);
-    return auxUsuarioModel;
+  public Usuario updateSenhaUsuario(Usuario dadosUsuario) {
+    Usuario dadosUsuarioAuxiliares = new Usuario();
+    this.usuarioRepository.updateSenhaUsuario(dadosUsuario);
+    dadosUsuarioAuxiliares.setA02_usuario(dadosUsuario.getA02_usuario());
+    dadosUsuarioAuxiliares = this.selectUserByUser(dadosUsuarioAuxiliares);
+    return dadosUsuarioAuxiliares;
   }
 
-  public String updateUsuario(Usuario oUsuarioModel) {
-    String okMetodo = "";
-    okMetodo = usuarioRepository.updateUsuario(oUsuarioModel);
-    return okMetodo;
+  public String updateUsuario(Usuario dadosUsuario) {
+    String operacaoConcluida = "";
+    operacaoConcluida = usuarioRepository.updateUsuario(dadosUsuario);
+    return operacaoConcluida;
   }
 
-  public Usuario insertUsuario(Usuario oUsuarioModel) {
-    oUsuarioModel = this.usuarioRepository.insertUsuario(oUsuarioModel);
-    return oUsuarioModel;
+  public Usuario insertUsuario(Usuario dadosUsuario) {
+    dadosUsuario = this.usuarioRepository.insertUsuario(dadosUsuario);
+    return dadosUsuario;
   }
 }

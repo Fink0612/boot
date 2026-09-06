@@ -15,138 +15,138 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 @Repository
 public class AgendaFatoresRepository {
 
-  public AgendaFatoresDados selectFatoresDaAgenda(AgendaFatoresDados oAgendaFatoresModel) {
-    Fator oFatorModel;
-    ArrayList<Fator> arrFatorModel = new ArrayList<Fator>();
-    Usuario oUsuarioModel;
-    ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM VW_AGENDAS_FATORES WHERE A04_CODIGO = ?;";
+  public AgendaFatoresDados selectFatoresDaAgenda(AgendaFatoresDados dadosAgendaFatores) {
+    Fator dadosFator;
+    ArrayList<Fator> listaFator = new ArrayList<Fator>();
+    Usuario dadosUsuario;
+    ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM VW_AGENDAS_FATORES WHERE A04_CODIGO = ?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oAgendaFatoresModel.getoAgendaModel().getA04_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oFatorModel = new Fator();
-        oFatorModel.setA06_codigo(rs.getLong("A06_CODIGO"));
-        oFatorModel.setA06_titulo(rs.getString("A06_TITULO"));
-        oFatorModel.setA06_descricao(rs.getString("A06_DESCRICAO"));
-        oFatorModel.setA06_num_sequencia(rs.getInt("A06_NUM_SEQUENCIA"));
-        oFatorModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oFatorModel.setA06_certeza_resultante_fator(rs.getLong("A06_CERTEZA_RESULTANTE_FATOR"));
-        oFatorModel.setA06_contradicao_resultante_fator(
-            rs.getLong("A06_CONTRADICAO_RESULTANTE_FATOR"));
-        oFatorModel.setA06_resultado_fator(rs.getString("A06_RESULTADO_FATOR"));
-        oFatorModel.setA06_dt_cadastro(rs.getDate("A06_DT_CADASTRO"));
-        oFatorModel.setA06_dt_ultima_alteracao(rs.getDate("A06_DT_ULTIMA_ALTERACAO"));
-        arrFatorModel.add(oFatorModel);
-        oUsuarioModel = new Usuario();
-        oUsuarioModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oUsuarioModel.setA02_nome(rs.getString("A02_NOME"));
-        arrUsuarioModel.add(oUsuarioModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosAgendaFatores.getoAgendaModel().getA04_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosFator = new Fator();
+        dadosFator.setA06_codigo(resultadoConsulta.getLong("A06_CODIGO"));
+        dadosFator.setA06_titulo(resultadoConsulta.getString("A06_TITULO"));
+        dadosFator.setA06_descricao(resultadoConsulta.getString("A06_DESCRICAO"));
+        dadosFator.setA06_num_sequencia(resultadoConsulta.getInt("A06_NUM_SEQUENCIA"));
+        dadosFator.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosFator.setA06_certeza_resultante_fator(resultadoConsulta.getLong("A06_CERTEZA_RESULTANTE_FATOR"));
+        dadosFator.setA06_contradicao_resultante_fator(
+            resultadoConsulta.getLong("A06_CONTRADICAO_RESULTANTE_FATOR"));
+        dadosFator.setA06_resultado_fator(resultadoConsulta.getString("A06_RESULTADO_FATOR"));
+        dadosFator.setA06_dt_cadastro(resultadoConsulta.getDate("A06_DT_CADASTRO"));
+        dadosFator.setA06_dt_ultima_alteracao(resultadoConsulta.getDate("A06_DT_ULTIMA_ALTERACAO"));
+        listaFator.add(dadosFator);
+        dadosUsuario = new Usuario();
+        dadosUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosUsuario.setA02_nome(resultadoConsulta.getString("A02_NOME"));
+        listaUsuario.add(dadosUsuario);
       }
-      oAgendaFatoresModel.setArrFatorModel(arrFatorModel);
-      oAgendaFatoresModel.setArrUsuarioModel(arrUsuarioModel);
-      stmt.close();
-    } catch (Exception e) {
+      dadosAgendaFatores.setArrFatorModel(listaFator);
+      dadosAgendaFatores.setArrUsuarioModel(listaUsuario);
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AFP-S1)");
     }
-    fechaCon(con);
-    return oAgendaFatoresModel;
+    fechaCon(conexaoBanco);
+    return dadosAgendaFatores;
   }
 
-  public ArrayList<Fator> getArrFatoresModel(Agenda oAgendaModel) {
-    Fator oFatorModel;
-    ArrayList<Fator> arrFatorModel = new ArrayList<Fator>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM FATOR_06 WHERE A04_CODIGO = ?;";
+  public ArrayList<Fator> getArrFatoresModel(Agenda dadosAgenda) {
+    Fator dadosFator;
+    ArrayList<Fator> listaFator = new ArrayList<Fator>();
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM FATOR_06 WHERE A04_CODIGO = ?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oAgendaModel.getA04_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oFatorModel = new Fator();
-        oFatorModel.setA06_codigo(rs.getLong("A06_CODIGO"));
-        oFatorModel.setA06_titulo(rs.getString("A06_TITULO"));
-        oFatorModel.setA06_descricao(rs.getString("A06_DESCRICAO"));
-        oFatorModel.setA06_num_sequencia(rs.getInt("A06_NUM_SEQUENCIA"));
-        oFatorModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oFatorModel.setA06_certeza_resultante_fator(rs.getLong("A06_CERTEZA_RESULTANTE_FATOR"));
-        oFatorModel.setA06_contradicao_resultante_fator(
-            rs.getLong("A06_CONTRADICAO_RESULTANTE_FATOR"));
-        oFatorModel.setA06_resultado_fator(rs.getString("A06_RESULTADO_FATOR"));
-        oFatorModel.setA06_dt_cadastro(rs.getDate("A06_DT_CADASTRO"));
-        oFatorModel.setA06_dt_ultima_alteracao(rs.getDate("A06_DT_ULTIMA_ALTERACAO"));
-        arrFatorModel.add(oFatorModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosAgenda.getA04_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosFator = new Fator();
+        dadosFator.setA06_codigo(resultadoConsulta.getLong("A06_CODIGO"));
+        dadosFator.setA06_titulo(resultadoConsulta.getString("A06_TITULO"));
+        dadosFator.setA06_descricao(resultadoConsulta.getString("A06_DESCRICAO"));
+        dadosFator.setA06_num_sequencia(resultadoConsulta.getInt("A06_NUM_SEQUENCIA"));
+        dadosFator.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosFator.setA06_certeza_resultante_fator(resultadoConsulta.getLong("A06_CERTEZA_RESULTANTE_FATOR"));
+        dadosFator.setA06_contradicao_resultante_fator(
+            resultadoConsulta.getLong("A06_CONTRADICAO_RESULTANTE_FATOR"));
+        dadosFator.setA06_resultado_fator(resultadoConsulta.getString("A06_RESULTADO_FATOR"));
+        dadosFator.setA06_dt_cadastro(resultadoConsulta.getDate("A06_DT_CADASTRO"));
+        dadosFator.setA06_dt_ultima_alteracao(resultadoConsulta.getDate("A06_DT_ULTIMA_ALTERACAO"));
+        listaFator.add(dadosFator);
       }
-      stmt.close();
-    } catch (Exception e) {
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AFP-S2)");
     }
-    fechaCon(con);
-    return arrFatorModel;
+    fechaCon(conexaoBanco);
+    return listaFator;
   }
 
-  public String updateGrausFatoresDaAgenda(AgendaFatoresDados oAgendaFatoresModel) {
-    String msgAction = "NOK";
-    Fator oFatorModel;
-    Agenda oAgendaModel;
-    ArrayList<Fator> arrFatorModel = oAgendaFatoresModel.getArrFatorModel();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "";
+  public String updateGrausFatoresDaAgenda(AgendaFatoresDados dadosAgendaFatores) {
+    String mensagemAcao = "NOK";
+    Fator dadosFator;
+    Agenda dadosAgenda;
+    ArrayList<Fator> listaFator = dadosAgendaFatores.getArrFatorModel();
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "";
     try {
-      PreparedStatement stmt;
-      int qtdFatores = arrFatorModel.size();
-      oAgendaModel = oAgendaFatoresModel.getoAgendaModel();
-      if (oAgendaModel.getA04_codigo() > 0 && qtdFatores > 0) {
+      PreparedStatement comandoPreparado;
+      int quantidadeFatores = listaFator.size();
+      dadosAgenda = dadosAgendaFatores.getoAgendaModel();
+      if (dadosAgenda.getA04_codigo() > 0 && quantidadeFatores > 0) {
         // ---- ATUALIZANDO A AGENDA -------
-        sql = "UPDATE AGENDA_04 SET ";
-        sql += "A04_CERTEZA_RESULTADO=?, ";
-        sql += "A04_CONTRADICAO_RESULTADO=?, ";
-        sql += "A04_RESULTADO=? ";
-        sql += "WHERE A04_CODIGO=?;";
-        stmt = con.prepareStatement(sql);
-        stmt.setDouble(1, oAgendaModel.getA04_certeza_resultado());
-        stmt.setDouble(2, oAgendaModel.getA04_contradicao_resultado());
-        stmt.setString(3, oAgendaModel.getA04_resultado());
-        stmt.setLong(4, oAgendaModel.getA04_codigo());
-        stmt.execute();
-        stmt.close();
+        instrucaoSql = "UPDATE AGENDA_04 SET ";
+        instrucaoSql += "A04_CERTEZA_RESULTADO=?, ";
+        instrucaoSql += "A04_CONTRADICAO_RESULTADO=?, ";
+        instrucaoSql += "A04_RESULTADO=? ";
+        instrucaoSql += "WHERE A04_CODIGO=?;";
+        comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+        comandoPreparado.setDouble(1, dadosAgenda.getA04_certeza_resultado());
+        comandoPreparado.setDouble(2, dadosAgenda.getA04_contradicao_resultado());
+        comandoPreparado.setString(3, dadosAgenda.getA04_resultado());
+        comandoPreparado.setLong(4, dadosAgenda.getA04_codigo());
+        comandoPreparado.execute();
+        comandoPreparado.close();
         // ---- ATUALIZANDO OS FATORES -------
-        sql = "UPDATE FATOR_06 SET ";
-        sql += "A06_CERTEZA_RESULTANTE_FATOR=?, ";
-        sql += "A06_CONTRADICAO_RESULTANTE_FATOR=?, ";
-        sql += "A06_RESULTADO_FATOR=? ";
-        sql += "WHERE A06_CODIGO=?;";
-        for (int ii = 0; ii < qtdFatores; ii++) {
-          oFatorModel = arrFatorModel.get(ii);
-          if (oFatorModel.getA06_codigo() > 0) {
-            stmt = con.prepareStatement(sql);
-            stmt.setDouble(1, oFatorModel.getA06_certeza_resultante_fator());
-            stmt.setDouble(2, oFatorModel.getA06_contradicao_resultante_fator());
-            stmt.setString(3, oFatorModel.getA06_resultado_fator());
-            stmt.setLong(4, oFatorModel.getA06_codigo());
-            stmt.execute();
-            stmt.close();
+        instrucaoSql = "UPDATE FATOR_06 SET ";
+        instrucaoSql += "A06_CERTEZA_RESULTANTE_FATOR=?, ";
+        instrucaoSql += "A06_CONTRADICAO_RESULTANTE_FATOR=?, ";
+        instrucaoSql += "A06_RESULTADO_FATOR=? ";
+        instrucaoSql += "WHERE A06_CODIGO=?;";
+        for (int indiceRegistro = 0; indiceRegistro < quantidadeFatores; indiceRegistro++) {
+          dadosFator = listaFator.get(indiceRegistro);
+          if (dadosFator.getA06_codigo() > 0) {
+            comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+            comandoPreparado.setDouble(1, dadosFator.getA06_certeza_resultante_fator());
+            comandoPreparado.setDouble(2, dadosFator.getA06_contradicao_resultante_fator());
+            comandoPreparado.setString(3, dadosFator.getA06_resultado_fator());
+            comandoPreparado.setLong(4, dadosFator.getA06_codigo());
+            comandoPreparado.execute();
+            comandoPreparado.close();
           }
         }
-        msgAction = "OK";
+        mensagemAcao = "OK";
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a Altera��o de dados no BD...(AFP)");
     }
-    fechaCon(con);
-    return msgAction;
+    fechaCon(conexaoBanco);
+    return mensagemAcao;
   }
 
   // ......PARA LIDAR COM O BANCO DE DADOS..........
 
-  private void fechaCon(Connection con) {
-    if (con == null) return;
+  private void fechaCon(Connection conexaoBanco) {
+    if (conexaoBanco == null) return;
     try {
-      con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      conexaoBanco.close();
+    } catch (SQLException excecao) {
+      excecao.printStackTrace();
     }
   }
 }

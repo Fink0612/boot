@@ -21,46 +21,46 @@ public class InterPareceresFatoresPaginaService {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
     String okIteracao = "";
-    String okMetodo = "OK";
+    String operacaoConcluida = "OK";
     String txt_ct_QTD_FATORES_AGENDA = formulario.valor("ct_QTD_FATORES_AGENDA");
     int num_ct_QTD_FATORES_AGENDA = MetodosUteis.retornaInt(txt_ct_QTD_FATORES_AGENDA);
     if (num_ct_QTD_FATORES_AGENDA > 0) {
-      for (int ii = 0; ii < num_ct_QTD_FATORES_AGENDA; ii++) {
+      for (int indiceRegistro = 0; indiceRegistro < num_ct_QTD_FATORES_AGENDA; indiceRegistro++) {
         okIteracao = "";
-        String txt_afp_A02_CODIGO = formulario.valor("ct_A02_CODIGO");
-        long num_afp_A02_CODIGO = MetodosUteis.retornaLong(txt_afp_A02_CODIGO);
-        String txt_afp_A06_CODIGO = formulario.valor("afp_A06_CODIGO_" + ii);
-        long num_afp_A06_CODIGO = MetodosUteis.retornaLong(txt_afp_A06_CODIGO);
-        String txt_afp_A07_CERTEZA = formulario.valor("afp_A07_CERTEZA_" + ii);
-        double num_afp_A07_CERTEZA = MetodosUteis.retornaDouble(txt_afp_A07_CERTEZA);
-        String txt_afp_A07_CONTRADICAO = formulario.valor("afp_A07_CONTRADICAO_" + ii);
-        double num_afp_A07_CONTRADICAO = MetodosUteis.retornaDouble(txt_afp_A07_CONTRADICAO);
+        String codigoUsuarioTextoPareceresAgenda = formulario.valor("ct_A02_CODIGO");
+        long codigoUsuarioNumericoPareceresAgenda = MetodosUteis.retornaLong(codigoUsuarioTextoPareceresAgenda);
+        String codigoFatorTextoPareceresAgenda = formulario.valor("afp_A06_CODIGO_" + indiceRegistro);
+        long codigoFatorNumericoPareceresAgenda = MetodosUteis.retornaLong(codigoFatorTextoPareceresAgenda);
+        String certezaParecerTextoPareceresAgenda = formulario.valor("afp_A07_CERTEZA_" + indiceRegistro);
+        double certezaParecerNumericoPareceresAgenda = MetodosUteis.retornaDouble(certezaParecerTextoPareceresAgenda);
+        String contradicaoParecerTextoPareceresAgenda = formulario.valor("afp_A07_CONTRADICAO_" + indiceRegistro);
+        double contradicaoParecerNumericoPareceresAgenda = MetodosUteis.retornaDouble(contradicaoParecerTextoPareceresAgenda);
         //		if (!(num_afp_A07_CERTEZA < 0 && num_afp_A07_CONTRADICAO < 0)) {
-        long codParecer = 0;
-        ParecerFatorUsuario oParecerFatorUsuarioModel = new ParecerFatorUsuario();
+        long codigoParecer = 0;
+        ParecerFatorUsuario dadosParecerFatorUsuario = new ParecerFatorUsuario();
 
-        oParecerFatorUsuarioModel.setA02_codigo(num_afp_A02_CODIGO);
-        oParecerFatorUsuarioModel.setA06_codigo(num_afp_A06_CODIGO);
-        oParecerFatorUsuarioModel =
-            parecerFatorUsuarioService.selectParecerFatorUsuario(oParecerFatorUsuarioModel);
-        oParecerFatorUsuarioModel.setA07_certeza(num_afp_A07_CERTEZA);
-        oParecerFatorUsuarioModel.setA07_contradicao(num_afp_A07_CONTRADICAO);
-        codParecer = oParecerFatorUsuarioModel.getA07_codigo();
-        if (codParecer > 0) {
+        dadosParecerFatorUsuario.setA02_codigo(codigoUsuarioNumericoPareceresAgenda);
+        dadosParecerFatorUsuario.setA06_codigo(codigoFatorNumericoPareceresAgenda);
+        dadosParecerFatorUsuario =
+            parecerFatorUsuarioService.selectParecerFatorUsuario(dadosParecerFatorUsuario);
+        dadosParecerFatorUsuario.setA07_certeza(certezaParecerNumericoPareceresAgenda);
+        dadosParecerFatorUsuario.setA07_contradicao(contradicaoParecerNumericoPareceresAgenda);
+        codigoParecer = dadosParecerFatorUsuario.getA07_codigo();
+        if (codigoParecer > 0) {
           okIteracao =
-              parecerFatorUsuarioService.updateParecerFatorUsuario(oParecerFatorUsuarioModel);
+              parecerFatorUsuarioService.updateParecerFatorUsuario(dadosParecerFatorUsuario);
         } else {
           okIteracao =
-              parecerFatorUsuarioService.insertParecerFatorUsuario(oParecerFatorUsuarioModel);
+              parecerFatorUsuarioService.insertParecerFatorUsuario(dadosParecerFatorUsuario);
         }
         if (okIteracao.equals("NOK")) {
-          okMetodo = "NOK";
+          operacaoConcluida = "NOK";
         }
         //		}
       }
     }
 
-    pagina.put("okMetodo", String.valueOf(okMetodo));
+    pagina.put("okMetodo", String.valueOf(operacaoConcluida));
 
     return pagina;
   }

@@ -7,33 +7,33 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 
 public class UsuarioEmpresasDados {
 
-  private Usuario oUsuarioModel = new Usuario();
-  private ArrayList<Empresa> arrEmpresaModel = new ArrayList<Empresa>();
-  private ArrayList<EmpresaUsuarioPerfil> arrEmpresaUsuarioPerfilModel =
+  private Usuario dadosUsuario = new Usuario();
+  private ArrayList<Empresa> listaEmpresa = new ArrayList<Empresa>();
+  private ArrayList<EmpresaUsuarioPerfil> listaEmpresaUsuarioPerfil =
       new ArrayList<EmpresaUsuarioPerfil>();
 
   public Usuario getoUsuarioModel() {
-    return oUsuarioModel;
+    return dadosUsuario;
   }
 
-  public void setoUsuarioModel(Usuario oUsuarioModel) {
-    this.oUsuarioModel = oUsuarioModel;
+  public void setoUsuarioModel(Usuario dadosUsuario) {
+    this.dadosUsuario = dadosUsuario;
   }
 
   public ArrayList<Empresa> getArrEmpresaModel() {
-    return arrEmpresaModel;
+    return listaEmpresa;
   }
 
-  public void setArrEmpresaModel(ArrayList<Empresa> arrEmpresaModel) {
-    this.arrEmpresaModel = arrEmpresaModel;
+  public void setArrEmpresaModel(ArrayList<Empresa> listaEmpresa) {
+    this.listaEmpresa = listaEmpresa;
   }
 
   public ArrayList<EmpresaUsuarioPerfil> getArrEmpresaUsuarioPerfilModel() {
-    return arrEmpresaUsuarioPerfilModel;
+    return listaEmpresaUsuarioPerfil;
   }
 
   public void setArrEmpresaUsuarioPerfilModel(
-      ArrayList<EmpresaUsuarioPerfil> arrEmpresaUsuarioPerfilModel) {
-    this.arrEmpresaUsuarioPerfilModel = arrEmpresaUsuarioPerfilModel;
+      ArrayList<EmpresaUsuarioPerfil> listaEmpresaUsuarioPerfil) {
+    this.listaEmpresaUsuarioPerfil = listaEmpresaUsuarioPerfil;
   }
 }

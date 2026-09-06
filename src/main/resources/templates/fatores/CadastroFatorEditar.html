@@ -42,17 +42,17 @@
 </form>
 
 <script type="text/javascript" th:inline="javascript">
-var f_A01_NOME = document.getElementById("f_A01_NOME");
-f_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
-var f_A04_TITULO = document.getElementById("f_A04_TITULO");
-f_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var nomeEmpresaFormularioFator = document.getElementById("f_A01_NOME");
+nomeEmpresaFormularioFator.innerHTML = document.getElementById("ct_A01_NOME").value;
+var tituloAgendaFormularioFator = document.getElementById("f_A04_TITULO");
+tituloAgendaFormularioFator.innerHTML = document.getElementById("ct_A04_TITULO").value;
 //---------------------------------------
-var okRetorno = [[${pagina.okRetorno}]];
-if (okRetorno == "OK") {
-	var f_a06_titulo = document.getElementById("f_a06_titulo");
-	f_a06_titulo.value = [[${pagina.oFatorModel_A06_titulo}]];
-	var f_a06_descricao = document.getElementById("f_a06_descricao");
-	f_a06_descricao.value = [[${pagina.oFatorModel_A06_descricao}]];
+var retornoValido = [[${pagina.okRetorno}]];
+if (retornoValido == "OK") {
+	var tituloFatorFormularioFator = document.getElementById("f_a06_titulo");
+	tituloFatorFormularioFator.value = [[${pagina.oFatorModel_A06_titulo}]];
+	var descricaoFatorFormularioFator = document.getElementById("f_a06_descricao");
+	descricaoFatorFormularioFator.value = [[${pagina.oFatorModel_A06_descricao}]];
 }
 </script>
 </body>

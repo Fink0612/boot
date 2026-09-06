@@ -18,7 +18,7 @@ public class TesteipPaginaService {
       InetAddress addr = InetAddress.getLocalHost();
       endereco = addr.getHostAddress();
       hostname = addr.getHostName();
-    } catch (Exception e) {
+    } catch (Exception excecao) {
       endereco = "OPS!!";
     }
 

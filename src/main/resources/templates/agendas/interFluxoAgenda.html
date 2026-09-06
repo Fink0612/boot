@@ -30,11 +30,11 @@
 </form>
 
 <script type="text/javascript" th:inline="javascript">
-var okMetodo = [[${pagina.okMetodo}]];
-var proximoFrame = "#";
+var operacaoConcluida = [[${pagina.okMetodo}]];
+var rotaProximaTela = "#";
 var cjInterMensagem = document.getElementById("cjInterMensagem"); 
 cjInterMensagem.style.display = "";
-if (okMetodo == 1) {
+if (operacaoConcluida == 1) {
 	document.getElementById("ct_A04_STATUS").value = [[${pagina.proxStatus}]]; 
 	var interMensagem = document.getElementById("interMensagem"); 
 	interMensagem.innerHTML = [[${pagina.msgAcaoOK}]];

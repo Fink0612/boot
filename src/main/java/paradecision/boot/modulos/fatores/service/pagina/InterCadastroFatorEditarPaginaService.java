@@ -20,24 +20,24 @@ public class InterCadastroFatorEditarPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    String okMetodo = "NOK";
-    String ic_A06_CODIGO = formulario.valor("ct_A06_CODIGO");
-    String f_a06_titulo = formulario.valor("f_a06_titulo");
-    String f_a06_descricao = formulario.valor("f_a06_descricao");
-    if (ic_A06_CODIGO == null) ic_A06_CODIGO = "0";
-    if (f_a06_titulo == null) f_a06_titulo = "";
-    if (f_a06_descricao == null) f_a06_descricao = "";
-    long num_a06_codigo = MetodosUteis.retornaLong(ic_A06_CODIGO);
-    f_a06_titulo = MetodosUteis.padronizarEspacos(f_a06_titulo);
-    f_a06_descricao = MetodosUteis.padronizarEspacos(f_a06_descricao);
-    Fator oFatorModel = new Fator();
+    String operacaoConcluida = "NOK";
+    String codigoFatorCadastro = formulario.valor("ct_A06_CODIGO");
+    String tituloFatorFormularioFator = formulario.valor("f_a06_titulo");
+    String descricaoFatorFormularioFator = formulario.valor("f_a06_descricao");
+    if (codigoFatorCadastro == null) codigoFatorCadastro = "0";
+    if (tituloFatorFormularioFator == null) tituloFatorFormularioFator = "";
+    if (descricaoFatorFormularioFator == null) descricaoFatorFormularioFator = "";
+    long codigoFatorNumerico = MetodosUteis.retornaLong(codigoFatorCadastro);
+    tituloFatorFormularioFator = MetodosUteis.padronizarEspacos(tituloFatorFormularioFator);
+    descricaoFatorFormularioFator = MetodosUteis.padronizarEspacos(descricaoFatorFormularioFator);
+    Fator dadosFator = new Fator();
 
-    oFatorModel.setA06_codigo(num_a06_codigo);
-    oFatorModel.setA06_titulo(f_a06_titulo);
-    oFatorModel.setA06_descricao(f_a06_descricao);
-    okMetodo = fatorService.updateFator(oFatorModel);
+    dadosFator.setA06_codigo(codigoFatorNumerico);
+    dadosFator.setA06_titulo(tituloFatorFormularioFator);
+    dadosFator.setA06_descricao(descricaoFatorFormularioFator);
+    operacaoConcluida = fatorService.updateFator(dadosFator);
 
-    pagina.put("okMetodo", String.valueOf(okMetodo));
+    pagina.put("okMetodo", String.valueOf(operacaoConcluida));
 
     return pagina;
   }

@@ -57,15 +57,15 @@
 </table>
 </form>
 <script type="text/javascript" th:inline="javascript">
-var eu_A01_NOME = document.getElementById("eu_A01_NOME");
-eu_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var nomeEmpresaUsuariosEmpresa = document.getElementById("eu_A01_NOME");
+nomeEmpresaUsuariosEmpresa.innerHTML = document.getElementById("ct_A01_NOME").value;
 //  -----------------------------------------------------------------
 //  ### contorle de permição de visualização da lista de Usuários ###
-var eu_A03_PERFIL_PARAVIVERBEM = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
-var eu_A03_PERFIL_ADMINISTRADOR = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
-var eu_cadastrarUsuario = document.getElementById("eu_cadastrarUsuario");
-if (eu_A03_PERFIL_PARAVIVERBEM.value == "1" || eu_A03_PERFIL_ADMINISTRADOR.value == "1") {
-	eu_cadastrarUsuario.style.display = "";
+var perfilParaviverbemPerfilEmpresaUsuarioUsuariosEmpresa = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
+var perfilAdministradorPerfilEmpresaUsuarioUsuariosEmpresa = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
+var controleCadastrarUsuario = document.getElementById("eu_cadastrarUsuario");
+if (perfilParaviverbemPerfilEmpresaUsuarioUsuariosEmpresa.value == "1" || perfilAdministradorPerfilEmpresaUsuarioUsuariosEmpresa.value == "1") {
+	controleCadastrarUsuario.style.display = "";
 }
 </script>
 </body>

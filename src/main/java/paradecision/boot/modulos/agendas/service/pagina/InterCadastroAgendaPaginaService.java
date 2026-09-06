@@ -27,43 +27,43 @@ public class InterCadastroAgendaPaginaService {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
     long novoCodigo = 0;
-    String a_a04_titulo = formulario.valor("a_a04_titulo");
-    String a_a04_descricao = formulario.valor("a_a04_descricao");
-    String a_a04_status_dt_limite = formulario.valor("a_a04_status_dt_limite");
-    String a_a04_data_limite = formulario.valor("a_a04_data_limite");
-    String ic_A01_CODIGO = formulario.valor("ct_A01_CODIGO");
-    if (a_a04_titulo == null) a_a04_titulo = "";
-    if (a_a04_descricao == null) a_a04_descricao = "";
-    if (a_a04_status_dt_limite == null) a_a04_status_dt_limite = "0";
-    if (a_a04_data_limite == null) a_a04_data_limite = "";
-    if ("".equals(a_a04_status_dt_limite)) a_a04_status_dt_limite = "0";
-    if (ic_A01_CODIGO == null) ic_A01_CODIGO = "0";
-    a_a04_titulo = MetodosUteis.padronizarEspacos(a_a04_titulo);
-    a_a04_descricao = MetodosUteis.padronizarEspacos(a_a04_descricao);
-    Agenda oAgendaModel = new Agenda();
+    String tituloAgendaFormularioAgenda = formulario.valor("a_a04_titulo");
+    String descricaoAgendaFormularioAgenda = formulario.valor("a_a04_descricao");
+    String statusDataLimiteAgendaFormularioAgenda = formulario.valor("a_a04_status_dt_limite");
+    String dataLimiteAgendaFormularioAgenda = formulario.valor("a_a04_data_limite");
+    String codigoEmpresaCadastro = formulario.valor("ct_A01_CODIGO");
+    if (tituloAgendaFormularioAgenda == null) tituloAgendaFormularioAgenda = "";
+    if (descricaoAgendaFormularioAgenda == null) descricaoAgendaFormularioAgenda = "";
+    if (statusDataLimiteAgendaFormularioAgenda == null) statusDataLimiteAgendaFormularioAgenda = "0";
+    if (dataLimiteAgendaFormularioAgenda == null) dataLimiteAgendaFormularioAgenda = "";
+    if ("".equals(statusDataLimiteAgendaFormularioAgenda)) statusDataLimiteAgendaFormularioAgenda = "0";
+    if (codigoEmpresaCadastro == null) codigoEmpresaCadastro = "0";
+    tituloAgendaFormularioAgenda = MetodosUteis.padronizarEspacos(tituloAgendaFormularioAgenda);
+    descricaoAgendaFormularioAgenda = MetodosUteis.padronizarEspacos(descricaoAgendaFormularioAgenda);
+    Agenda dadosAgenda = new Agenda();
 
-    oAgendaModel.setA04_titulo(a_a04_titulo);
-    oAgendaModel.setA04_descricao(a_a04_descricao);
-    int a_num_a04_status_dt_limite = Integer.parseInt(a_a04_status_dt_limite);
-    oAgendaModel.setA04_status_dt_limite(a_num_a04_status_dt_limite);
-    Date a_dt_a04_data_limite = MetodosUteis.retornaDate(a_a04_data_limite, "yyyy-MM-dd");
-    oAgendaModel.setA04_data_limite(a_dt_a04_data_limite);
-    long ic_num_A01_CODIGO = Long.parseLong(ic_A01_CODIGO);
-    oAgendaModel.setA01_codigo(ic_num_A01_CODIGO);
-    novoCodigo = agendaService.insertAgenda(oAgendaModel);
+    dadosAgenda.setA04_titulo(tituloAgendaFormularioAgenda);
+    dadosAgenda.setA04_descricao(descricaoAgendaFormularioAgenda);
+    int statusDataLimiteAgendaFormularioAgendaNumerico = Integer.parseInt(statusDataLimiteAgendaFormularioAgenda);
+    dadosAgenda.setA04_status_dt_limite(statusDataLimiteAgendaFormularioAgendaNumerico);
+    Date a_dt_a04_data_limite = MetodosUteis.retornaDate(dataLimiteAgendaFormularioAgenda, "yyyy-MM-dd");
+    dadosAgenda.setA04_data_limite(a_dt_a04_data_limite);
+    long codigoEmpresaCadastroNumerico = Long.parseLong(codigoEmpresaCadastro);
+    dadosAgenda.setA01_codigo(codigoEmpresaCadastroNumerico);
+    novoCodigo = agendaService.insertAgenda(dadosAgenda);
     if (novoCodigo > 0) {
-      String ic_A02_CODIGO = formulario.valor("ct_A02_CODIGO");
-      if (ic_A02_CODIGO == null) ic_A02_CODIGO = "0";
-      long ic_num_A02_CODIGO = Long.parseLong(ic_A02_CODIGO);
-      AgendaUsuarioPerfil oAgendaUsuarioPerfilModel = new AgendaUsuarioPerfil();
-      oAgendaUsuarioPerfilModel.setA02_codigo(ic_num_A02_CODIGO);
-      oAgendaUsuarioPerfilModel.setA04_codigo(novoCodigo);
-      oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_titular(1);
-      oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_facilitador(0);
-      oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_especialista(0);
-      oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_analista(0);
+      String codigoUsuarioCadastro = formulario.valor("ct_A02_CODIGO");
+      if (codigoUsuarioCadastro == null) codigoUsuarioCadastro = "0";
+      long codigoUsuarioCadastroNumerico = Long.parseLong(codigoUsuarioCadastro);
+      AgendaUsuarioPerfil dadosAgendaUsuarioPerfil = new AgendaUsuarioPerfil();
+      dadosAgendaUsuarioPerfil.setA02_codigo(codigoUsuarioCadastroNumerico);
+      dadosAgendaUsuarioPerfil.setA04_codigo(novoCodigo);
+      dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_titular(1);
+      dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_facilitador(0);
+      dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_especialista(0);
+      dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_analista(0);
 
-      agendaUsuarioPerfilService.insertPerfilUsuarioAgenda(oAgendaUsuarioPerfilModel);
+      agendaUsuarioPerfilService.insertPerfilUsuarioAgenda(dadosAgendaUsuarioPerfil);
     }
 
     pagina.put("novoCodigo", String.valueOf(novoCodigo));

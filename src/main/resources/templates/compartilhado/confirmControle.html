@@ -1,7 +1,7 @@
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="conteudo">
 <script th:inline="javascript">
-function abreConfirmMensagem(txtConfirm, codConfirm){
-	document.getElementById("codConfirm").value = codConfirm;
+function abreConfirmMensagem(txtConfirm, codigoConfirmacao){
+	document.getElementById("codConfirm").value = codigoConfirmacao;
 	var confirmMensagem = document.getElementById("confirmMensagem"); 
 	confirmMensagem.innerHTML = txtConfirm;
 	document.getElementById("confMsg").style.visibility = "visible";

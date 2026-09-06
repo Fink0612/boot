@@ -20,28 +20,28 @@ public class InterCadastroFatorPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    String okMetodo = "NOK";
-    String f_a06_titulo = formulario.valor("f_a06_titulo");
-    String f_a06_descricao = formulario.valor("f_a06_descricao");
-    String ic_A02_CODIGO = formulario.valor("ct_A02_CODIGO");
-    String ic_A04_CODIGO = formulario.valor("ct_A04_CODIGO");
-    if (f_a06_titulo == null) f_a06_titulo = "";
-    if (f_a06_descricao == null) f_a06_descricao = "";
-    if (ic_A02_CODIGO == null) ic_A02_CODIGO = "0";
-    if (ic_A04_CODIGO == null) ic_A04_CODIGO = "0";
-    f_a06_titulo = MetodosUteis.padronizarEspacos(f_a06_titulo);
-    f_a06_descricao = MetodosUteis.padronizarEspacos(f_a06_descricao);
-    long num_a02_codigo = MetodosUteis.retornaLong(ic_A02_CODIGO);
-    long num_a04_codigo = MetodosUteis.retornaLong(ic_A04_CODIGO);
-    Fator oFatorModel = new Fator();
+    String operacaoConcluida = "NOK";
+    String tituloFatorFormularioFator = formulario.valor("f_a06_titulo");
+    String descricaoFatorFormularioFator = formulario.valor("f_a06_descricao");
+    String codigoUsuarioCadastro = formulario.valor("ct_A02_CODIGO");
+    String codigoAgendaCadastro = formulario.valor("ct_A04_CODIGO");
+    if (tituloFatorFormularioFator == null) tituloFatorFormularioFator = "";
+    if (descricaoFatorFormularioFator == null) descricaoFatorFormularioFator = "";
+    if (codigoUsuarioCadastro == null) codigoUsuarioCadastro = "0";
+    if (codigoAgendaCadastro == null) codigoAgendaCadastro = "0";
+    tituloFatorFormularioFator = MetodosUteis.padronizarEspacos(tituloFatorFormularioFator);
+    descricaoFatorFormularioFator = MetodosUteis.padronizarEspacos(descricaoFatorFormularioFator);
+    long codigoUsuarioNumerico = MetodosUteis.retornaLong(codigoUsuarioCadastro);
+    long codigoAgendaNumerico = MetodosUteis.retornaLong(codigoAgendaCadastro);
+    Fator dadosFator = new Fator();
 
-    oFatorModel.setA06_titulo(f_a06_titulo);
-    oFatorModel.setA06_descricao(f_a06_descricao);
-    oFatorModel.setA02_codigo(num_a02_codigo);
-    oFatorModel.setA04_codigo(num_a04_codigo);
-    okMetodo = fatorService.insertFator(oFatorModel);
+    dadosFator.setA06_titulo(tituloFatorFormularioFator);
+    dadosFator.setA06_descricao(descricaoFatorFormularioFator);
+    dadosFator.setA02_codigo(codigoUsuarioNumerico);
+    dadosFator.setA04_codigo(codigoAgendaNumerico);
+    operacaoConcluida = fatorService.insertFator(dadosFator);
 
-    pagina.put("okMetodo", String.valueOf(okMetodo));
+    pagina.put("okMetodo", String.valueOf(operacaoConcluida));
 
     return pagina;
   }

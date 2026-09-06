@@ -7,33 +7,33 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 
 public class AgendaPareceresDados {
 
-  private Agenda oAgendaModel = new Agenda();
-  private ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-  private ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel =
+  private Agenda dadosAgenda = new Agenda();
+  private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+  private ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario =
       new ArrayList<ParecerFatorUsuario>();
 
   public Agenda getoAgendaModel() {
-    return oAgendaModel;
+    return dadosAgenda;
   }
 
-  public void setoAgendaModel(Agenda oAgendaModel) {
-    this.oAgendaModel = oAgendaModel;
+  public void setoAgendaModel(Agenda dadosAgenda) {
+    this.dadosAgenda = dadosAgenda;
   }
 
   public ArrayList<Usuario> getArrUsuarioModel() {
-    return arrUsuarioModel;
+    return listaUsuario;
   }
 
-  public void setArrUsuarioModel(ArrayList<Usuario> arrUsuarioModel) {
-    this.arrUsuarioModel = arrUsuarioModel;
+  public void setArrUsuarioModel(ArrayList<Usuario> listaUsuario) {
+    this.listaUsuario = listaUsuario;
   }
 
   public ArrayList<ParecerFatorUsuario> getArrParecerFatorUsuarioModel() {
-    return arrParecerFatorUsuarioModel;
+    return listaParecerFatorUsuario;
   }
 
   public void setArrParecerFatorUsuarioModel(
-      ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel) {
-    this.arrParecerFatorUsuarioModel = arrParecerFatorUsuarioModel;
+      ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario) {
+    this.listaParecerFatorUsuario = listaParecerFatorUsuario;
   }
 }

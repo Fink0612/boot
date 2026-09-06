@@ -7,33 +7,33 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 
 public class AgendaUsuarioPareceresDados {
 
-  private Agenda oAgendaModel = new Agenda();
-  private Usuario oUsuarioModel = new Usuario();
-  private ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel =
+  private Agenda dadosAgenda = new Agenda();
+  private Usuario dadosUsuario = new Usuario();
+  private ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario =
       new ArrayList<ParecerFatorUsuario>();
 
   public Agenda getoAgendaModel() {
-    return oAgendaModel;
+    return dadosAgenda;
   }
 
-  public void setoAgendaModel(Agenda oAgendaModel) {
-    this.oAgendaModel = oAgendaModel;
+  public void setoAgendaModel(Agenda dadosAgenda) {
+    this.dadosAgenda = dadosAgenda;
   }
 
   public Usuario getoUsuarioModel() {
-    return oUsuarioModel;
+    return dadosUsuario;
   }
 
-  public void setoUsuarioModel(Usuario oUsuarioModel) {
-    this.oUsuarioModel = oUsuarioModel;
+  public void setoUsuarioModel(Usuario dadosUsuario) {
+    this.dadosUsuario = dadosUsuario;
   }
 
   public ArrayList<ParecerFatorUsuario> getArrParecerFatorUsuarioModel() {
-    return arrParecerFatorUsuarioModel;
+    return listaParecerFatorUsuario;
   }
 
   public void setArrParecerFatorUsuarioModel(
-      ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel) {
-    this.arrParecerFatorUsuarioModel = arrParecerFatorUsuarioModel;
+      ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario) {
+    this.listaParecerFatorUsuario = listaParecerFatorUsuario;
   }
 }

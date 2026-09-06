@@ -12,23 +12,23 @@ public class AgendaService {
     this.agendaRepository = agendaRepository;
   }
 
-  public long insertAgenda(Agenda oAgendaModel) {
-    long res = this.agendaRepository.insertAgenda(oAgendaModel);
-    return res;
+  public long insertAgenda(Agenda dadosAgenda) {
+    long resultadoProcessamento = this.agendaRepository.insertAgenda(dadosAgenda);
+    return resultadoProcessamento;
   }
 
-  public Agenda selectAgenda(Agenda oAgendaModel) {
-    oAgendaModel = this.agendaRepository.selectAgenda(oAgendaModel);
-    return oAgendaModel;
+  public Agenda selectAgenda(Agenda dadosAgenda) {
+    dadosAgenda = this.agendaRepository.selectAgenda(dadosAgenda);
+    return dadosAgenda;
   }
 
-  public String updateStatusAgenda(Agenda oAgendaModel) {
-    String msgAction = this.agendaRepository.updateStatusAgenda(oAgendaModel);
-    return msgAction;
+  public String updateStatusAgenda(Agenda dadosAgenda) {
+    String mensagemAcao = this.agendaRepository.updateStatusAgenda(dadosAgenda);
+    return mensagemAcao;
   }
 
-  public String updateAgenda(Agenda oAgendaModel) {
-    String msgAction = this.agendaRepository.updateAgenda(oAgendaModel);
-    return msgAction;
+  public String updateAgenda(Agenda dadosAgenda) {
+    String mensagemAcao = this.agendaRepository.updateAgenda(dadosAgenda);
+    return mensagemAcao;
   }
 }

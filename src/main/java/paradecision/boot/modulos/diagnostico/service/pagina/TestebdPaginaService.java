@@ -19,12 +19,12 @@ public class TestebdPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    String tbd = "";
+    String diagnosticoBanco = "";
 
     DiagnosticoBanco abd = acessoBancoService.verificar();
-    tbd = abd.mensagem();
+    diagnosticoBanco = abd.mensagem();
 
-    pagina.put("tbd", String.valueOf(tbd));
+    pagina.put("tbd", String.valueOf(diagnosticoBanco));
 
     pagina.put("abd_conFac_ipAtual", String.valueOf(abd.ipAtual()));
 

@@ -39,24 +39,24 @@ public class AgendaUsuariosEditarPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Empresa oEmpresaModel = new Empresa();
-    Agenda oAgendaModel = new Agenda();
+    Empresa dadosEmpresa = new Empresa();
+    Agenda dadosAgenda = new Agenda();
     // AgendaService oAgendaControl = agendaService;
-    Usuario oEmpUsuarioModel = new Usuario();
-    Usuario oAgeUsuarioModel = new Usuario();
-    AgendaUsuarioPerfil oAgendaUsuarioPerfilModel = new AgendaUsuarioPerfil();
+    Usuario dadosEmpUsuario = new Usuario();
+    Usuario dadosAgeUsuario = new Usuario();
+    AgendaUsuarioPerfil dadosAgendaUsuarioPerfil = new AgendaUsuarioPerfil();
     // AgendaUsuarioPerfilService oAgendaUsuarioPerfilControl = agendaUsuarioPerfilService;
-    EmpresaUsuariosDados oEmpresaUsuariosModel = new EmpresaUsuariosDados();
+    EmpresaUsuariosDados dadosEmpresaUsuarios = new EmpresaUsuariosDados();
 
-    AgendaUsuariosDados oAgendaUsuariosModel = new AgendaUsuariosDados();
+    AgendaUsuariosDados dadosAgendaUsuarios = new AgendaUsuariosDados();
 
     // ..Capturando dados da Agenda
-    long au_ct_A04_CODIGO = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
+    long codigoAgendaAgendaUsuariosControle = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
     // String au_A04_TITULO = "";
     // String au_A04_STATUS_DT_LIMITE = "";
     // String au_A04_DATA_LIMITE = "";
     // String au_A04_STATUS = "";
-    oAgendaModel.setA04_codigo(au_ct_A04_CODIGO);
+    dadosAgenda.setA04_codigo(codigoAgendaAgendaUsuariosControle);
     // oAgendaModel = oAgendaControl.selectAgenda(oAgendaModel);
     // try {
     //	if (oAgendaModel.getA01_codigo() > 0) {
@@ -68,13 +68,13 @@ public class AgendaUsuariosEditarPaginaService {
     // } catch (Exception e) {
     // }
     // ..Capturando dados do Usuário Atual em relação à Agenda
-    long au_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    long codigoUsuarioAgendaUsuariosControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
     // int au_A05_PERFIL_TITULAR = 0;
     // int au_A05_PERFIL_FACILITADOR = 0;
     // int au_A05_PERFIL_ESPECIALISTA = 0;
     // int au_A05_PERFIL_ANALISTA = 0;
-    oAgendaUsuarioPerfilModel.setA02_codigo(au_ct_A02_CODIGO);
-    oAgendaUsuarioPerfilModel.setA04_codigo(au_ct_A04_CODIGO);
+    dadosAgendaUsuarioPerfil.setA02_codigo(codigoUsuarioAgendaUsuariosControle);
+    dadosAgendaUsuarioPerfil.setA04_codigo(codigoAgendaAgendaUsuariosControle);
     // oAgendaUsuarioPerfilModel =
     // try {
     //	if (oAgendaUsuarioPerfilModel.getA05_codigo() > 0) {
@@ -88,27 +88,27 @@ public class AgendaUsuariosEditarPaginaService {
     // ..Capturando os Usuários da Empresa (para permitir seleção)
     int achouUsuariosEmpresa = 0;
     long aue_ct_A01_CODIGO = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
-    oEmpresaModel.setA01_codigo(aue_ct_A01_CODIGO);
-    oEmpresaUsuariosModel.setoEmpresaModel(oEmpresaModel);
-    oEmpresaUsuariosModel = empresaUsuariosService.selectUsuariosDaEmpresa(oEmpresaUsuariosModel);
-    if (oEmpresaUsuariosModel.getArrUsuarioModel().size() > 0) {
+    dadosEmpresa.setA01_codigo(aue_ct_A01_CODIGO);
+    dadosEmpresaUsuarios.setoEmpresaModel(dadosEmpresa);
+    dadosEmpresaUsuarios = empresaUsuariosService.selectUsuariosDaEmpresa(dadosEmpresaUsuarios);
+    if (dadosEmpresaUsuarios.getArrUsuarioModel().size() > 0) {
       achouUsuariosEmpresa = 1;
     }
     int achouUsuariosAgenda = 0;
-    oAgendaUsuariosModel.setoAgendaModel(oAgendaModel);
-    oAgendaUsuariosModel = agendaUsuariosService.selectUsuariosDaAgenda(oAgendaUsuariosModel);
-    if (oAgendaUsuariosModel.getArrUsuarioModel().size() > 0) {
+    dadosAgendaUsuarios.setoAgendaModel(dadosAgenda);
+    dadosAgendaUsuarios = agendaUsuariosService.selectUsuariosDaAgenda(dadosAgendaUsuarios);
+    if (dadosAgendaUsuarios.getArrUsuarioModel().size() > 0) {
       achouUsuariosAgenda = 1;
     }
 
-    int qtdUsuariosEmpresa = 0;
+    int quantidadeUsuariosEmpresa = 0;
     if (achouUsuariosEmpresa == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      ArrayList<Usuario> arrEmpUsuariosModel = new ArrayList<Usuario>();
-      arrEmpUsuariosModel = oEmpresaUsuariosModel.getArrUsuarioModel();
-      ArrayList<Usuario> arrAgeUsuariosModel = new ArrayList<Usuario>();
-      arrAgeUsuariosModel = oAgendaUsuariosModel.getArrUsuarioModel();
+      ArrayList<Usuario> listaEmpUsuarios = new ArrayList<Usuario>();
+      listaEmpUsuarios = dadosEmpresaUsuarios.getArrUsuarioModel();
+      ArrayList<Usuario> listaAgeUsuarios = new ArrayList<Usuario>();
+      listaAgeUsuarios = dadosAgendaUsuarios.getArrUsuarioModel();
       String checkUsu = "";
       String checkT = "";
       String checkF = "";
@@ -118,19 +118,19 @@ public class AgendaUsuariosEditarPaginaService {
       String ncheckF = "";
       String ncheckE = "";
       String ncheckA = "";
-      qtdUsuariosEmpresa = arrEmpUsuariosModel.size();
-      for (int emp = 0; emp < qtdUsuariosEmpresa; emp++) {
+      quantidadeUsuariosEmpresa = listaEmpUsuarios.size();
+      for (int emp = 0; emp < quantidadeUsuariosEmpresa; emp++) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
         int ageArrLoc = -1;
         long val_a02_codigo = -1;
         long val_a05_codigo = -1;
         int val_usu_marcado = 0;
-        oEmpUsuarioModel = oEmpresaUsuariosModel.getArrUsuarioModel().get(emp);
-        val_a02_codigo = oEmpUsuarioModel.getA02_codigo();
-        for (int age = 0; age < arrAgeUsuariosModel.size(); age++) {
-          oAgeUsuarioModel = oAgendaUsuariosModel.getArrUsuarioModel().get(age);
-          if (oEmpUsuarioModel.getA02_codigo() == oAgeUsuarioModel.getA02_codigo()) {
+        dadosEmpUsuario = dadosEmpresaUsuarios.getArrUsuarioModel().get(emp);
+        val_a02_codigo = dadosEmpUsuario.getA02_codigo();
+        for (int age = 0; age < listaAgeUsuarios.size(); age++) {
+          dadosAgeUsuario = dadosAgendaUsuarios.getArrUsuarioModel().get(age);
+          if (dadosEmpUsuario.getA02_codigo() == dadosAgeUsuario.getA02_codigo()) {
             ageArrLoc = age;
           }
         }
@@ -147,22 +147,22 @@ public class AgendaUsuariosEditarPaginaService {
           val_usu_marcado = 1;
           String txtChecked = "checked=\"checked\" ";
           checkUsu = txtChecked;
-          oAgendaUsuarioPerfilModel =
-              oAgendaUsuariosModel.getArrAgendaUsuarioPerfilModel().get(ageArrLoc);
-          val_a05_codigo = oAgendaUsuarioPerfilModel.getA05_codigo();
-          if (oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_titular() == 1) {
+          dadosAgendaUsuarioPerfil =
+              dadosAgendaUsuarios.getArrAgendaUsuarioPerfilModel().get(ageArrLoc);
+          val_a05_codigo = dadosAgendaUsuarioPerfil.getA05_codigo();
+          if (dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_titular() == 1) {
             checkT = txtChecked;
             ncheckT = "1";
           }
-          if (oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_facilitador() == 1) {
+          if (dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_facilitador() == 1) {
             checkF = txtChecked;
             ncheckF = "1";
           }
-          if (oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_especialista() == 1) {
+          if (dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_especialista() == 1) {
             checkE = txtChecked;
             ncheckE = "1";
           }
-          if (oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_analista() == 1) {
+          if (dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_analista() == 1) {
             checkA = txtChecked;
             ncheckA = "1";
           }
@@ -184,7 +184,7 @@ public class AgendaUsuariosEditarPaginaService {
 
         linha2.put("checkUsu", String.valueOf(checkUsu));
 
-        linha2.put("oEmpUsuarioModel_A02_nome", String.valueOf(oEmpUsuarioModel.getA02_nome()));
+        linha2.put("oEmpUsuarioModel_A02_nome", String.valueOf(dadosEmpUsuario.getA02_nome()));
 
         linha2.put("emp5", String.valueOf(emp));
 
@@ -221,7 +221,7 @@ public class AgendaUsuariosEditarPaginaService {
         linha2.put("checkA", String.valueOf(checkA));
       }
     } // fechando o for e o if acima
-    pagina.put("qtdUsuariosEmpresa", String.valueOf(qtdUsuariosEmpresa));
+    pagina.put("qtdUsuariosEmpresa", String.valueOf(quantidadeUsuariosEmpresa));
 
     return pagina;
   }

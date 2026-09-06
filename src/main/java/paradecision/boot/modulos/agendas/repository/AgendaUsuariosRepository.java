@@ -15,80 +15,80 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 @Repository
 public class AgendaUsuariosRepository {
 
-  public AgendaUsuariosDados selectUsuariosDaAgenda(AgendaUsuariosDados oAgendaUsuariosModel) {
-    Usuario oUsuarioModel;
-    AgendaUsuarioPerfil oAgendaUsuarioPerfilModel;
-    ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-    ArrayList<AgendaUsuarioPerfil> arrAgendaUsuarioPerfilModel =
+  public AgendaUsuariosDados selectUsuariosDaAgenda(AgendaUsuariosDados dadosAgendaUsuarios) {
+    Usuario dadosUsuario;
+    AgendaUsuarioPerfil dadosAgendaUsuarioPerfil;
+    ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+    ArrayList<AgendaUsuarioPerfil> listaAgendaUsuarioPerfil =
         new ArrayList<AgendaUsuarioPerfil>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM VW_AGENDAS_USUARIOS WHERE A04_CODIGO = ?;";
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM VW_AGENDAS_USUARIOS WHERE A04_CODIGO = ?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oAgendaUsuariosModel.getoAgendaModel().getA04_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oUsuarioModel = new Usuario();
-        oUsuarioModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oUsuarioModel.setA02_nome(rs.getString("A02_NOME"));
-        arrUsuarioModel.add(oUsuarioModel);
-        oAgendaUsuarioPerfilModel = new AgendaUsuarioPerfil();
-        oAgendaUsuarioPerfilModel.setA05_codigo(rs.getLong("A05_CODIGO"));
-        oAgendaUsuarioPerfilModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oAgendaUsuarioPerfilModel.setA05_num_sequencia(rs.getLong("A05_NUM_SEQUENCIA"));
-        oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_titular(
-            rs.getInt("A05_PERFIL_AGENDA_USUARIO_TITULAR"));
-        oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_facilitador(
-            rs.getInt("A05_PERFIL_AGENDA_USUARIO_FACILITADOR"));
-        oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_especialista(
-            rs.getInt("A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA"));
-        oAgendaUsuarioPerfilModel.setA05_perfil_agenda_usuario_analista(
-            rs.getInt("A05_PERFIL_AGENDA_USUARIO_ANALISTA"));
-        oAgendaUsuarioPerfilModel.setA05_dt_cadastro(rs.getDate("A05_DT_CADASTRO"));
-        arrAgendaUsuarioPerfilModel.add(oAgendaUsuarioPerfilModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosAgendaUsuarios.getoAgendaModel().getA04_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosUsuario = new Usuario();
+        dadosUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosUsuario.setA02_nome(resultadoConsulta.getString("A02_NOME"));
+        listaUsuario.add(dadosUsuario);
+        dadosAgendaUsuarioPerfil = new AgendaUsuarioPerfil();
+        dadosAgendaUsuarioPerfil.setA05_codigo(resultadoConsulta.getLong("A05_CODIGO"));
+        dadosAgendaUsuarioPerfil.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosAgendaUsuarioPerfil.setA05_num_sequencia(resultadoConsulta.getLong("A05_NUM_SEQUENCIA"));
+        dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_titular(
+            resultadoConsulta.getInt("A05_PERFIL_AGENDA_USUARIO_TITULAR"));
+        dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_facilitador(
+            resultadoConsulta.getInt("A05_PERFIL_AGENDA_USUARIO_FACILITADOR"));
+        dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_especialista(
+            resultadoConsulta.getInt("A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA"));
+        dadosAgendaUsuarioPerfil.setA05_perfil_agenda_usuario_analista(
+            resultadoConsulta.getInt("A05_PERFIL_AGENDA_USUARIO_ANALISTA"));
+        dadosAgendaUsuarioPerfil.setA05_dt_cadastro(resultadoConsulta.getDate("A05_DT_CADASTRO"));
+        listaAgendaUsuarioPerfil.add(dadosAgendaUsuarioPerfil);
       }
-      oAgendaUsuariosModel.setArrUsuarioModel(arrUsuarioModel);
-      oAgendaUsuariosModel.setArrAgendaUsuarioPerfilModel(arrAgendaUsuarioPerfilModel);
-      stmt.close();
-    } catch (Exception e) {
+      dadosAgendaUsuarios.setArrUsuarioModel(listaUsuario);
+      dadosAgendaUsuarios.setArrAgendaUsuarioPerfilModel(listaAgendaUsuarioPerfil);
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AUP-S1)");
     }
-    fechaCon(con);
-    return oAgendaUsuariosModel;
+    fechaCon(conexaoBanco);
+    return dadosAgendaUsuarios;
   }
 
-  public ArrayList<Usuario> getArrEspecialistasModel(Agenda oAgendaModel) {
-    Usuario oUsuarioModel;
-    ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM VW_AGENDAS_USUARIOS WHERE (A04_CODIGO=? ";
-    sql += "AND A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA=1);";
+  public ArrayList<Usuario> getArrEspecialistasModel(Agenda dadosAgenda) {
+    Usuario dadosUsuario;
+    ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM VW_AGENDAS_USUARIOS WHERE (A04_CODIGO=? ";
+    instrucaoSql += "AND A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA=1);";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oAgendaModel.getA04_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oUsuarioModel = new Usuario();
-        oUsuarioModel.setA02_codigo(rs.getLong("A02_CODIGO"));
-        oUsuarioModel.setA02_nome(rs.getString("A02_NOME"));
-        arrUsuarioModel.add(oUsuarioModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosAgenda.getA04_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosUsuario = new Usuario();
+        dadosUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
+        dadosUsuario.setA02_nome(resultadoConsulta.getString("A02_NOME"));
+        listaUsuario.add(dadosUsuario);
       }
-      stmt.close();
-    } catch (Exception e) {
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AUP-S2)");
     }
-    fechaCon(con);
-    return arrUsuarioModel;
+    fechaCon(conexaoBanco);
+    return listaUsuario;
   }
 
   // ......PARA LIDAR COM O BANCO DE DADOS..........
 
-  private void fechaCon(Connection con) {
-    if (con == null) return;
+  private void fechaCon(Connection conexaoBanco) {
+    if (conexaoBanco == null) return;
     try {
-      con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      conexaoBanco.close();
+    } catch (SQLException excecao) {
+      excecao.printStackTrace();
     }
   }
 }

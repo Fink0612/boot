@@ -21,7 +21,7 @@
 </form>
 <script type="text/javascript" th:inline="javascript">
 var achouEmpresa = [[${pagina.achouEmpresa}]];
-var proximoFrame = "../usuarios/UsuarioEmpresas";
+var rotaProximaTela = "../usuarios/UsuarioEmpresas";
 if (achouEmpresa == "1") {
 	iue_txt = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_paraviverbem}]];
 	document.getElementById("ct_A03_PERFIL_PARAVIVERBEM").value = iue_txt;
@@ -31,10 +31,10 @@ if (achouEmpresa == "1") {
 	document.getElementById("ct_A03_PERFIL_CHEFE").value = iue_txt;
 	iue_txt = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_padrao}]];
 	document.getElementById("ct_A03_PERFIL_PADRAO").value = iue_txt;
-	proximoFrame = "../empresas/EmpresaAgendas";
+	rotaProximaTela = "../empresas/EmpresaAgendas";
 }
 document.getElementById("pdAcao").value = "";
-document.getElementById("interUsuarioEmpresasForm").action = proximoFrame;
+document.getElementById("interUsuarioEmpresasForm").action = rotaProximaTela;
 document.getElementById("interUsuarioEmpresasForm").submit();
 </script>
 </body>

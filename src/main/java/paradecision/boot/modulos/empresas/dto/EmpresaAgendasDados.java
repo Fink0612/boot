@@ -7,31 +7,31 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 
 public class EmpresaAgendasDados {
 
-  private Empresa oEmpresaModel = new Empresa();
-  private Usuario oUsuarioModel = new Usuario();
-  private ArrayList<Agenda> arrAgendaModel = new ArrayList<Agenda>();
+  private Empresa dadosEmpresa = new Empresa();
+  private Usuario dadosUsuario = new Usuario();
+  private ArrayList<Agenda> listaAgenda = new ArrayList<Agenda>();
 
   public Empresa getoEmpresaModel() {
-    return oEmpresaModel;
+    return dadosEmpresa;
   }
 
-  public void setoEmpresaModel(Empresa oEmpresaModel) {
-    this.oEmpresaModel = oEmpresaModel;
+  public void setoEmpresaModel(Empresa dadosEmpresa) {
+    this.dadosEmpresa = dadosEmpresa;
   }
 
   public Usuario getoUsuarioModel() {
-    return oUsuarioModel;
+    return dadosUsuario;
   }
 
-  public void setoUsuarioModel(Usuario oUsuarioModel) {
-    this.oUsuarioModel = oUsuarioModel;
+  public void setoUsuarioModel(Usuario dadosUsuario) {
+    this.dadosUsuario = dadosUsuario;
   }
 
   public ArrayList<Agenda> getArrAgendaModel() {
-    return arrAgendaModel;
+    return listaAgenda;
   }
 
-  public void setArrAgendaModel(ArrayList<Agenda> arrAgendaModel) {
-    this.arrAgendaModel = arrAgendaModel;
+  public void setArrAgendaModel(ArrayList<Agenda> listaAgenda) {
+    this.listaAgenda = listaAgenda;
   }
 }

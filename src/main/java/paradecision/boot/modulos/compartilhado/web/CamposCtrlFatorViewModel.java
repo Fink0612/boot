@@ -9,10 +9,10 @@ public final class CamposCtrlFatorViewModel {
   public static Map<String, Object> preparar(HttpServletRequest request) {
     Map<String, Object> controleFator = new LinkedHashMap<>();
 
-    String ct_A06_CODIGO = request.getParameter("ct_A06_CODIGO");
-    if (ct_A06_CODIGO == null) ct_A06_CODIGO = "";
+    String codigoFatorControle = request.getParameter("ct_A06_CODIGO");
+    if (codigoFatorControle == null) codigoFatorControle = "";
 
-    controleFator.put("ct_A06_CODIGO", String.valueOf(ct_A06_CODIGO));
+    controleFator.put("ct_A06_CODIGO", String.valueOf(codigoFatorControle));
 
     return controleFator;
   }

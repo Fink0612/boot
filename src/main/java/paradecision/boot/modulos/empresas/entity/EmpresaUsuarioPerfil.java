@@ -4,67 +4,67 @@ import java.sql.Date;
 
 public class EmpresaUsuarioPerfil {
 
-  private long a01_codigo;
-  private long a02_codigo;
-  private Date a03_dt_cadastro;
-  private int a03_perfil_paraviverbem;
-  private int a03_perfil_administrador;
-  private int a03_perfil_chefe;
-  private int a03_perfil_padrao;
+  private long codigoEmpresa;
+  private long codigoUsuario;
+  private Date dataCadastroPerfilEmpresaUsuario;
+  private int perfilParaviverbemPerfilEmpresaUsuario;
+  private int perfilAdministradorPerfilEmpresaUsuario;
+  private int perfilChefePerfilEmpresaUsuario;
+  private int perfilPadraoPerfilEmpresaUsuario;
 
   public long getA01_codigo() {
-    return a01_codigo;
+    return codigoEmpresa;
   }
 
-  public void setA01_codigo(long a01_codigo) {
-    this.a01_codigo = a01_codigo;
+  public void setA01_codigo(long codigoEmpresa) {
+    this.codigoEmpresa = codigoEmpresa;
   }
 
   public long getA02_codigo() {
-    return a02_codigo;
+    return codigoUsuario;
   }
 
-  public void setA02_codigo(long a02_codigo) {
-    this.a02_codigo = a02_codigo;
+  public void setA02_codigo(long codigoUsuario) {
+    this.codigoUsuario = codigoUsuario;
   }
 
   public Date getA03_dt_cadastro() {
-    return a03_dt_cadastro;
+    return dataCadastroPerfilEmpresaUsuario;
   }
 
-  public void setA03_dt_cadastro(Date a03_dt_cadastro) {
-    this.a03_dt_cadastro = a03_dt_cadastro;
+  public void setA03_dt_cadastro(Date dataCadastroPerfilEmpresaUsuario) {
+    this.dataCadastroPerfilEmpresaUsuario = dataCadastroPerfilEmpresaUsuario;
   }
 
   public int getA03_perfil_paraviverbem() {
-    return a03_perfil_paraviverbem;
+    return perfilParaviverbemPerfilEmpresaUsuario;
   }
 
-  public void setA03_perfil_paraviverbem(int a03_perfil_paraviverbem) {
-    this.a03_perfil_paraviverbem = a03_perfil_paraviverbem;
+  public void setA03_perfil_paraviverbem(int perfilParaviverbemPerfilEmpresaUsuario) {
+    this.perfilParaviverbemPerfilEmpresaUsuario = perfilParaviverbemPerfilEmpresaUsuario;
   }
 
   public int getA03_perfil_administrador() {
-    return a03_perfil_administrador;
+    return perfilAdministradorPerfilEmpresaUsuario;
   }
 
-  public void setA03_perfil_administrador(int a03_perfil_administrador) {
-    this.a03_perfil_administrador = a03_perfil_administrador;
+  public void setA03_perfil_administrador(int perfilAdministradorPerfilEmpresaUsuario) {
+    this.perfilAdministradorPerfilEmpresaUsuario = perfilAdministradorPerfilEmpresaUsuario;
   }
 
   public int getA03_perfil_chefe() {
-    return a03_perfil_chefe;
+    return perfilChefePerfilEmpresaUsuario;
   }
 
-  public void setA03_perfil_chefe(int a03_perfil_chefe) {
-    this.a03_perfil_chefe = a03_perfil_chefe;
+  public void setA03_perfil_chefe(int perfilChefePerfilEmpresaUsuario) {
+    this.perfilChefePerfilEmpresaUsuario = perfilChefePerfilEmpresaUsuario;
   }
 
   public int getA03_perfil_padrao() {
-    return a03_perfil_padrao;
+    return perfilPadraoPerfilEmpresaUsuario;
   }
 
-  public void setA03_perfil_padrao(int a03_perfil_padrao) {
-    this.a03_perfil_padrao = a03_perfil_padrao;
+  public void setA03_perfil_padrao(int perfilPadraoPerfilEmpresaUsuario) {
+    this.perfilPadraoPerfilEmpresaUsuario = perfilPadraoPerfilEmpresaUsuario;
   }
 }

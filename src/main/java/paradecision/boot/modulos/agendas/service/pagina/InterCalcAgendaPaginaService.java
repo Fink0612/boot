@@ -19,24 +19,24 @@ public class InterCalcAgendaPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    int okMetodo = 0;
-    String str_a04_codigo = formulario.valor("ct_A04_CODIGO");
-    long lng_a04_codigo = Long.parseLong(str_a04_codigo);
+    int operacaoConcluida = 0;
+    String codigoAgendaTexto = formulario.valor("ct_A04_CODIGO");
+    long codigoAgendaNumerico = Long.parseLong(codigoAgendaTexto);
 
     String msgAcaoOK = "Sucesso!!";
     String msgAcaoNOK = "Problemas!!";
-    if (lng_a04_codigo > 0) {
-      String resultBD = "";
-      Agenda oAgendaModel = new Agenda();
+    if (codigoAgendaNumerico > 0) {
+      String resultadoBanco = "";
+      Agenda dadosAgenda = new Agenda();
 
-      oAgendaModel.setA04_codigo(lng_a04_codigo);
-      resultBD = calculoResultadoAgendaService.geraResultados(oAgendaModel, 0);
-      if (resultBD.equals("OK")) okMetodo = 1;
+      dadosAgenda.setA04_codigo(codigoAgendaNumerico);
+      resultadoBanco = calculoResultadoAgendaService.geraResultados(dadosAgenda, 0);
+      if (resultadoBanco.equals("OK")) operacaoConcluida = 1;
     }
 
-    pagina.put("okMetodo", String.valueOf(okMetodo));
+    pagina.put("okMetodo", String.valueOf(operacaoConcluida));
 
-    pagina.put("lng_a04_codigo", String.valueOf(lng_a04_codigo));
+    pagina.put("lng_a04_codigo", String.valueOf(codigoAgendaNumerico));
 
     pagina.put("msgAcaoOK", String.valueOf(msgAcaoOK));
 

@@ -16,12 +16,12 @@
 	var pdUsuSessao = document.getElementById("pdUsuSessao");
 	var pdNomeUsuSessao = document.getElementById("pdNomeUsuSessao");
 	var pdStatusSessao = document.getElementById("pdStatusSessao");
-	var txt_user_session = document.getElementById("txt_user_session");
+	var elementoNomeUsuarioCabecalho = document.getElementById("txt_user_session");
 	if (pdUsuSessao.value == "") {
 		pdNomeUsuSessao.value = "Bem-vindo";
 		pdStatusSessao.value = "offline";
 	}
-	txt_user_session.innerHTML = pdNomeUsuSessao.value.toUpperCase();
+	elementoNomeUsuarioCabecalho.innerHTML = pdNomeUsuSessao.value.toUpperCase();
 </script>
 
 </th:block>

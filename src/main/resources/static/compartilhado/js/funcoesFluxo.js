@@ -42,10 +42,10 @@ function rotaPagina(nome) {
     return ROTAS_PAGINAS[nome];
 }
 // ######## ... FUNÇÕES DE TODAS AS PÁGINAS ... ########
-function atualizarPagina(nomePagina, nomeForm) {
-	var proximoFrame = rotaPagina(nomePagina);
-	document.getElementById(nomeForm).action = proximoFrame;
-	document.getElementById(nomeForm).submit();
+function atualizarPagina(nomePagina, nomeFormulario) {
+	var rotaProximaTela = rotaPagina(nomePagina);
+	document.getElementById(nomeFormulario).action = rotaProximaTela;
+	document.getElementById(nomeFormulario).submit();
 }
 
 // ######## ... FUNÇÕES DE FLUXO ENTRE PÁGINAS ... ########
@@ -56,257 +56,257 @@ function abrirUsuarioEmpresas() {
 	document.getElementById("ct_A03_PERFIL_ADMINISTRADOR").value = "";
 	document.getElementById("ct_A03_PERFIL_CHEFE").value = "";
 	document.getElementById("ct_A03_PERFIL_PADRAO").value = "";
-	var proximoFrame = "../usuarios/UsuarioEmpresas";
-	document.getElementById("EmpresaAgendasForm").action = proximoFrame;
+	var rotaProximaTela = "../usuarios/UsuarioEmpresas";
+	document.getElementById("EmpresaAgendasForm").action = rotaProximaTela;
 	document.getElementById("EmpresaAgendasForm").submit();
 }
 
 function abrirEmpresaUsuarios() {
-	var proximoFrame = "../empresas/EmpresaUsuarios";
-	document.getElementById("EmpresaAgendasForm").action = proximoFrame;
+	var rotaProximaTela = "../empresas/EmpresaUsuarios";
+	document.getElementById("EmpresaAgendasForm").action = rotaProximaTela;
 	document.getElementById("EmpresaAgendasForm").submit();
 }
 
-function abrirEmpresaDoUsuario(ff_A01_codigo, ff_A01_nome, ff_A02_codigo) {
-	var proximoFrame = "../usuarios/interUsuarioEmpresas";
-	document.getElementById("ct_A01_CODIGO").value = ff_A01_codigo;
-	document.getElementById("ct_A01_NOME").value = ff_A01_nome;
+function abrirEmpresaDoUsuario(codigoEmpresaSelecionado, nomeEmpresaSelecionado, codigoUsuarioSelecionado) {
+	var rotaProximaTela = "../usuarios/interUsuarioEmpresas";
+	document.getElementById("ct_A01_CODIGO").value = codigoEmpresaSelecionado;
+	document.getElementById("ct_A01_NOME").value = nomeEmpresaSelecionado;
 	document.getElementById("pdAcao").value = "abrirEmpresa";
-	document.getElementById("UsuarioEmpresasForm").action = proximoFrame;
+	document.getElementById("UsuarioEmpresasForm").action = rotaProximaTela;
 	document.getElementById("UsuarioEmpresasForm").submit();
 }
 
-function abrirEmpresa_Usu_Agendas(nomeForm) {
-	var proximoFrame = "../empresas/EmpresaAgendas";
-	document.getElementById(nomeForm).action = proximoFrame;
-	document.getElementById(nomeForm).submit();
+function abrirEmpresa_Usu_Agendas(nomeFormulario) {
+	var rotaProximaTela = "../empresas/EmpresaAgendas";
+	document.getElementById(nomeFormulario).action = rotaProximaTela;
+	document.getElementById(nomeFormulario).submit();
 }
 
 // ######## ... FUNÇÕES DE CADASTRO DE USUÁRIOS ... ########
 function cadastrarNovoUsuario() {
-	var proximoFrame = "../usuarios/CadastroUsuario";
-	document.getElementById("EmpresaUsuariosForm").action = proximoFrame;
+	var rotaProximaTela = "../usuarios/CadastroUsuario";
+	document.getElementById("EmpresaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("EmpresaUsuariosForm").submit();
 }
 
 function fecharInterCadastroUsuario(tipoAcao) {
-	var proximoFrame = "../usuarios/CadastroUsuario";
+	var rotaProximaTela = "../usuarios/CadastroUsuario";
 	if (tipoAcao == 1) {
-		proximoFrame = "../empresas/EmpresaUsuarios";
+		rotaProximaTela = "../empresas/EmpresaUsuarios";
 	} else if (tipoAcao == 2) {
-		proximoFrame = "../usuarios/CadastroUsuarioEditar";
+		rotaProximaTela = "../usuarios/CadastroUsuarioEditar";
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCadastroUsuarioForm").action = proximoFrame;
+	document.getElementById("interCadastroUsuarioForm").action = rotaProximaTela;
 	document.getElementById("interCadastroUsuarioForm").submit();
 }
 
-function editarCadastroUsuario(strCodUsuario) {
-	document.getElementById("eu_A02_CODIGO").value = strCodUsuario;
-	var proximoFrame = "../usuarios/CadastroUsuarioEditar";
-	document.getElementById("EmpresaUsuariosForm").action = proximoFrame;
+function editarCadastroUsuario(codigoUsuarioTexto) {
+	document.getElementById("eu_A02_CODIGO").value = codigoUsuarioTexto;
+	var rotaProximaTela = "../usuarios/CadastroUsuarioEditar";
+	document.getElementById("EmpresaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("EmpresaUsuariosForm").submit();
 }
 
 // ######## ... FUNÇÕES DE CADASTRO DE AGENDAS ... ########
 function cadastrarNovaAgenda() {
-	var proximoFrame = "../agendas/CadastroAgenda";
-	document.getElementById("EmpresaAgendasForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/CadastroAgenda";
+	document.getElementById("EmpresaAgendasForm").action = rotaProximaTela;
 	document.getElementById("EmpresaAgendasForm").submit();
 }
 
 function fecharInterCadastroAgenda(tipoAcao) {
-	var proximoFrame = "../agendas/CadastroAgenda";
+	var rotaProximaTela = "../agendas/CadastroAgenda";
 	if (tipoAcao == 1) {
-		proximoFrame = "../empresas/EmpresaAgendas";
+		rotaProximaTela = "../empresas/EmpresaAgendas";
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCadastroAgendaForm").action = proximoFrame;
+	document.getElementById("interCadastroAgendaForm").action = rotaProximaTela;
 	document.getElementById("interCadastroAgendaForm").submit();
 }
 
 function fecharInterEditarAgenda(tipoAcao) {
-	var proximoFrame = "../agendas/CadastroAgendaEditar";
+	var rotaProximaTela = "../agendas/CadastroAgendaEditar";
 	if (tipoAcao == 1) {
-		proximoFrame = "../agendas/AgendaUsuarios";
+		rotaProximaTela = "../agendas/AgendaUsuarios";
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCadastroAgendaForm").action = proximoFrame;
+	document.getElementById("interCadastroAgendaForm").action = rotaProximaTela;
 	document.getElementById("interCadastroAgendaForm").submit();
 }
 
-function abrirAgenda(ff_A04_codigo, ff_A04_titulo, ff_A04_status) {
-	if (ff_A04_status == "") ff_A04_status == "0";
-	if (ff_A04_status == "null") ff_A04_status == "0";
-	document.getElementById("ct_A04_CODIGO").value = ff_A04_codigo;
-	document.getElementById("ct_A04_TITULO").value = ff_A04_titulo;
-	var proximoFrame = "../agendas/AgendaUsuarios";
-	if (ff_A04_status == "1") proximoFrame = "../agendas/AgendaFatores";
-	if (ff_A04_status == "2") proximoFrame = "../pareceres/AgendaFatoresPareceres";
-	if (ff_A04_status == "9") proximoFrame = "../agendas/AgendaFatoresResultados";
-	document.getElementById("EmpresaAgendasForm").action = proximoFrame;
+function abrirAgenda(codigoAgendaSelecionado, tituloAgendaSelecionado, statusAgendaSelecionado) {
+	if (statusAgendaSelecionado == "") statusAgendaSelecionado == "0";
+	if (statusAgendaSelecionado == "null") statusAgendaSelecionado == "0";
+	document.getElementById("ct_A04_CODIGO").value = codigoAgendaSelecionado;
+	document.getElementById("ct_A04_TITULO").value = tituloAgendaSelecionado;
+	var rotaProximaTela = "../agendas/AgendaUsuarios";
+	if (statusAgendaSelecionado == "1") rotaProximaTela = "../agendas/AgendaFatores";
+	if (statusAgendaSelecionado == "2") rotaProximaTela = "../pareceres/AgendaFatoresPareceres";
+	if (statusAgendaSelecionado == "9") rotaProximaTela = "../agendas/AgendaFatoresResultados";
+	document.getElementById("EmpresaAgendasForm").action = rotaProximaTela;
 	document.getElementById("EmpresaAgendasForm").submit();
 }
 
 function editarDadosUsuariosAgenda() {
-	var proximoFrame = "../agendas/AgendaUsuariosEditar";
-	document.getElementById("AgendaUsuariosForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/AgendaUsuariosEditar";
+	document.getElementById("AgendaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("AgendaUsuariosForm").submit();
 }
 
 function editarDadosAgenda() {
-	var proximoFrame = "../agendas/CadastroAgendaEditar";
-	document.getElementById("AgendaUsuariosForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/CadastroAgendaEditar";
+	document.getElementById("AgendaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("AgendaUsuariosForm").submit();
 }
 
 function fecharInterAgendaUsuarios(tipoAcao) {
 	var statusAgenda = document.getElementById("ct_A04_STATUS").value;
-	var proximoFrame = "../agendas/AgendaUsuariosEditar";
+	var rotaProximaTela = "../agendas/AgendaUsuariosEditar";
 	if (tipoAcao == 1) {
-		proximoFrame = "../agendas/AgendaUsuarios";
+		rotaProximaTela = "../agendas/AgendaUsuarios";
 		if (statusAgenda == "1") {
-			proximoFrame = "../agendas/AgendaFatores";
+			rotaProximaTela = "../agendas/AgendaFatores";
 		}
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interAgendaUsuariosForm").action = proximoFrame;
+	document.getElementById("interAgendaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("interAgendaUsuariosForm").submit();
 }
 
 function validarAgenda(tipoAg) {
-	var ret = false;
+	var resultadoOperacao = false;
 	if (tipoAg == 1) {
-		var num_qtdEspec = 0;
-		var cmp_qtdEspec = document.getElementById("ct_QTD_ESPECIALISTAS_AGENDA");
-		var cmp_msg = document.getElementById("au_Mensagens");
-		if(ehNumero(cmp_qtdEspec.value)) {
-			num_qtdEspec = parseInt(cmp_qtdEspec.value);
+		var quantidadeEspecialistasNumerica = 0;
+		var campoQuantidadeEspecialistas = document.getElementById("ct_QTD_ESPECIALISTAS_AGENDA");
+		var campoMensagem = document.getElementById("au_Mensagens");
+		if(ehNumero(campoQuantidadeEspecialistas.value)) {
+			quantidadeEspecialistasNumerica = parseInt(campoQuantidadeEspecialistas.value);
 		} else {
-			num_qtdEspec = 0;
+			quantidadeEspecialistasNumerica = 0;
 		}
 		//alert("num_qtdEspec: " + num_qtdEspec);
-		if (num_qtdEspec >= 3) {
-			cmp_msg.style.display = "none";
-			ret = true;
+		if (quantidadeEspecialistasNumerica >= 3) {
+			campoMensagem.style.display = "none";
+			resultadoOperacao = true;
 		} else {
-			cmp_msg.style.display = "";
-			cmp_msg.innerHTML = "Para encaminhar esta Agenda, deve-se ter no m&iacute;nimo 3 Especialistas!";
+			campoMensagem.style.display = "";
+			campoMensagem.innerHTML = "Para encaminhar esta Agenda, deve-se ter no m&iacute;nimo 3 Especialistas!";
 		}
 	} else {
-		ret = false;
+		resultadoOperacao = false;
 	}
-	return ret;
+	return resultadoOperacao;
 }
 
 function encaminharAgenda() {
 	document.getElementById("pdAcao").value = "encaminharAgenda";
-	var proximoFrame = "../agendas/interFluxoAgenda";
-	document.getElementById("AgendaUsuariosForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/interFluxoAgenda";
+	document.getElementById("AgendaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("AgendaUsuariosForm").submit();
 }
 
 function liberarAgenda() {
 	document.getElementById("pdAcao").value = "liberarAgenda";
-	var proximoFrame = "../agendas/interFluxoAgenda";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/interFluxoAgenda";
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }
 
 function encerrarAgenda() {
 	document.getElementById("pdAcao").value = "encerrarAgenda";
-	var proximoFrame = "../agendas/interFluxoAgenda";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/interFluxoAgenda";
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }
 
 function calcularResultadosAgenda() {
 	document.getElementById("pdAcao").value = "calcularResultadosAgenda";
-	var proximoFrame = "../agendas/interCalcAgenda";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/interCalcAgenda";
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }
 
 function fecharInterAgendaFatores(tipoAcao) {
-	var proximoFrame = "../fatores/CadastroFatorEditar";
+	var rotaProximaTela = "../fatores/CadastroFatorEditar";
 	if (tipoAcao == 1) {
-		proximoFrame = "../agendas/AgendaFatores";
+		rotaProximaTela = "../agendas/AgendaFatores";
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interAgendaUsuariosForm").action = proximoFrame;
+	document.getElementById("interAgendaUsuariosForm").action = rotaProximaTela;
 	document.getElementById("interAgendaUsuariosForm").submit();
 }
 
 function fecharInterAgendaFluxo(tipoAcao) {
 	var statusAgenda = document.getElementById("ct_A04_STATUS").value;
-	var proximoFrame = "../empresas/EmpresaAgendas";
+	var rotaProximaTela = "../empresas/EmpresaAgendas";
 	if (tipoAcao = 0) {
-		proximoFrame = "../agendas/AgendaUsuarios";
+		rotaProximaTela = "../agendas/AgendaUsuarios";
 		if (statusAgenda == "1") {
-			proximoFrame = "../agendas/AgendaFatores";
+			rotaProximaTela = "../agendas/AgendaFatores";
 		} else if (statusAgenda == "2") {
-			proximoFrame = "../pareceres/AgendaFatoresPareceres";
+			rotaProximaTela = "../pareceres/AgendaFatoresPareceres";
 		}
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interFluxoAgendaForm").action = proximoFrame;
+	document.getElementById("interFluxoAgendaForm").action = rotaProximaTela;
 	document.getElementById("interFluxoAgendaForm").submit();
 }
 
 // ######## ... FUNÇÕES DE CADASTRO DE FATORES ... ########
 function cadastrarNovoFator() {
-	var proximoFrame = "../fatores/CadastroFator";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	var rotaProximaTela = "../fatores/CadastroFator";
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }
 
 function editarCadastroFator(strCodFator) {
 	document.getElementById("ct_A06_CODIGO").value = strCodFator;
-	var proximoFrame = "../fatores/CadastroFatorEditar";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	var rotaProximaTela = "../fatores/CadastroFatorEditar";
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }
 
 function fecharInterCadastroFator(tipoAcao) {
-	var proximoFrame = "../agendas/AgendaFatores";
+	var rotaProximaTela = "../agendas/AgendaFatores";
 	if (tipoAcao == 0) {
-		proximoFrame = "../fatores/CadastroFator";
+		rotaProximaTela = "../fatores/CadastroFator";
 	} else if (tipoAcao == 2) {
-		proximoFrame = "../fatores/CadastroFatorEditar";
+		rotaProximaTela = "../fatores/CadastroFatorEditar";
 	}
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCadastroFatorForm").action = proximoFrame;
+	document.getElementById("interCadastroFatorForm").action = rotaProximaTela;
 	document.getElementById("interCadastroFatorForm").submit();
 }
 
 function editarDadosUsuariosAgendaFatores() {
-	var proximoFrame = "../agendas/AgendaUsuariosEditar";
-	document.getElementById("AgendaFatoresForm").action = proximoFrame;
+	var rotaProximaTela = "../agendas/AgendaUsuariosEditar";
+	document.getElementById("AgendaFatoresForm").action = rotaProximaTela;
 	document.getElementById("AgendaFatoresForm").submit();
 }
 
-function abrirAgendaFatores(nomeForm) {
-	var proximoFrame = "../pareceres/AgendaFatoresPareceres";
+function abrirAgendaFatores(nomeFormulario) {
+	var rotaProximaTela = "../pareceres/AgendaFatoresPareceres";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById(nomeForm).action = proximoFrame;
-	document.getElementById(nomeForm).submit();
+	document.getElementById(nomeFormulario).action = rotaProximaTela;
+	document.getElementById(nomeFormulario).submit();
 }
 
 // ######## ... FUNÇÕES DE CADASTRO DE PARECERES ... ########
 
 function fecharInterPareceresFatores(tipoAcao) {
-	var proximoFrame = "../pareceres/AgendaFatoresPareceres";
+	var rotaProximaTela = "../pareceres/AgendaFatoresPareceres";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interPareceresFatoresForm").action = proximoFrame;
+	document.getElementById("interPareceresFatoresForm").action = rotaProximaTela;
 	document.getElementById("interPareceresFatoresForm").submit();
 }
 
 // ######## ... FUNÇÕES DE FINAL DE CÁLCULO DE CERTEZA / INCERTEZA ... ########
 
 function fecharInterCalcAgenda(tipoAcao) {
-	var proximoFrame = "../agendas/AgendaFatoresResultados";
+	var rotaProximaTela = "../agendas/AgendaFatoresResultados";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCalcAgendaForm").action = proximoFrame;
+	document.getElementById("interCalcAgendaForm").action = rotaProximaTela;
 	document.getElementById("interCalcAgendaForm").submit();
 }
 

@@ -7,33 +7,33 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 
 public class AgendaUsuariosDados {
 
-  private Agenda oAgendaModel = new Agenda();
-  private ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-  private ArrayList<AgendaUsuarioPerfil> arrAgendaUsuarioPerfilModel =
+  private Agenda dadosAgenda = new Agenda();
+  private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+  private ArrayList<AgendaUsuarioPerfil> listaAgendaUsuarioPerfil =
       new ArrayList<AgendaUsuarioPerfil>();
 
   public Agenda getoAgendaModel() {
-    return oAgendaModel;
+    return dadosAgenda;
   }
 
-  public void setoAgendaModel(Agenda oAgendaModel) {
-    this.oAgendaModel = oAgendaModel;
+  public void setoAgendaModel(Agenda dadosAgenda) {
+    this.dadosAgenda = dadosAgenda;
   }
 
   public ArrayList<Usuario> getArrUsuarioModel() {
-    return arrUsuarioModel;
+    return listaUsuario;
   }
 
-  public void setArrUsuarioModel(ArrayList<Usuario> arrUsuarioModel) {
-    this.arrUsuarioModel = arrUsuarioModel;
+  public void setArrUsuarioModel(ArrayList<Usuario> listaUsuario) {
+    this.listaUsuario = listaUsuario;
   }
 
   public ArrayList<AgendaUsuarioPerfil> getArrAgendaUsuarioPerfilModel() {
-    return arrAgendaUsuarioPerfilModel;
+    return listaAgendaUsuarioPerfil;
   }
 
   public void setArrAgendaUsuarioPerfilModel(
-      ArrayList<AgendaUsuarioPerfil> arrAgendaUsuarioPerfilModel) {
-    this.arrAgendaUsuarioPerfilModel = arrAgendaUsuarioPerfilModel;
+      ArrayList<AgendaUsuarioPerfil> listaAgendaUsuarioPerfil) {
+    this.listaAgendaUsuarioPerfil = listaAgendaUsuarioPerfil;
   }
 }

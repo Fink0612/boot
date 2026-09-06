@@ -19,7 +19,7 @@ public class LoginIniPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    Usuario oUsuarioModel = new Usuario();
+    Usuario dadosUsuario = new Usuario();
 
     String txt_codini = formulario.valor("liCodini");
     String txt_pdUsuario = formulario.valor("pdUsuario");
@@ -36,14 +36,14 @@ public class LoginIniPaginaService {
     try {
       if (txt_pdAcao.equals("envLoginIni")) {
         // ... inserindo um "x" na penúltima posição do código inicial
-        int tam = txt_codini.length();
-        txt_codini = txt_codini.substring(0, tam - 1) + "x" + txt_codini.substring(tam - 1);
-        oUsuarioModel.setA02_usuario(txt_pdUsuario);
-        oUsuarioModel.setA02_senha(txt_pdNovaSenha);
-        oUsuarioModel.setA02_codigo_link(txt_codini);
-        oUsuarioModel = usuarioService.updateSenhaUsuario(oUsuarioModel);
+        int tamanhoSolicitado = txt_codini.length();
+        txt_codini = txt_codini.substring(0, tamanhoSolicitado - 1) + "x" + txt_codini.substring(tamanhoSolicitado - 1);
+        dadosUsuario.setA02_usuario(txt_pdUsuario);
+        dadosUsuario.setA02_senha(txt_pdNovaSenha);
+        dadosUsuario.setA02_codigo_link(txt_codini);
+        dadosUsuario = usuarioService.updateSenhaUsuario(dadosUsuario);
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
 
     pagina.put("txt_pdNovaSenha", String.valueOf(txt_pdNovaSenha));
@@ -56,9 +56,9 @@ public class LoginIniPaginaService {
 
     pagina.put("txt_pdAcao", String.valueOf(txt_pdAcao));
 
-    pagina.put("oUsuarioModel_A02_usuario", String.valueOf(oUsuarioModel.getA02_usuario()));
+    pagina.put("oUsuarioModel_A02_usuario", String.valueOf(dadosUsuario.getA02_usuario()));
 
-    pagina.put("oUsuarioModel_A02_codigo", String.valueOf(oUsuarioModel.getA02_codigo()));
+    pagina.put("oUsuarioModel_A02_codigo", String.valueOf(dadosUsuario.getA02_codigo()));
 
     return pagina;
   }

@@ -20,38 +20,38 @@ public class InterUsuarioEmpresasPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel = new EmpresaUsuarioPerfil();
+    EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil = new EmpresaUsuarioPerfil();
 
     int achouEmpresa = 0;
-    long iue_ct_A01_CODIGO = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
-    long iue_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
-    oEmpresaUsuarioPerfilModel.setA01_codigo(iue_ct_A01_CODIGO);
-    oEmpresaUsuarioPerfilModel.setA02_codigo(iue_ct_A02_CODIGO);
-    oEmpresaUsuarioPerfilModel =
-        empresaUsuarioPerfilService.selectEmpresaUsuario(oEmpresaUsuarioPerfilModel);
-    if (oEmpresaUsuarioPerfilModel != null) {
+    long codigoEmpresaVinculoEmpresaUsuarioControle = Long.parseLong(formulario.valor("ct_A01_CODIGO"));
+    long codigoUsuarioVinculoEmpresaUsuarioControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    dadosEmpresaUsuarioPerfil.setA01_codigo(codigoEmpresaVinculoEmpresaUsuarioControle);
+    dadosEmpresaUsuarioPerfil.setA02_codigo(codigoUsuarioVinculoEmpresaUsuarioControle);
+    dadosEmpresaUsuarioPerfil =
+        empresaUsuarioPerfilService.selectEmpresaUsuario(dadosEmpresaUsuarioPerfil);
+    if (dadosEmpresaUsuarioPerfil != null) {
       achouEmpresa = 1;
     } else {
-      oEmpresaUsuarioPerfilModel = new EmpresaUsuarioPerfil();
+      dadosEmpresaUsuarioPerfil = new EmpresaUsuarioPerfil();
     }
 
     pagina.put("achouEmpresa", String.valueOf(achouEmpresa));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_paraviverbem",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_paraviverbem()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_paraviverbem()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_administrador",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_administrador()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_administrador()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_chefe",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_chefe()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_chefe()));
 
     pagina.put(
         "oEmpresaUsuarioPerfilModel_A03_perfil_padrao",
-        String.valueOf(oEmpresaUsuarioPerfilModel.getA03_perfil_padrao()));
+        String.valueOf(dadosEmpresaUsuarioPerfil.getA03_perfil_padrao()));
 
     return pagina;
   }

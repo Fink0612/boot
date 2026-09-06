@@ -25,51 +25,51 @@ public class InterCadastroUsuarioPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    int okMetodo = 0;
-    String u_a02_nome = formulario.valor("u_a02_nome");
-    String u_a02_email = formulario.valor("u_a02_email");
-    String u_a02_usuario = formulario.valor("u_a02_usuario");
-    String u_a02_senha = formulario.valor("u_a02_senha");
-    String u_a02_status = formulario.valor("u_a02_status");
-    String eup_a03_perfil_chefe = formulario.valor("eup_a03_perfil_chefe");
-    String eup_a03_perfil_padrao = formulario.valor("eup_a03_perfil_padrao");
-    String ic_A01_CODIGO = formulario.valor("ct_A01_CODIGO");
-    if (u_a02_nome == null) u_a02_nome = "";
-    if (u_a02_email == null) u_a02_email = "";
-    if (u_a02_usuario == null) u_a02_usuario = "";
-    if (u_a02_senha == null) u_a02_senha = "";
-    if (u_a02_status == null) u_a02_status = "0";
-    if (eup_a03_perfil_chefe == null) eup_a03_perfil_chefe = "0";
-    if (eup_a03_perfil_padrao == null) eup_a03_perfil_padrao = "0";
-    if ("".equals(u_a02_status)) u_a02_status = "0";
-    if ("".equals(eup_a03_perfil_chefe)) eup_a03_perfil_chefe = "0";
-    if ("".equals(eup_a03_perfil_padrao)) eup_a03_perfil_padrao = "0";
-    if (ic_A01_CODIGO == null) ic_A01_CODIGO = "0";
-    u_a02_nome = MetodosUteis.padronizarMaiusculoCE(u_a02_nome);
-    u_a02_email = MetodosUteis.padronizarMinusculoSE(u_a02_email);
-    u_a02_usuario = MetodosUteis.padronizarMinusculoSE(u_a02_usuario);
-    Usuario oUsuarioModel = new Usuario();
+    int operacaoConcluida = 0;
+    String nomeUsuarioFormularioUsuario = formulario.valor("u_a02_nome");
+    String emailUsuarioFormularioUsuario = formulario.valor("u_a02_email");
+    String usuarioUsuarioFormularioUsuario = formulario.valor("u_a02_usuario");
+    String senhaUsuarioFormularioUsuario = formulario.valor("u_a02_senha");
+    String statusUsuarioFormularioUsuario = formulario.valor("u_a02_status");
+    String perfilChefePerfilEmpresaUsuarioPerfilEmpresaUsuario = formulario.valor("eup_a03_perfil_chefe");
+    String perfilPadraoPerfilEmpresaUsuarioPerfilEmpresaUsuario = formulario.valor("eup_a03_perfil_padrao");
+    String codigoEmpresaCadastro = formulario.valor("ct_A01_CODIGO");
+    if (nomeUsuarioFormularioUsuario == null) nomeUsuarioFormularioUsuario = "";
+    if (emailUsuarioFormularioUsuario == null) emailUsuarioFormularioUsuario = "";
+    if (usuarioUsuarioFormularioUsuario == null) usuarioUsuarioFormularioUsuario = "";
+    if (senhaUsuarioFormularioUsuario == null) senhaUsuarioFormularioUsuario = "";
+    if (statusUsuarioFormularioUsuario == null) statusUsuarioFormularioUsuario = "0";
+    if (perfilChefePerfilEmpresaUsuarioPerfilEmpresaUsuario == null) perfilChefePerfilEmpresaUsuarioPerfilEmpresaUsuario = "0";
+    if (perfilPadraoPerfilEmpresaUsuarioPerfilEmpresaUsuario == null) perfilPadraoPerfilEmpresaUsuarioPerfilEmpresaUsuario = "0";
+    if ("".equals(statusUsuarioFormularioUsuario)) statusUsuarioFormularioUsuario = "0";
+    if ("".equals(perfilChefePerfilEmpresaUsuarioPerfilEmpresaUsuario)) perfilChefePerfilEmpresaUsuarioPerfilEmpresaUsuario = "0";
+    if ("".equals(perfilPadraoPerfilEmpresaUsuarioPerfilEmpresaUsuario)) perfilPadraoPerfilEmpresaUsuarioPerfilEmpresaUsuario = "0";
+    if (codigoEmpresaCadastro == null) codigoEmpresaCadastro = "0";
+    nomeUsuarioFormularioUsuario = MetodosUteis.padronizarMaiusculoCE(nomeUsuarioFormularioUsuario);
+    emailUsuarioFormularioUsuario = MetodosUteis.padronizarMinusculoSE(emailUsuarioFormularioUsuario);
+    usuarioUsuarioFormularioUsuario = MetodosUteis.padronizarMinusculoSE(usuarioUsuarioFormularioUsuario);
+    Usuario dadosUsuario = new Usuario();
 
-    EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel = new EmpresaUsuarioPerfil();
+    EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil = new EmpresaUsuarioPerfil();
 
-    oUsuarioModel.setA02_nome(u_a02_nome);
-    oUsuarioModel.setA02_email(u_a02_email);
-    oUsuarioModel.setA02_usuario(u_a02_usuario);
-    oUsuarioModel.setA02_senha(u_a02_senha);
-    oUsuarioModel.setA02_codigo_link(MetodosUteis.gerarCodigo(25));
-    oUsuarioModel.setA02_status(Integer.parseInt(u_a02_status));
-    oUsuarioModel = usuarioService.insertUsuario(oUsuarioModel);
-    if (oUsuarioModel.getA02_codigo() != 0) {
-      oEmpresaUsuarioPerfilModel.setA01_codigo(Long.parseLong(ic_A01_CODIGO));
-      oEmpresaUsuarioPerfilModel.setA02_codigo(oUsuarioModel.getA02_codigo());
-      oEmpresaUsuarioPerfilModel.setA03_perfil_paraviverbem(0);
-      oEmpresaUsuarioPerfilModel.setA03_perfil_chefe(Integer.parseInt(eup_a03_perfil_chefe));
-      oEmpresaUsuarioPerfilModel.setA03_perfil_padrao(Integer.parseInt(eup_a03_perfil_padrao));
+    dadosUsuario.setA02_nome(nomeUsuarioFormularioUsuario);
+    dadosUsuario.setA02_email(emailUsuarioFormularioUsuario);
+    dadosUsuario.setA02_usuario(usuarioUsuarioFormularioUsuario);
+    dadosUsuario.setA02_senha(senhaUsuarioFormularioUsuario);
+    dadosUsuario.setA02_codigo_link(MetodosUteis.gerarCodigo(25));
+    dadosUsuario.setA02_status(Integer.parseInt(statusUsuarioFormularioUsuario));
+    dadosUsuario = usuarioService.insertUsuario(dadosUsuario);
+    if (dadosUsuario.getA02_codigo() != 0) {
+      dadosEmpresaUsuarioPerfil.setA01_codigo(Long.parseLong(codigoEmpresaCadastro));
+      dadosEmpresaUsuarioPerfil.setA02_codigo(dadosUsuario.getA02_codigo());
+      dadosEmpresaUsuarioPerfil.setA03_perfil_paraviverbem(0);
+      dadosEmpresaUsuarioPerfil.setA03_perfil_chefe(Integer.parseInt(perfilChefePerfilEmpresaUsuarioPerfilEmpresaUsuario));
+      dadosEmpresaUsuarioPerfil.setA03_perfil_padrao(Integer.parseInt(perfilPadraoPerfilEmpresaUsuarioPerfilEmpresaUsuario));
       // ... continuar pegando o control deste ultimo objeto
-      okMetodo = empresaUsuarioPerfilService.insertEmpresaUsuarioPerfil(oEmpresaUsuarioPerfilModel);
+      operacaoConcluida = empresaUsuarioPerfilService.insertEmpresaUsuarioPerfil(dadosEmpresaUsuarioPerfil);
     }
 
-    pagina.put("okMetodo", String.valueOf(okMetodo));
+    pagina.put("okMetodo", String.valueOf(operacaoConcluida));
 
     return pagina;
   }

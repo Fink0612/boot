@@ -14,7 +14,7 @@ public class DiagnosticoBancoRepository {
           conexao != null
               ? "Sucesso!! Banco de Dados Conectado!"
               : "OPS!! Problemas com acesso ao Banco de Dados!";
-    } catch (java.sql.SQLException e) {
+    } catch (java.sql.SQLException excecao) {
       mensagem = "OPS!! Problemas com acesso ao Banco de Dados!";
     }
     return new DiagnosticoBanco(

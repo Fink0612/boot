@@ -14,23 +14,23 @@ public class EmpresaUsuarioPerfilService {
   }
 
   public EmpresaUsuarioPerfil selectEmpresaUsuario(
-      EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel) {
-    oEmpresaUsuarioPerfilModel =
-        empresaUsuarioPerfilRepository.selectEmpresaUsuario(oEmpresaUsuarioPerfilModel);
-    return oEmpresaUsuarioPerfilModel;
+      EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil) {
+    dadosEmpresaUsuarioPerfil =
+        empresaUsuarioPerfilRepository.selectEmpresaUsuario(dadosEmpresaUsuarioPerfil);
+    return dadosEmpresaUsuarioPerfil;
   }
 
-  public int insertEmpresaUsuarioPerfil(EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel) {
-    int okMetodo = 1;
-    okMetodo =
-        empresaUsuarioPerfilRepository.insertEmpresaUsuarioPerfil(oEmpresaUsuarioPerfilModel);
-    return okMetodo;
+  public int insertEmpresaUsuarioPerfil(EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil) {
+    int operacaoConcluida = 1;
+    operacaoConcluida =
+        empresaUsuarioPerfilRepository.insertEmpresaUsuarioPerfil(dadosEmpresaUsuarioPerfil);
+    return operacaoConcluida;
   }
 
-  public String updateEmpresaUsuarioPerfil(EmpresaUsuarioPerfil oEmpresaUsuarioPerfilModel) {
-    String okMetodo = "";
-    okMetodo =
-        empresaUsuarioPerfilRepository.updateEmpresaUsuarioPerfil(oEmpresaUsuarioPerfilModel);
-    return okMetodo;
+  public String updateEmpresaUsuarioPerfil(EmpresaUsuarioPerfil dadosEmpresaUsuarioPerfil) {
+    String operacaoConcluida = "";
+    operacaoConcluida =
+        empresaUsuarioPerfilRepository.updateEmpresaUsuarioPerfil(dadosEmpresaUsuarioPerfil);
+    return operacaoConcluida;
   }
 }

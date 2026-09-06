@@ -120,25 +120,25 @@ document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ANALISTA").value = [[${pag
 //-----------------------------------------------------------------
 document.getElementById("ct_QTD_FATORES_AGENDA").value = [[${pagina.qtdFatoresAgenda}]];
 //-----------------------------------------------------------------
-var afp_A01_NOME = document.getElementById("afp_A01_NOME");
-afp_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
-var afp_A04_TITULO = document.getElementById("afp_A04_TITULO");
-afp_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
-var afp_A04_TXT_STATUS = document.getElementById("afp_A04_TXT_STATUS");
-afp_A04_TXT_STATUS.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
+var nomeEmpresaPareceresAgenda = document.getElementById("afp_A01_NOME");
+nomeEmpresaPareceresAgenda.innerHTML = document.getElementById("ct_A01_NOME").value;
+var tituloAgendaPareceresAgenda = document.getElementById("afp_A04_TITULO");
+tituloAgendaPareceresAgenda.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var textoStatusAgendaPareceresAgenda = document.getElementById("afp_A04_TXT_STATUS");
+textoStatusAgendaPareceresAgenda.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
 //  -----------------------------------------------------------------
 //  ### controle de permição de visualização da lista de Usuários ###
-var afp_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
-var afp_A05_PERFIL_ESPECIALISTA = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA");
-if (afp_A05_PERFIL_TITULAR.value == "1") {
-	var afp_editarDadosUsuariosAgendaFatores = document.getElementById("afp_editarDadosUsuariosAgendaFatores");
-	afp_editarDadosUsuariosAgendaFatores.style.display = "";
-	var afp_encerrarAgenda = document.getElementById("afp_encerrarAgenda");
-	afp_encerrarAgenda.style.display = "";
+var perfilTitularParticipacaoAgendaPareceresAgenda = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+var perfilEspecialistaParticipacaoAgendaPareceresAgenda = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA");
+if (perfilTitularParticipacaoAgendaPareceresAgenda.value == "1") {
+	var controleEditarDadosUsuariosAgendaFatores = document.getElementById("afp_editarDadosUsuariosAgendaFatores");
+	controleEditarDadosUsuariosAgendaFatores.style.display = "";
+	var controleEncerrarAgenda = document.getElementById("afp_encerrarAgenda");
+	controleEncerrarAgenda.style.display = "";
 }
-if (afp_A05_PERFIL_TITULAR.value == "1" || afp_A05_PERFIL_ESPECIALISTA.value == "1") {
-	var afp_SalvarPareceresFatores = document.getElementById("afp_SalvarPareceresFatores");
-	afp_SalvarPareceresFatores.style.display = "";
+if (perfilTitularParticipacaoAgendaPareceresAgenda.value == "1" || perfilEspecialistaParticipacaoAgendaPareceresAgenda.value == "1") {
+	var controleSalvarPareceresFatores = document.getElementById("afp_SalvarPareceresFatores");
+	controleSalvarPareceresFatores.style.display = "";
 }
 </script>
 </body>

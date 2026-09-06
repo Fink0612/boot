@@ -13,27 +13,27 @@ public class AgendaUsuarioPerfilService {
   }
 
   public AgendaUsuarioPerfil selectAgendaUsuarioPerfil(
-      AgendaUsuarioPerfil oAgendaUsuarioPerfilModel) {
-    oAgendaUsuarioPerfilModel =
-        agendaUsuarioPerfilRepository.selectAgendaUsuarioPerfil(oAgendaUsuarioPerfilModel);
-    return oAgendaUsuarioPerfilModel;
+      AgendaUsuarioPerfil dadosAgendaUsuarioPerfil) {
+    dadosAgendaUsuarioPerfil =
+        agendaUsuarioPerfilRepository.selectAgendaUsuarioPerfil(dadosAgendaUsuarioPerfil);
+    return dadosAgendaUsuarioPerfil;
   }
 
-  public String deleteAgendaUsuarioPerfil(AgendaUsuarioPerfil oAgendaUsuarioPerfilModel) {
-    String msgAction =
-        agendaUsuarioPerfilRepository.deleteAgendaUsuarioPerfil(oAgendaUsuarioPerfilModel);
-    return msgAction;
+  public String deleteAgendaUsuarioPerfil(AgendaUsuarioPerfil dadosAgendaUsuarioPerfil) {
+    String mensagemAcao =
+        agendaUsuarioPerfilRepository.deleteAgendaUsuarioPerfil(dadosAgendaUsuarioPerfil);
+    return mensagemAcao;
   }
 
-  public String updatePerfilUsuarioAgenda(AgendaUsuarioPerfil oAgendaUsuarioPerfilModel) {
-    String msgAction =
-        agendaUsuarioPerfilRepository.updatePerfilUsuarioAgenda(oAgendaUsuarioPerfilModel);
-    return msgAction;
+  public String updatePerfilUsuarioAgenda(AgendaUsuarioPerfil dadosAgendaUsuarioPerfil) {
+    String mensagemAcao =
+        agendaUsuarioPerfilRepository.updatePerfilUsuarioAgenda(dadosAgendaUsuarioPerfil);
+    return mensagemAcao;
   }
 
-  public String insertPerfilUsuarioAgenda(AgendaUsuarioPerfil oAgendaUsuarioPerfilModel) {
-    String msgAction =
-        agendaUsuarioPerfilRepository.insertPerfilUsuarioAgenda(oAgendaUsuarioPerfilModel);
-    return msgAction;
+  public String insertPerfilUsuarioAgenda(AgendaUsuarioPerfil dadosAgendaUsuarioPerfil) {
+    String mensagemAcao =
+        agendaUsuarioPerfilRepository.insertPerfilUsuarioAgenda(dadosAgendaUsuarioPerfil);
+    return mensagemAcao;
   }
 }

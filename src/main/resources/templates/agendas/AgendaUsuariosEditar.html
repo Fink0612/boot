@@ -82,16 +82,16 @@ a05Cod<input type="text" th:name="${'a05_codigo_' + linha2.emp3}" th:value="${li
 </form>
 <script type="text/javascript" th:inline="javascript">
 //-----------------------------------------------------------------
-var au_A01_NOME = document.getElementById("au_A01_NOME");
-au_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
-var au_A04_TITULO = document.getElementById("au_A04_TITULO");
-au_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var nomeEmpresaAgendaUsuarios = document.getElementById("au_A01_NOME");
+nomeEmpresaAgendaUsuarios.innerHTML = document.getElementById("ct_A01_NOME").value;
+var tituloAgendaAgendaUsuarios = document.getElementById("au_A04_TITULO");
+tituloAgendaAgendaUsuarios.innerHTML = document.getElementById("ct_A04_TITULO").value;
 //  -----------------------------------------------------------------
 //  ### contorle de permição de visualização da lista de Usuários ###
-var au_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
-var au_editarDadosUsuarios = document.getElementById("au_editarDadosUsuarios");
-if (au_A05_PERFIL_TITULAR.value == "1") {
-	au_editarDadosUsuarios.style.display = "";
+var perfilTitularParticipacaoAgendaAgendaUsuarios = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+var controleEditarDadosUsuarios = document.getElementById("au_editarDadosUsuarios");
+if (perfilTitularParticipacaoAgendaAgendaUsuarios.value == "1") {
+	controleEditarDadosUsuarios.style.display = "";
 }
 </script>
 </body>

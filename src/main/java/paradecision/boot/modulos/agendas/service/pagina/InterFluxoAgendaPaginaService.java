@@ -19,51 +19,51 @@ public class InterFluxoAgendaPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    int okMetodo = 0;
+    int operacaoConcluida = 0;
     int proxStatus = 0;
-    String str_a04_codigo = formulario.valor("ct_A04_CODIGO");
-    long lng_a04_codigo = Long.parseLong(str_a04_codigo);
-    String str_a04_status = formulario.valor("ct_A04_STATUS");
-    long lng_a04_status = Long.parseLong(str_a04_status);
+    String codigoAgendaTexto = formulario.valor("ct_A04_CODIGO");
+    long codigoAgendaNumerico = Long.parseLong(codigoAgendaTexto);
+    String statusAgendaTexto = formulario.valor("ct_A04_STATUS");
+    long statusAgendaNumerico = Long.parseLong(statusAgendaTexto);
     String str_pdAcao = formulario.valor("pdAcao");
     String msgAcaoOK = "Sucesso!!";
     String msgAcaoNOK = "Problemas!!";
     if (str_pdAcao.equals("encaminharAgenda")) {
       proxStatus = 1;
-      String resultBD = "";
+      String resultadoBanco = "";
       msgAcaoOK = "Agenda Encaminhada com Sucesso";
       msgAcaoNOK = "Problemas com o Encaminhamento da Agenda!";
-      Agenda oAgendaModel = new Agenda();
+      Agenda dadosAgenda = new Agenda();
 
-      oAgendaModel.setA04_codigo(lng_a04_codigo);
-      oAgendaModel.setA04_status(proxStatus);
-      resultBD = agendaService.updateStatusAgenda(oAgendaModel);
-      if (resultBD.equals("OK")) okMetodo = 1;
+      dadosAgenda.setA04_codigo(codigoAgendaNumerico);
+      dadosAgenda.setA04_status(proxStatus);
+      resultadoBanco = agendaService.updateStatusAgenda(dadosAgenda);
+      if (resultadoBanco.equals("OK")) operacaoConcluida = 1;
     } else if (str_pdAcao.equals("liberarAgenda")) {
       proxStatus = 2;
-      String resultBD = "";
+      String resultadoBanco = "";
       msgAcaoOK = "Agenda Liberada com Sucesso";
       msgAcaoNOK = "Problemas com a Liberação da Agenda!";
-      Agenda oAgendaModel = new Agenda();
+      Agenda dadosAgenda = new Agenda();
 
-      oAgendaModel.setA04_codigo(lng_a04_codigo);
-      oAgendaModel.setA04_status(proxStatus);
-      resultBD = agendaService.updateStatusAgenda(oAgendaModel);
-      if (resultBD.equals("OK")) okMetodo = 1;
+      dadosAgenda.setA04_codigo(codigoAgendaNumerico);
+      dadosAgenda.setA04_status(proxStatus);
+      resultadoBanco = agendaService.updateStatusAgenda(dadosAgenda);
+      if (resultadoBanco.equals("OK")) operacaoConcluida = 1;
     } else if (str_pdAcao.equals("encerrarAgenda")) {
       proxStatus = 9;
-      String resultBD = "";
+      String resultadoBanco = "";
       msgAcaoOK = "Agenda Encerrada com Sucesso";
       msgAcaoNOK = "Problemas com o Encerramento desta Agenda!";
-      Agenda oAgendaModel = new Agenda();
+      Agenda dadosAgenda = new Agenda();
 
-      oAgendaModel.setA04_codigo(lng_a04_codigo);
-      oAgendaModel.setA04_status(proxStatus);
-      resultBD = agendaService.updateStatusAgenda(oAgendaModel);
-      if (resultBD.equals("OK")) okMetodo = 1;
+      dadosAgenda.setA04_codigo(codigoAgendaNumerico);
+      dadosAgenda.setA04_status(proxStatus);
+      resultadoBanco = agendaService.updateStatusAgenda(dadosAgenda);
+      if (resultadoBanco.equals("OK")) operacaoConcluida = 1;
     }
 
-    pagina.put("okMetodo", String.valueOf(okMetodo));
+    pagina.put("okMetodo", String.valueOf(operacaoConcluida));
 
     pagina.put("proxStatus", String.valueOf(proxStatus));
 

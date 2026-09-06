@@ -27,10 +27,10 @@
 		var jsPdNomeUsuSessao = [[${pagina.indNomeUsuSessao}]];
 		var pdUsuSessao = document.getElementById("pdUsuSessao");
 		var pdNomeUsuSessao = document.getElementById("pdNomeUsuSessao");
-		var txt_user_session = document.getElementById("txt_user_session");
+		var elementoNomeUsuarioCabecalho = document.getElementById("txt_user_session");
 		pdUsuSessao.value = jsPdUsuSessao;
 		pdNomeUsuSessao.value = jsPdNomeUsuSessao;
-		txt_user_session.innerHTML = jsPdNomeUsuSessao.toUpperCase();
+		elementoNomeUsuarioCabecalho.innerHTML = jsPdNomeUsuSessao.toUpperCase();
 	}
 	//-------------------------------------------
 	indIFrame.src = jsIFrame;

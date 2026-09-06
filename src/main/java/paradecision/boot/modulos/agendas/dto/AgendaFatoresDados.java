@@ -8,42 +8,42 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 
 public class AgendaFatoresDados {
 
-  private Agenda oAgendaModel = new Agenda();
-  private ArrayList<Fator> arrFatorModel = new ArrayList<Fator>();
-  private ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-  private ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel =
+  private Agenda dadosAgenda = new Agenda();
+  private ArrayList<Fator> listaFator = new ArrayList<Fator>();
+  private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+  private ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario =
       new ArrayList<ParecerFatorUsuario>();
 
   public ArrayList<Usuario> getArrUsuarioModel() {
-    return arrUsuarioModel;
+    return listaUsuario;
   }
 
-  public void setArrUsuarioModel(ArrayList<Usuario> arrUsuarioModel) {
-    this.arrUsuarioModel = arrUsuarioModel;
+  public void setArrUsuarioModel(ArrayList<Usuario> listaUsuario) {
+    this.listaUsuario = listaUsuario;
   }
 
   public Agenda getoAgendaModel() {
-    return oAgendaModel;
+    return dadosAgenda;
   }
 
-  public void setoAgendaModel(Agenda oAgendaModel) {
-    this.oAgendaModel = oAgendaModel;
+  public void setoAgendaModel(Agenda dadosAgenda) {
+    this.dadosAgenda = dadosAgenda;
   }
 
   public ArrayList<Fator> getArrFatorModel() {
-    return arrFatorModel;
+    return listaFator;
   }
 
-  public void setArrFatorModel(ArrayList<Fator> arrFatorModel) {
-    this.arrFatorModel = arrFatorModel;
+  public void setArrFatorModel(ArrayList<Fator> listaFator) {
+    this.listaFator = listaFator;
   }
 
   public ArrayList<ParecerFatorUsuario> getArrParecerFatorUsuarioModel() {
-    return arrParecerFatorUsuarioModel;
+    return listaParecerFatorUsuario;
   }
 
   public void setArrParecerFatorUsuarioModel(
-      ArrayList<ParecerFatorUsuario> arrParecerFatorUsuarioModel) {
-    this.arrParecerFatorUsuarioModel = arrParecerFatorUsuarioModel;
+      ArrayList<ParecerFatorUsuario> listaParecerFatorUsuario) {
+    this.listaParecerFatorUsuario = listaParecerFatorUsuario;
   }
 }

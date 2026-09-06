@@ -61,34 +61,34 @@
 </form>
 <script type="text/javascript" th:inline="javascript">
 apagarCmpCtrlAgenda();
-var ea_A01_NOME = document.getElementById("ea_A01_NOME");
-ea_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var nomeEmpresaAgendasEmpresa = document.getElementById("ea_A01_NOME");
+nomeEmpresaAgendasEmpresa.innerHTML = document.getElementById("ct_A01_NOME").value;
 //-----------------------------------------------------------------
-var ea_A03_PERFIL_PARAVIVERBEM = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
-var ea_A03_PERFIL_ADMINISTRADOR = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
-var ea_A03_PERFIL_PADRAO = document.getElementById("ct_A03_PERFIL_PADRAO");
+var perfilParaviverbemPerfilEmpresaUsuarioAgendasEmpresa = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
+var perfilAdministradorPerfilEmpresaUsuarioAgendasEmpresa = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
+var perfilPadraoPerfilEmpresaUsuarioAgendasEmpresa = document.getElementById("ct_A03_PERFIL_PADRAO");
 //-----------------------------------------------------------------
 //### contorle de permição para voltar à lista de Empresas ###
-var ea_abrirUsuarioEmpresas = document.getElementById("ea_abrirUsuarioEmpresas");
-var ea_ct_QTD_EMPRESAS = document.getElementById("ct_QTD_EMPRESAS");
-var ea_QTD_EMPRESAS = 0;
-if (ehNumero(ea_ct_QTD_EMPRESAS.value)) {
-	ea_QTD_EMPRESAS = parseInt(ea_ct_QTD_EMPRESAS.value);
+var controleAbrirUsuarioEmpresas = document.getElementById("ea_abrirUsuarioEmpresas");
+var campoQuantidadeEmpresas = document.getElementById("ct_QTD_EMPRESAS");
+var quantidadeEmpresasDisponiveis = 0;
+if (ehNumero(campoQuantidadeEmpresas.value)) {
+	quantidadeEmpresasDisponiveis = parseInt(campoQuantidadeEmpresas.value);
 }
-if (ea_QTD_EMPRESAS > "1") {
-	ea_abrirUsuarioEmpresas.style.display = "";
+if (quantidadeEmpresasDisponiveis > "1") {
+	controleAbrirUsuarioEmpresas.style.display = "";
 }
 //-----------------------------------------------------------------
 //### contorle de permição de acessar a lista de Usuários da Empresa ###
-var ea_abrirEmpresaUsuarios = document.getElementById("ea_abrirEmpresaUsuarios");
-if (ea_A03_PERFIL_PARAVIVERBEM.value == "1" || ea_A03_PERFIL_ADMINISTRADOR.value == "1") {
-	ea_abrirEmpresaUsuarios.style.display = "";
+var controleAbrirEmpresaUsuarios = document.getElementById("ea_abrirEmpresaUsuarios");
+if (perfilParaviverbemPerfilEmpresaUsuarioAgendasEmpresa.value == "1" || perfilAdministradorPerfilEmpresaUsuarioAgendasEmpresa.value == "1") {
+	controleAbrirEmpresaUsuarios.style.display = "";
 }
 //-----------------------------------------------------------------
 //### contorle de permição de cadastrar nova Agenda ###
-var ea_cadastrarAgenda = document.getElementById("ea_cadastrarAgenda");
-if (ea_A03_PERFIL_PARAVIVERBEM.value == "1" || ea_A03_PERFIL_PADRAO.value == "1") {
-	ea_cadastrarAgenda.style.display = "";
+var controleCadastrarAgenda = document.getElementById("ea_cadastrarAgenda");
+if (perfilParaviverbemPerfilEmpresaUsuarioAgendasEmpresa.value == "1" || perfilPadraoPerfilEmpresaUsuarioAgendasEmpresa.value == "1") {
+	controleCadastrarAgenda.style.display = "";
 }
 </script>
 </body>

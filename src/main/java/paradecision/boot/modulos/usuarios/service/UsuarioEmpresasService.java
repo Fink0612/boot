@@ -12,10 +12,10 @@ public class UsuarioEmpresasService {
     this.usuarioEmpresasRepository = usuarioEmpresasRepository;
   }
 
-  public UsuarioEmpresasDados selectEmpresasDoUsuario(UsuarioEmpresasDados oUsuarioEmpresasModel) {
+  public UsuarioEmpresasDados selectEmpresasDoUsuario(UsuarioEmpresasDados dadosUsuarioEmpresas) {
 
-    oUsuarioEmpresasModel =
-        usuarioEmpresasRepository.selectEmpresasDoUsuario(oUsuarioEmpresasModel);
-    return oUsuarioEmpresasModel;
+    dadosUsuarioEmpresas =
+        usuarioEmpresasRepository.selectEmpresasDoUsuario(dadosUsuarioEmpresas);
+    return dadosUsuarioEmpresas;
   }
 }

@@ -40,103 +40,103 @@ public class AgendaFatoresPareceresPaginaService {
   public Map<String, Object> preparar(DadosFormulario formulario) {
     Map<String, Object> pagina = new LinkedHashMap<>();
 
-    long afp_ct_A04_CODIGO = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
-    long afp_ct_A02_CODIGO = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
-    Agenda oAgendaModel = new Agenda();
+    long codigoAgendaPareceresAgendaControle = Long.parseLong(formulario.valor("ct_A04_CODIGO"));
+    long codigoUsuarioPareceresAgendaControle = Long.parseLong(formulario.valor("ct_A02_CODIGO"));
+    Agenda dadosAgenda = new Agenda();
 
-    AgendaUsuarioPerfil oAgendaUsuarioPerfilModel = new AgendaUsuarioPerfil();
+    AgendaUsuarioPerfil dadosAgendaUsuarioPerfil = new AgendaUsuarioPerfil();
 
-    String afp_A04_TITULO = "";
-    String afp_A04_STATUS_DT_LIMITE = "";
-    String afp_A04_DATA_LIMITE = "";
-    String afp_A04_STATUS = "";
-    String afp_A04_TXT_STATUS = "";
-    oAgendaModel.setA04_codigo(afp_ct_A04_CODIGO);
-    oAgendaModel = agendaService.selectAgenda(oAgendaModel);
+    String tituloAgendaPareceresAgenda = "";
+    String statusDataLimiteAgendaPareceresAgenda = "";
+    String dataLimiteAgendaPareceresAgenda = "";
+    String statusAgendaPareceresAgenda = "";
+    String textoStatusAgendaPareceresAgenda = "";
+    dadosAgenda.setA04_codigo(codigoAgendaPareceresAgendaControle);
+    dadosAgenda = agendaService.selectAgenda(dadosAgenda);
     try {
-      if (oAgendaModel.getA01_codigo() > 0) {
-        afp_A04_TITULO = oAgendaModel.getA04_titulo();
-        afp_A04_STATUS_DT_LIMITE = Long.toString(oAgendaModel.getA04_status_dt_limite());
-        if (afp_A04_STATUS_DT_LIMITE.equals("1")) {
-          afp_A04_DATA_LIMITE = oAgendaModel.getA04_data_limite().toString();
+      if (dadosAgenda.getA01_codigo() > 0) {
+        tituloAgendaPareceresAgenda = dadosAgenda.getA04_titulo();
+        statusDataLimiteAgendaPareceresAgenda = Long.toString(dadosAgenda.getA04_status_dt_limite());
+        if (statusDataLimiteAgendaPareceresAgenda.equals("1")) {
+          dataLimiteAgendaPareceresAgenda = dadosAgenda.getA04_data_limite().toString();
         }
-        afp_A04_STATUS = Integer.toString(oAgendaModel.getA04_status());
-        afp_A04_TXT_STATUS = MetodosUteis.retornaTxtStatusAgenda(afp_A04_STATUS);
+        statusAgendaPareceresAgenda = Integer.toString(dadosAgenda.getA04_status());
+        textoStatusAgendaPareceresAgenda = MetodosUteis.retornaTxtStatusAgenda(statusAgendaPareceresAgenda);
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
-    int afp_A05_PERFIL_TITULAR = 0;
-    int afp_A05_PERFIL_FACILITADOR = 0;
-    int afp_A05_PERFIL_ESPECIALISTA = 0;
-    int afp_A05_PERFIL_ANALISTA = 0;
-    oAgendaUsuarioPerfilModel.setA02_codigo(afp_ct_A02_CODIGO);
-    oAgendaUsuarioPerfilModel.setA04_codigo(afp_ct_A04_CODIGO);
-    oAgendaUsuarioPerfilModel =
-        agendaUsuarioPerfilService.selectAgendaUsuarioPerfil(oAgendaUsuarioPerfilModel);
+    int perfilTitularParticipacaoAgendaPareceresAgenda = 0;
+    int perfilFacilitadorParticipacaoAgendaPareceresAgenda = 0;
+    int perfilEspecialistaParticipacaoAgendaPareceresAgenda = 0;
+    int perfilAnalistaParticipacaoAgendaPareceresAgenda = 0;
+    dadosAgendaUsuarioPerfil.setA02_codigo(codigoUsuarioPareceresAgendaControle);
+    dadosAgendaUsuarioPerfil.setA04_codigo(codigoAgendaPareceresAgendaControle);
+    dadosAgendaUsuarioPerfil =
+        agendaUsuarioPerfilService.selectAgendaUsuarioPerfil(dadosAgendaUsuarioPerfil);
     try {
-      if (oAgendaUsuarioPerfilModel.getA05_codigo() > 0) {
-        afp_A05_PERFIL_TITULAR = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_titular();
-        afp_A05_PERFIL_FACILITADOR =
-            oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_facilitador();
-        afp_A05_PERFIL_ESPECIALISTA =
-            oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_especialista();
-        afp_A05_PERFIL_ANALISTA = oAgendaUsuarioPerfilModel.getA05_perfil_agenda_usuario_analista();
+      if (dadosAgendaUsuarioPerfil.getA05_codigo() > 0) {
+        perfilTitularParticipacaoAgendaPareceresAgenda = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_titular();
+        perfilFacilitadorParticipacaoAgendaPareceresAgenda =
+            dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_facilitador();
+        perfilEspecialistaParticipacaoAgendaPareceresAgenda =
+            dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_especialista();
+        perfilAnalistaParticipacaoAgendaPareceresAgenda = dadosAgendaUsuarioPerfil.getA05_perfil_agenda_usuario_analista();
       }
-    } catch (Exception e) {
+    } catch (Exception excecao) {
     }
-    AgendaFatoresDados oAgendaFatoresModel = new AgendaFatoresDados();
+    AgendaFatoresDados dadosAgendaFatores = new AgendaFatoresDados();
 
     int achouFator = 0;
-    oAgendaFatoresModel.setoAgendaModel(oAgendaModel);
-    oAgendaFatoresModel = agendaFatoresService.selectFatoresDaAgenda(oAgendaFatoresModel);
-    if (oAgendaFatoresModel.getArrFatorModel().size() > 0) {
+    dadosAgendaFatores.setoAgendaModel(dadosAgenda);
+    dadosAgendaFatores = agendaFatoresService.selectFatoresDaAgenda(dadosAgendaFatores);
+    if (dadosAgendaFatores.getArrFatorModel().size() > 0) {
       achouFator = 1;
     }
 
-    int qtdFatoresAgenda = 0;
+    int quantidadeFatoresAgenda = 0;
     if (achouFator == 1) {
       Map<String, Object> linha1 = DadosPagina.novaLinha(pagina, "linhas1");
 
-      String txt_afp_A02_CODIGO = formulario.valor("ct_A02_CODIGO");
-      long num_afp_A02_CODIGO = MetodosUteis.retornaLong(txt_afp_A02_CODIGO);
-      long num_afp_A06_CODIGO = 0;
-      Fator oFatorModel;
-      ArrayList<Fator> arrFatorModel = new ArrayList<Fator>();
-      arrFatorModel = oAgendaFatoresModel.getArrFatorModel();
-      qtdFatoresAgenda = arrFatorModel.size();
-      Usuario oUsuarioModel;
-      ArrayList<Usuario> arrUsuarioModel = new ArrayList<Usuario>();
-      arrUsuarioModel = oAgendaFatoresModel.getArrUsuarioModel();
-      for (int ii = 0; ii < arrFatorModel.size(); ii++) {
+      String codigoUsuarioTextoPareceresAgenda = formulario.valor("ct_A02_CODIGO");
+      long codigoUsuarioNumericoPareceresAgenda = MetodosUteis.retornaLong(codigoUsuarioTextoPareceresAgenda);
+      long codigoFatorNumericoPareceresAgenda = 0;
+      Fator dadosFator;
+      ArrayList<Fator> listaFator = new ArrayList<Fator>();
+      listaFator = dadosAgendaFatores.getArrFatorModel();
+      quantidadeFatoresAgenda = listaFator.size();
+      Usuario dadosUsuario;
+      ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+      listaUsuario = dadosAgendaFatores.getArrUsuarioModel();
+      for (int indiceRegistro = 0; indiceRegistro < listaFator.size(); indiceRegistro++) {
         Map<String, Object> linha2 = DadosPagina.novaLinha(linha1, "linhas2");
 
-        long codParecer = 0;
+        long codigoParecer = 0;
         double numCertezaContradicao = -1;
         String valStr = "";
         String strCerteza = "";
         String strContradicao = "";
-        oFatorModel = oAgendaFatoresModel.getArrFatorModel().get(ii);
-        oUsuarioModel = oAgendaFatoresModel.getArrUsuarioModel().get(ii);
-        ParecerFatorUsuario oParecerFatorUsuarioModel = new ParecerFatorUsuario();
+        dadosFator = dadosAgendaFatores.getArrFatorModel().get(indiceRegistro);
+        dadosUsuario = dadosAgendaFatores.getArrUsuarioModel().get(indiceRegistro);
+        ParecerFatorUsuario dadosParecerFatorUsuario = new ParecerFatorUsuario();
 
-        oParecerFatorUsuarioModel.setA02_codigo(num_afp_A02_CODIGO);
-        num_afp_A06_CODIGO = oFatorModel.getA06_codigo();
-        oParecerFatorUsuarioModel.setA06_codigo(num_afp_A06_CODIGO);
-        oParecerFatorUsuarioModel =
-            parecerFatorUsuarioService.selectParecerFatorUsuario(oParecerFatorUsuarioModel);
-        codParecer = oParecerFatorUsuarioModel.getA07_codigo();
-        if (codParecer > 0) {
-          numCertezaContradicao = oParecerFatorUsuarioModel.getA07_certeza();
+        dadosParecerFatorUsuario.setA02_codigo(codigoUsuarioNumericoPareceresAgenda);
+        codigoFatorNumericoPareceresAgenda = dadosFator.getA06_codigo();
+        dadosParecerFatorUsuario.setA06_codigo(codigoFatorNumericoPareceresAgenda);
+        dadosParecerFatorUsuario =
+            parecerFatorUsuarioService.selectParecerFatorUsuario(dadosParecerFatorUsuario);
+        codigoParecer = dadosParecerFatorUsuario.getA07_codigo();
+        if (codigoParecer > 0) {
+          numCertezaContradicao = dadosParecerFatorUsuario.getA07_certeza();
           strCerteza = "";
-          valStr = oParecerFatorUsuarioModel.getStr_a07_certeza();
+          valStr = dadosParecerFatorUsuario.getStr_a07_certeza();
           if (valStr != null) {
             if (!(valStr.equals(""))) {
               if (numCertezaContradicao >= 0) strCerteza = Double.toString(numCertezaContradicao);
             }
           }
-          numCertezaContradicao = oParecerFatorUsuarioModel.getA07_contradicao();
+          numCertezaContradicao = dadosParecerFatorUsuario.getA07_contradicao();
           strContradicao = "";
-          valStr = oParecerFatorUsuarioModel.getStr_a07_contradicao();
+          valStr = dadosParecerFatorUsuario.getStr_a07_contradicao();
           if (valStr != null) {
             if (!(valStr.equals(""))) {
               if (numCertezaContradicao >= 0)
@@ -145,109 +145,109 @@ public class AgendaFatoresPareceresPaginaService {
           }
         }
 
-        linha2.put("ii", String.valueOf(ii));
+        linha2.put("ii", String.valueOf(indiceRegistro));
 
-        linha2.put("num_afp_A06_CODIGO", String.valueOf(num_afp_A06_CODIGO));
+        linha2.put("num_afp_A06_CODIGO", String.valueOf(codigoFatorNumericoPareceresAgenda));
 
-        linha2.put("oFatorModel_A06_titulo", String.valueOf(oFatorModel.getA06_titulo()));
+        linha2.put("oFatorModel_A06_titulo", String.valueOf(dadosFator.getA06_titulo()));
 
-        linha2.put("oFatorModel_A06_descricao", String.valueOf(oFatorModel.getA06_descricao()));
+        linha2.put("oFatorModel_A06_descricao", String.valueOf(dadosFator.getA06_descricao()));
 
         String chkMark = "";
-        String corCert = "";
-        for (int kk = 0; kk <= 10; kk++) {
+        String corCerteza = "";
+        for (int indiceNivelParecer = 0; indiceNivelParecer <= 10; indiceNivelParecer++) {
           Map<String, Object> linha3 = DadosPagina.novaLinha(linha2, "linhas3");
 
-          double valC = 0;
-          int mm = kk * 10;
+          double valorGrauParecer = 0;
+          int percentualNivelParecer = indiceNivelParecer * 10;
           chkMark = "nchk";
-          corCert = MetodosUteis.getCorNivelCert(kk);
+          corCerteza = MetodosUteis.getCorNivelCert(indiceNivelParecer);
           if (!(strCerteza.equals(""))) {
-            valC = MetodosUteis.retornaDouble(strCerteza);
-            if (mm < valC + 1 && mm > valC - 1) {
+            valorGrauParecer = MetodosUteis.retornaDouble(strCerteza);
+            if (percentualNivelParecer < valorGrauParecer + 1 && percentualNivelParecer > valorGrauParecer - 1) {
               chkMark = "chk";
             }
           }
 
           linha3.put("chkMark", String.valueOf(chkMark));
 
-          linha3.put("corCert", String.valueOf(corCert));
+          linha3.put("corCert", String.valueOf(corCerteza));
 
-          linha3.put("ii", String.valueOf(ii));
+          linha3.put("ii", String.valueOf(indiceRegistro));
 
-          linha3.put("kk", String.valueOf(kk));
+          linha3.put("kk", String.valueOf(indiceNivelParecer));
 
-          linha3.put("mm", String.valueOf(mm));
+          linha3.put("mm", String.valueOf(percentualNivelParecer));
 
-          linha3.put("ii2", String.valueOf(ii));
+          linha3.put("ii2", String.valueOf(indiceRegistro));
 
-          linha3.put("kk2", String.valueOf(kk));
+          linha3.put("kk2", String.valueOf(indiceNivelParecer));
 
-          linha3.put("kk3", String.valueOf(kk));
+          linha3.put("kk3", String.valueOf(indiceNivelParecer));
         }
-        linha2.put("ii2", String.valueOf(ii));
+        linha2.put("ii2", String.valueOf(indiceRegistro));
 
-        linha2.put("ii3", String.valueOf(ii));
+        linha2.put("ii3", String.valueOf(indiceRegistro));
 
         linha2.put("strCerteza", String.valueOf(strCerteza));
 
-        String corContr = "";
-        for (int kk = 0; kk <= 10; kk++) {
+        String corContradicao = "";
+        for (int indiceNivelParecer = 0; indiceNivelParecer <= 10; indiceNivelParecer++) {
           Map<String, Object> linha4 = DadosPagina.novaLinha(linha2, "linhas4");
 
-          double valC = 0;
-          int mm = kk * 10;
+          double valorGrauParecer = 0;
+          int percentualNivelParecer = indiceNivelParecer * 10;
           chkMark = "nchk";
-          corContr = MetodosUteis.getCorNivelContr(kk);
+          corContradicao = MetodosUteis.getCorNivelContr(indiceNivelParecer);
           if (!(strContradicao.equals(""))) {
-            valC = MetodosUteis.retornaDouble(strContradicao);
-            if (mm < valC + 1 && mm > valC - 1) {
+            valorGrauParecer = MetodosUteis.retornaDouble(strContradicao);
+            if (percentualNivelParecer < valorGrauParecer + 1 && percentualNivelParecer > valorGrauParecer - 1) {
               chkMark = "chk";
             }
           }
 
           linha4.put("chkMark", String.valueOf(chkMark));
 
-          linha4.put("corContr", String.valueOf(corContr));
+          linha4.put("corContr", String.valueOf(corContradicao));
 
-          linha4.put("ii", String.valueOf(ii));
+          linha4.put("ii", String.valueOf(indiceRegistro));
 
-          linha4.put("kk", String.valueOf(kk));
+          linha4.put("kk", String.valueOf(indiceNivelParecer));
 
-          linha4.put("mm", String.valueOf(mm));
+          linha4.put("mm", String.valueOf(percentualNivelParecer));
 
-          linha4.put("ii2", String.valueOf(ii));
+          linha4.put("ii2", String.valueOf(indiceRegistro));
 
-          linha4.put("kk2", String.valueOf(kk));
+          linha4.put("kk2", String.valueOf(indiceNivelParecer));
 
-          linha4.put("kk3", String.valueOf(kk));
+          linha4.put("kk3", String.valueOf(indiceNivelParecer));
         }
-        linha2.put("ii4", String.valueOf(ii));
+        linha2.put("ii4", String.valueOf(indiceRegistro));
 
-        linha2.put("ii5", String.valueOf(ii));
+        linha2.put("ii5", String.valueOf(indiceRegistro));
 
         linha2.put("strContradicao", String.valueOf(strContradicao));
       }
     }
-    pagina.put("afp_A04_TITULO", String.valueOf(afp_A04_TITULO));
+    pagina.put("afp_A04_TITULO", String.valueOf(tituloAgendaPareceresAgenda));
 
-    pagina.put("afp_A04_STATUS_DT_LIMITE", String.valueOf(afp_A04_STATUS_DT_LIMITE));
+    pagina.put("afp_A04_STATUS_DT_LIMITE", String.valueOf(statusDataLimiteAgendaPareceresAgenda));
 
-    pagina.put("afp_A04_DATA_LIMITE", String.valueOf(afp_A04_DATA_LIMITE));
+    pagina.put("afp_A04_DATA_LIMITE", String.valueOf(dataLimiteAgendaPareceresAgenda));
 
-    pagina.put("afp_A04_STATUS", String.valueOf(afp_A04_STATUS));
+    pagina.put("afp_A04_STATUS", String.valueOf(statusAgendaPareceresAgenda));
 
-    pagina.put("afp_A04_TXT_STATUS", String.valueOf(afp_A04_TXT_STATUS));
+    pagina.put("afp_A04_TXT_STATUS", String.valueOf(textoStatusAgendaPareceresAgenda));
 
-    pagina.put("afp_A05_PERFIL_TITULAR", String.valueOf(afp_A05_PERFIL_TITULAR));
+    pagina.put("afp_A05_PERFIL_TITULAR", String.valueOf(perfilTitularParticipacaoAgendaPareceresAgenda));
 
-    pagina.put("afp_A05_PERFIL_FACILITADOR", String.valueOf(afp_A05_PERFIL_FACILITADOR));
+    pagina.put("afp_A05_PERFIL_FACILITADOR", String.valueOf(perfilFacilitadorParticipacaoAgendaPareceresAgenda));
 
-    pagina.put("afp_A05_PERFIL_ESPECIALISTA", String.valueOf(afp_A05_PERFIL_ESPECIALISTA));
+    pagina.put("afp_A05_PERFIL_ESPECIALISTA", String.valueOf(perfilEspecialistaParticipacaoAgendaPareceresAgenda));
 
-    pagina.put("afp_A05_PERFIL_ANALISTA", String.valueOf(afp_A05_PERFIL_ANALISTA));
+    pagina.put("afp_A05_PERFIL_ANALISTA", String.valueOf(perfilAnalistaParticipacaoAgendaPareceresAgenda));
 
-    pagina.put("qtdFatoresAgenda", String.valueOf(qtdFatoresAgenda));
+    pagina.put("qtdFatoresAgenda", String.valueOf(quantidadeFatoresAgenda));
 
     return pagina;
   }

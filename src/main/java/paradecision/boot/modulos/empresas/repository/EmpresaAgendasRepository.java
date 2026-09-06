@@ -13,80 +13,80 @@ import paradecision.boot.modulos.empresas.dto.EmpresaAgendasDados;
 @Repository
 public class EmpresaAgendasRepository {
 
-  public EmpresaAgendasDados selectAgendasDaEmpresa(EmpresaAgendasDados oEmpresaAgendasModel) {
-    Agenda oAgendaModel;
-    ArrayList<Agenda> arrAgendaModel = new ArrayList<Agenda>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM AGENDA_04 AS A ";
-    sql += "WHERE A.A01_CODIGO=? ";
-    sql += "ORDER BY A.A01_CODIGO, A.A04_STATUS, A.A04_TITULO;";
+  public EmpresaAgendasDados selectAgendasDaEmpresa(EmpresaAgendasDados dadosEmpresaAgendas) {
+    Agenda dadosAgenda;
+    ArrayList<Agenda> listaAgenda = new ArrayList<Agenda>();
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM AGENDA_04 AS A ";
+    instrucaoSql += "WHERE A.A01_CODIGO=? ";
+    instrucaoSql += "ORDER BY A.A01_CODIGO, A.A04_STATUS, A.A04_TITULO;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oEmpresaAgendasModel.getoEmpresaModel().getA01_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oAgendaModel = new Agenda();
-        oAgendaModel.setA04_codigo(rs.getLong("A04_CODIGO"));
-        oAgendaModel.setA04_titulo(rs.getString("A04_TITULO"));
-        oAgendaModel.setA04_descricao(rs.getString("A04_DESCRICAO"));
-        oAgendaModel.setA04_status_dt_limite(rs.getInt("A04_STATUS_DT_LIMITE"));
-        oAgendaModel.setA04_data_limite(rs.getDate("A04_DATA_LIMITE"));
-        oAgendaModel.setA04_resultado(rs.getString("A04_RESULTADO"));
-        oAgendaModel.setA04_certeza_resultado(rs.getDouble("A04_CERTEZA_RESULTADO"));
-        oAgendaModel.setA04_contradicao_resultado(rs.getDouble("A04_CONTRADICAO_RESULTADO"));
-        oAgendaModel.setA04_dt_cadastro(rs.getDate("A04_DT_CADASTRO"));
-        oAgendaModel.setA04_dt_ultima_alteracao(rs.getDate("A04_DT_ULTIMA_ALTERACAO"));
-        oAgendaModel.setA01_codigo(rs.getLong("A01_CODIGO"));
-        oAgendaModel.setA04_status(rs.getInt("A04_STATUS"));
-        arrAgendaModel.add(oAgendaModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosEmpresaAgendas.getoEmpresaModel().getA01_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosAgenda = new Agenda();
+        dadosAgenda.setA04_codigo(resultadoConsulta.getLong("A04_CODIGO"));
+        dadosAgenda.setA04_titulo(resultadoConsulta.getString("A04_TITULO"));
+        dadosAgenda.setA04_descricao(resultadoConsulta.getString("A04_DESCRICAO"));
+        dadosAgenda.setA04_status_dt_limite(resultadoConsulta.getInt("A04_STATUS_DT_LIMITE"));
+        dadosAgenda.setA04_data_limite(resultadoConsulta.getDate("A04_DATA_LIMITE"));
+        dadosAgenda.setA04_resultado(resultadoConsulta.getString("A04_RESULTADO"));
+        dadosAgenda.setA04_certeza_resultado(resultadoConsulta.getDouble("A04_CERTEZA_RESULTADO"));
+        dadosAgenda.setA04_contradicao_resultado(resultadoConsulta.getDouble("A04_CONTRADICAO_RESULTADO"));
+        dadosAgenda.setA04_dt_cadastro(resultadoConsulta.getDate("A04_DT_CADASTRO"));
+        dadosAgenda.setA04_dt_ultima_alteracao(resultadoConsulta.getDate("A04_DT_ULTIMA_ALTERACAO"));
+        dadosAgenda.setA01_codigo(resultadoConsulta.getLong("A01_CODIGO"));
+        dadosAgenda.setA04_status(resultadoConsulta.getInt("A04_STATUS"));
+        listaAgenda.add(dadosAgenda);
       }
-      oEmpresaAgendasModel.setArrAgendaModel(arrAgendaModel);
-      stmt.close();
-    } catch (Exception e) {
+      dadosEmpresaAgendas.setArrAgendaModel(listaAgenda);
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(EAP-S1)");
     }
-    fechaCon(con);
-    return oEmpresaAgendasModel;
+    fechaCon(conexaoBanco);
+    return dadosEmpresaAgendas;
   }
 
   public EmpresaAgendasDados selectAgendasDaEmpresaUsuario(
-      EmpresaAgendasDados oEmpresaAgendasModel) {
-    Agenda oAgendaModel;
-    ArrayList<Agenda> arrAgendaModel = new ArrayList<Agenda>();
-    Connection con = new ConnectionFactory().getConnection();
-    String sql = "SELECT * FROM VW_PARTICIPANTES_AGENDA AS PA ";
-    sql += "WHERE PA.A01_CODIGO=? AND PA.A02_CODIGO=?;";
+      EmpresaAgendasDados dadosEmpresaAgendas) {
+    Agenda dadosAgenda;
+    ArrayList<Agenda> listaAgenda = new ArrayList<Agenda>();
+    Connection conexaoBanco = new ConnectionFactory().getConnection();
+    String instrucaoSql = "SELECT * FROM VW_PARTICIPANTES_AGENDA AS PA ";
+    instrucaoSql += "WHERE PA.A01_CODIGO=? AND PA.A02_CODIGO=?;";
     try {
-      PreparedStatement stmt = con.prepareStatement(sql);
-      stmt.setLong(1, oEmpresaAgendasModel.getoEmpresaModel().getA01_codigo());
-      stmt.setLong(2, oEmpresaAgendasModel.getoUsuarioModel().getA02_codigo());
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        oAgendaModel = new Agenda();
-        oAgendaModel.setA04_codigo(rs.getLong("A04_CODIGO"));
-        oAgendaModel.setA04_titulo(rs.getString("A04_TITULO"));
-        oAgendaModel.setA04_descricao(rs.getString("A04_DESCRICAO"));
-        oAgendaModel.setA01_codigo(rs.getLong("A01_CODIGO"));
-        oAgendaModel.setA04_status(rs.getInt("A04_STATUS"));
-        arrAgendaModel.add(oAgendaModel);
+      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
+      comandoPreparado.setLong(1, dadosEmpresaAgendas.getoEmpresaModel().getA01_codigo());
+      comandoPreparado.setLong(2, dadosEmpresaAgendas.getoUsuarioModel().getA02_codigo());
+      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
+      while (resultadoConsulta.next()) {
+        dadosAgenda = new Agenda();
+        dadosAgenda.setA04_codigo(resultadoConsulta.getLong("A04_CODIGO"));
+        dadosAgenda.setA04_titulo(resultadoConsulta.getString("A04_TITULO"));
+        dadosAgenda.setA04_descricao(resultadoConsulta.getString("A04_DESCRICAO"));
+        dadosAgenda.setA01_codigo(resultadoConsulta.getLong("A01_CODIGO"));
+        dadosAgenda.setA04_status(resultadoConsulta.getInt("A04_STATUS"));
+        listaAgenda.add(dadosAgenda);
       }
-      oEmpresaAgendasModel.setArrAgendaModel(arrAgendaModel);
-      stmt.close();
-    } catch (Exception e) {
+      dadosEmpresaAgendas.setArrAgendaModel(listaAgenda);
+      comandoPreparado.close();
+    } catch (Exception excecao) {
       System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(EAP-S2)");
     }
-    fechaCon(con);
-    return oEmpresaAgendasModel;
+    fechaCon(conexaoBanco);
+    return dadosEmpresaAgendas;
   }
 
   // ......PARA LIDAR COM O BANCO DE DADOS..........
 
-  private void fechaCon(Connection con) {
-    if (con == null) return;
+  private void fechaCon(Connection conexaoBanco) {
+    if (conexaoBanco == null) return;
     try {
-      con.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      conexaoBanco.close();
+    } catch (SQLException excecao) {
+      excecao.printStackTrace();
     }
   }
 }

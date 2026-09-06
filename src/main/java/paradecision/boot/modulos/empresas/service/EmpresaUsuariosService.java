@@ -12,9 +12,9 @@ public class EmpresaUsuariosService {
     this.empresaUsuariosRepository = empresaUsuariosRepository;
   }
 
-  public EmpresaUsuariosDados selectUsuariosDaEmpresa(EmpresaUsuariosDados oEmpresaUsuariosModel) {
-    oEmpresaUsuariosModel =
-        empresaUsuariosRepository.selectUsuariosDaEmpresa(oEmpresaUsuariosModel);
-    return oEmpresaUsuariosModel;
+  public EmpresaUsuariosDados selectUsuariosDaEmpresa(EmpresaUsuariosDados dadosEmpresaUsuarios) {
+    dadosEmpresaUsuarios =
+        empresaUsuariosRepository.selectUsuariosDaEmpresa(dadosEmpresaUsuarios);
+    return dadosEmpresaUsuarios;
   }
 }

@@ -49,19 +49,19 @@
 document.getElementById("ct_A04_CODIGO").value = [[${pagina.ct_A04_CODIGO}]];
 document.getElementById("a_a04_titulo").value = [[${pagina.ct_A04_TITULO}]];
 document.getElementById("a_a04_descricao").value = [[${pagina.ct_A04_DESCRICAO}]];
-var ct_A04_STATUS_DT_LIMITE = [[${pagina.ct_A04_STATUS_DT_LIMITE}]];
-var a_cmpDataLimite = document.getElementById("a_cmpDataLimite");
-if (ct_A04_STATUS_DT_LIMITE == "1") {
+var statusDataLimiteAgendaControle = [[${pagina.ct_A04_STATUS_DT_LIMITE}]];
+var containerDataLimite = document.getElementById("a_cmpDataLimite");
+if (statusDataLimiteAgendaControle == "1") {
 	document.getElementById("a_a04_status_dt_limite").checked = true;
-	a_cmpDataLimite.style.display = "inline";
+	containerDataLimite.style.display = "inline";
 } else {
 	document.getElementById("a_a04_status_dt_limite").checked = false;
-	a_cmpDataLimite.style.display = "none";
+	containerDataLimite.style.display = "none";
 }
 document.getElementById("a_a04_data_limite").value = [[${pagina.ct_A04_DATA_LIMITE}]];
 //----------------------------------------------------
-var a_A01_NOME = document.getElementById("a_A01_NOME");
-a_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var nomeEmpresaFormularioAgenda = document.getElementById("a_A01_NOME");
+nomeEmpresaFormularioAgenda.innerHTML = document.getElementById("ct_A01_NOME").value;
 </script>
 </body>
 </html>

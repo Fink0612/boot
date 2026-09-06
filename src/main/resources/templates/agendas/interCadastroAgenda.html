@@ -30,7 +30,7 @@
 
 <script type="text/javascript" th:inline="javascript">
 var novoCodigo = [[${pagina.novoCodigo}]];
-var proximoFrame = "#";
+var rotaProximaTela = "#";
 var cjInterMensagem = document.getElementById("cjInterMensagem"); 
 cjInterMensagem.style.display = "";
 if (novoCodigo > 0) {
@@ -38,9 +38,9 @@ if (novoCodigo > 0) {
 	//interMensagem.innerHTML = "Agenda cadastrada com sucesso!";
 	//var interBotaoOK = document.getElementById("interBotaoOK"); 
 	//interBotaoOK.style.display = "";
-	proximoFrame = "../empresas/EmpresaAgendas";
+	rotaProximaTela = "../empresas/EmpresaAgendas";
 	document.getElementById("pdAcao").value = "";
-	document.getElementById("interCadastroAgendaForm").action = proximoFrame;
+	document.getElementById("interCadastroAgendaForm").action = rotaProximaTela;
 	document.getElementById("interCadastroAgendaForm").submit();
 } else {
 	var interMensagem = document.getElementById("interMensagem"); 

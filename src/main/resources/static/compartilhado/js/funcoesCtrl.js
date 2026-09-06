@@ -1,39 +1,39 @@
-function ehNumero(txt) {
-	return !isNaN(txt);
+function ehNumero(textoRecebido) {
+	return !isNaN(textoRecebido);
 }
 
 function setTarget() {
-	var ct_A02_CODIGO = document.getElementById("ct_A02_CODIGO");
-	var ct_A02_USUARIO = document.getElementById("ct_A02_USUARIO");
+	var codigoUsuarioControle = document.getElementById("ct_A02_CODIGO");
+	var usuarioUsuarioControle = document.getElementById("ct_A02_USUARIO");
 	var ct_QTD_EMPRESAS = document.getElementById("ct_QTD_EMPRESAS");
-	var ct_A01_CODIGO = document.getElementById("ct_A01_CODIGO");
-	var ct_A01_NOME = document.getElementById("ct_A01_NOME");
-	var ct_A03_PERFIL_PARAVIVERBEM = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
-	var ct_A03_PERFIL_ADMINISTRADOR = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
-	var ct_A03_PERFIL_CHEFE = document.getElementById("ct_A03_PERFIL_CHEFE");
-	var ct_A03_PERFIL_PADRAO = document.getElementById("ct_A03_PERFIL_PADRAO");
-	var ctrlAcao = document.getElementById("pdAcao");
-	var txtAcao = ctrlAcao.value;
-	var proximoFrame = "#";
-	var msg = "";
-	var num_QTD_EMPRESAS = 0;
+	var codigoEmpresaControle = document.getElementById("ct_A01_CODIGO");
+	var nomeEmpresaControle = document.getElementById("ct_A01_NOME");
+	var perfilParaviverbemPerfilEmpresaUsuarioControle = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
+	var perfilAdministradorPerfilEmpresaUsuarioControle = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
+	var perfilChefePerfilEmpresaUsuarioControle = document.getElementById("ct_A03_PERFIL_CHEFE");
+	var perfilPadraoPerfilEmpresaUsuarioControle = document.getElementById("ct_A03_PERFIL_PADRAO");
+	var controleAcao = document.getElementById("pdAcao");
+	var textoAcao = controleAcao.value;
+	var rotaProximaTela = "#";
+	var mensagemExibida = "";
+	var quantidadeEmpresasNumerica = 0;
 	if (ehNumero(ct_QTD_EMPRESAS.value)) {
-		num_QTD_EMPRESAS = parseInt(ct_QTD_EMPRESAS.value);
+		quantidadeEmpresasNumerica = parseInt(ct_QTD_EMPRESAS.value);
 	}
-	if (txtAcao == "envLogin" || txtAcao == "envLoginIni") {
-		if (num_QTD_EMPRESAS > 1) {
-			proximoFrame = "../usuarios/UsuarioEmpresas";
+	if (textoAcao == "envLogin" || textoAcao == "envLoginIni") {
+		if (quantidadeEmpresasNumerica > 1) {
+			rotaProximaTela = "../usuarios/UsuarioEmpresas";
 		} else {
-			proximoFrame = "../empresas/EmpresaAgendas";
+			rotaProximaTela = "../empresas/EmpresaAgendas";
 		}
 	}
-	if(proximoFrame != "#") {
+	if(rotaProximaTela != "#") {
 		document.getElementById("pdAcao").value = "";
-		document.getElementById("ctrlForm").action = proximoFrame;
+		document.getElementById("ctrlForm").action = rotaProximaTela;
 		document.getElementById("ctrlForm").submit();
 	} else {
-		msg = "Aguarde um instante...";
-		document.getElementById("i_ctrlMsg").innerHTML = msg;
+		mensagemExibida = "Aguarde um instante...";
+		document.getElementById("i_ctrlMsg").innerHTML = mensagemExibida;
 	}
 }
 

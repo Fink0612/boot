@@ -33,33 +33,33 @@
 var jsUsuSessao = [[${pagina.oUsuarioModel_A02_nome}]];
 if (jsUsuSessao == "null") jsUsuSessao = "";
 if (jsUsuSessao != "") {
-	var txtAux = "";
-	var sess_pdUsuSessao = parent.document.getElementById("pdUsuSessao"); 
-	var sess_pdNomeUsuSessao = parent.document.getElementById("pdNomeUsuSessao"); 
-	var sess_pdUsuPerfil = parent.document.getElementById("pdUsuPerfil"); 
-	sess_pdUsuSessao.value = [[${pagina.oUsuarioModel_A02_usuario}]];
-	sess_pdNomeUsuSessao.value = [[${pagina.oUsuarioModel_A02_nome2}]];
-	sess_pdUsuPerfil.value = "Analista";
+	var textoAuxiliar = "";
+	var campoUsuarioSessao = parent.document.getElementById("pdUsuSessao"); 
+	var campoNomeUsuarioSessao = parent.document.getElementById("pdNomeUsuSessao"); 
+	var campoPerfilUsuarioSessao = parent.document.getElementById("pdUsuPerfil"); 
+	campoUsuarioSessao.value = [[${pagina.oUsuarioModel_A02_usuario}]];
+	campoNomeUsuarioSessao.value = [[${pagina.oUsuarioModel_A02_nome2}]];
+	campoPerfilUsuarioSessao.value = "Analista";
 	// ###### Preenchendo Campos de Controle ######
-	var qtdEmpresas = [[${pagina.qtdEmpresas}]];
-	txtAux = [[${pagina.oUsuarioModel_A02_codigo}]];
-	document.getElementById("ct_A02_CODIGO").value = txtAux;
-	txtAux = [[${pagina.oUsuarioModel_A02_usuario2}]];
-	document.getElementById("ct_A02_USUARIO").value = txtAux;
-	document.getElementById("ct_QTD_EMPRESAS").value = qtdEmpresas;
-	if (qtdEmpresas == "1") {
-		txtAux = [[${pagina.oEmpresaModel_A01_codigo}]];
-		document.getElementById("ct_A01_CODIGO").value = txtAux;
-		txtAux = [[${pagina.oEmpresaModel_A01_nome}]];
-		document.getElementById("ct_A01_NOME").value = txtAux;
-		txtAux = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_paraviverbem}]];
-		document.getElementById("ct_A03_PERFIL_PARAVIVERBEM").value = txtAux;
-		txtAux = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_administrador}]];
-		document.getElementById("ct_A03_PERFIL_ADMINISTRADOR").value = txtAux;
-		txtAux = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_chefe}]];
-		document.getElementById("ct_A03_PERFIL_CHEFE").value = txtAux;
-		txtAux = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_padrao}]];
-		document.getElementById("ct_A03_PERFIL_PADRAO").value = txtAux;
+	var quantidadeEmpresas = [[${pagina.qtdEmpresas}]];
+	textoAuxiliar = [[${pagina.oUsuarioModel_A02_codigo}]];
+	document.getElementById("ct_A02_CODIGO").value = textoAuxiliar;
+	textoAuxiliar = [[${pagina.oUsuarioModel_A02_usuario2}]];
+	document.getElementById("ct_A02_USUARIO").value = textoAuxiliar;
+	document.getElementById("ct_QTD_EMPRESAS").value = quantidadeEmpresas;
+	if (quantidadeEmpresas == "1") {
+		textoAuxiliar = [[${pagina.oEmpresaModel_A01_codigo}]];
+		document.getElementById("ct_A01_CODIGO").value = textoAuxiliar;
+		textoAuxiliar = [[${pagina.oEmpresaModel_A01_nome}]];
+		document.getElementById("ct_A01_NOME").value = textoAuxiliar;
+		textoAuxiliar = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_paraviverbem}]];
+		document.getElementById("ct_A03_PERFIL_PARAVIVERBEM").value = textoAuxiliar;
+		textoAuxiliar = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_administrador}]];
+		document.getElementById("ct_A03_PERFIL_ADMINISTRADOR").value = textoAuxiliar;
+		textoAuxiliar = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_chefe}]];
+		document.getElementById("ct_A03_PERFIL_CHEFE").value = textoAuxiliar;
+		textoAuxiliar = [[${pagina.oEmpresaUsuarioPerfilModel_A03_perfil_padrao}]];
+		document.getElementById("ct_A03_PERFIL_PADRAO").value = textoAuxiliar;
 	}
 	// ############################################
 	enviarPdLogin(2);

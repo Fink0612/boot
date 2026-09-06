@@ -40,10 +40,10 @@
 <th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
 </form>
 <script type="text/javascript" th:inline="javascript">
-var f_A01_NOME = document.getElementById("f_A01_NOME");
-f_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
-var f_A04_TITULO = document.getElementById("f_A04_TITULO");
-f_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var nomeEmpresaFormularioFator = document.getElementById("f_A01_NOME");
+nomeEmpresaFormularioFator.innerHTML = document.getElementById("ct_A01_NOME").value;
+var tituloAgendaFormularioFator = document.getElementById("f_A04_TITULO");
+tituloAgendaFormularioFator.innerHTML = document.getElementById("ct_A04_TITULO").value;
 </script>
 </body>
 </html>

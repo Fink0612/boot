@@ -12,8 +12,8 @@ public class AgendaUsuariosService {
     this.agendaUsuariosRepository = agendaUsuariosRepository;
   }
 
-  public AgendaUsuariosDados selectUsuariosDaAgenda(AgendaUsuariosDados oAgendaUsuariosModel) {
-    oAgendaUsuariosModel = agendaUsuariosRepository.selectUsuariosDaAgenda(oAgendaUsuariosModel);
-    return oAgendaUsuariosModel;
+  public AgendaUsuariosDados selectUsuariosDaAgenda(AgendaUsuariosDados dadosAgendaUsuarios) {
+    dadosAgendaUsuarios = agendaUsuariosRepository.selectUsuariosDaAgenda(dadosAgendaUsuarios);
+    return dadosAgendaUsuarios;
   }
 }

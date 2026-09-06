@@ -89,24 +89,24 @@ document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ANALISTA").value = [[${pag
 //-----------------------------------------------------------------
 document.getElementById("ct_QTD_ESPECIALISTAS_AGENDA").value = [[${pagina.num_QTD_ESPECIALISTAS_AGENDA}]];
 //-----------------------------------------------------------------
-var au_A01_NOME = document.getElementById("au_A01_NOME");
-au_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
-var au_A04_TITULO = document.getElementById("au_A04_TITULO");
-au_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
-var au_A04_DESCRICAO = document.getElementById("au_A04_DESCRICAO");
-au_A04_DESCRICAO.innerHTML = document.getElementById("ct_A04_DESCRICAO").value;
-var au_A04_TXT_STATUS = document.getElementById("au_A04_TXT_STATUS");
-au_A04_TXT_STATUS.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
+var nomeEmpresaAgendaUsuarios = document.getElementById("au_A01_NOME");
+nomeEmpresaAgendaUsuarios.innerHTML = document.getElementById("ct_A01_NOME").value;
+var tituloAgendaAgendaUsuarios = document.getElementById("au_A04_TITULO");
+tituloAgendaAgendaUsuarios.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var descricaoAgendaAgendaUsuarios = document.getElementById("au_A04_DESCRICAO");
+descricaoAgendaAgendaUsuarios.innerHTML = document.getElementById("ct_A04_DESCRICAO").value;
+var textoStatusAgendaAgendaUsuarios = document.getElementById("au_A04_TXT_STATUS");
+textoStatusAgendaAgendaUsuarios.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
 //  -----------------------------------------------------------------
 //  ### contorle de permição de visualização da lista de Usuários ###
-var au_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
-if (au_A05_PERFIL_TITULAR.value == "1") {
-	var au_editarDadosAgenda = document.getElementById("au_editarDadosAgenda");
-	au_editarDadosAgenda.style.display = "";
-	var au_editarDadosUsuariosAgenda = document.getElementById("au_editarDadosUsuariosAgenda");
-	au_editarDadosUsuariosAgenda.style.display = "";
-	var au_encaminharAgenda = document.getElementById("au_encaminharAgenda");
-	au_encaminharAgenda.style.display = "";
+var perfilTitularParticipacaoAgendaAgendaUsuarios = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+if (perfilTitularParticipacaoAgendaAgendaUsuarios.value == "1") {
+	var controleEditarDadosAgenda = document.getElementById("au_editarDadosAgenda");
+	controleEditarDadosAgenda.style.display = "";
+	var controleEditarDadosUsuariosAgenda = document.getElementById("au_editarDadosUsuariosAgenda");
+	controleEditarDadosUsuariosAgenda.style.display = "";
+	var controleEncaminharAgenda = document.getElementById("au_encaminharAgenda");
+	controleEncaminharAgenda.style.display = "";
 }
 </script>
 </body>
