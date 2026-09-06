@@ -1,0 +1,4 @@
+/* Formatação da impressão dos códigos das páginas: para não imprimir */
+.stlCodForm {
+	display:none;
+}

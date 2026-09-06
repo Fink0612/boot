@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesConfirm.js}" th:inline="javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{compartilhado/confirmControle :: conteudo}"></th:block>
+
+<a onclick="abrirEmpresa_Usu_Agendas('AgendaFatoresForm')" href="javascript:void(0);">Voltar para Lista de Agendas</a>
+
+<table class="tabTitForm"><tr>
+<td>
+<table>
+<tr><td><b>EMPRESA:</b></td><td><span id="au_A01_NOME"></span></td></tr>
+<tr><td><b>AGENDA:</b></td><td><span id="au_A04_TITULO"></span><br/></td></tr>
+<tr><td><b>STATUS:</b></td><td><span id="au_A04_TXT_STATUS"></span></td></tr>
+</table>
+</td>
+<td style="text-align:right;"><span class="stlCodForm">AgeFat</span></td>
+</tr></table>
+<br/>
+
+<form id="AgendaFatoresForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlFator :: conteudo}"></th:block>
+<div id="au_cadastrarNovoFator" style="display:none;">
+<a onclick="cadastrarNovoFator()" href="javascript:void(0);">Cadastrar Critério</a>
+</div>
+<div id="au_editarDadosUsuariosAgendaFatores" style="display:none;">
+<a onclick="editarDadosUsuariosAgendaFatores()" href="javascript:void(0);">Selecionar Participantes e seus Perfis para esta Agenda</a>
+</div>
+<h3>LISTA DE CRITÉRIOS PARA ESTA AGENDA</h3>
+<table>
+<tr style="text-align: left;">
+<th>Título</th>
+<th>Autor</th>
+<th>Descrição</th>
+</tr>
+
+<th:block th:each="linha1 : ${pagina['linhas1']}">
+
+<th:block th:each="linha2 : ${linha1['linhas2']}">
+
+<tr>
+<td>
+<span th:style="${'display:' + linha2.displayLink + ';'}"><a onclick="editarCadastroFator(this.dataset.arg0)" th:attr="data-arg0=${linha2.oFatorModel_A06_codigo}" href="javascript:void(0);">
+<th:block th:text="${linha2.oFatorModel_A06_titulo}"></th:block></a></span>
+<span th:style="${'display:' + linha2.displaySoTexto + ';'}"><th:block th:text="${linha2.oFatorModel_A06_titulo2}"></th:block></span>
+</td>
+<td><th:block th:text="${linha2.oUsuarioModel_A02_nome}"></th:block></td>
+<td><th:block th:text="${linha2.oFatorModel_A06_descricao}"></th:block></td>
+</tr>
+
+</th:block>
+
+</th:block>
+
+</table>
+<div id="au_liberarAgenda" style="display:none;">
+<br/><a onclick="abreConfirmMensagem('Confirma a Liberação desta Agenda?', 'libAg');" 
+href="javascript:void(0);">Liberar Agenda</a><br/>
+</div>
+</form>
+<script type="text/javascript" th:inline="javascript">
+//-----------------------------------------------------------------
+document.getElementById("ct_A04_TITULO").value = [[${pagina.au_A04_TITULO}]];
+document.getElementById("ct_A04_STATUS_DT_LIMITE").value = [[${pagina.au_A04_STATUS_DT_LIMITE}]];
+document.getElementById("ct_A04_DATA_LIMITE").value = [[${pagina.au_A04_DATA_LIMITE}]];
+document.getElementById("ct_A04_STATUS").value = [[${pagina.au_A04_STATUS}]];
+document.getElementById("ct_A04_TXT_STATUS").value = [[${pagina.au_A04_TXT_STATUS}]];
+//-----------------------------------------------------------------
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR").value = [[${pagina.au_A05_PERFIL_TITULAR}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_FACILITADOR").value = [[${pagina.au_A05_PERFIL_FACILITADOR}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA").value = [[${pagina.au_A05_PERFIL_ESPECIALISTA}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ANALISTA").value = [[${pagina.au_A05_PERFIL_ANALISTA}]];
+//-----------------------------------------------------------------
+var au_A01_NOME = document.getElementById("au_A01_NOME");
+au_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var au_A04_TITULO = document.getElementById("au_A04_TITULO");
+au_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var au_A04_TXT_STATUS = document.getElementById("au_A04_TXT_STATUS");
+au_A04_TXT_STATUS.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
+//  -----------------------------------------------------------------
+//  ### contorle de permição de visualização da lista de Usuários ###
+var au_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+var au_A05_PERFIL_FACILITADOR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_FACILITADOR");
+if (au_A05_PERFIL_TITULAR.value == "1" || au_A05_PERFIL_FACILITADOR.value == "1") {
+	var au_cadastrarNovoFator = document.getElementById("au_cadastrarNovoFator");
+	au_cadastrarNovoFator.style.display = "";
+}
+if (au_A05_PERFIL_TITULAR.value == "1") {
+	var au_editarDadosUsuariosAgendaFatores = document.getElementById("au_editarDadosUsuariosAgendaFatores");
+	au_editarDadosUsuariosAgendaFatores.style.display = "";
+	var au_liberarAgenda = document.getElementById("au_liberarAgenda");
+	au_liberarAgenda.style.display = "";
+}
+</script>
+</body>
+</html>

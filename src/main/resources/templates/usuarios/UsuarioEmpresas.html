@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+</head>
+<body>
+
+<form id="UsuarioEmpresasForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+
+<table class="tabTitForm"><tr>
+<td><span class="stlTitForm">LISTA DE EMPRESAS:</span></td>
+<td style="text-align:right;"><span class="stlCodForm">UsuEmp</span></td>
+</tr></table>
+
+<th:block th:each="linha1 : ${pagina['linhas1']}">
+
+<th:block th:each="linha2 : ${linha1['linhas2']}">
+
+<a onclick="abrirEmpresaDoUsuario(this.dataset.arg0, this.dataset.arg1, this.dataset.arg2)" th:attr="data-arg0=${linha2.oEmpresaModel_A01_codigo}, data-arg1=${linha2.oEmpresaModel_A01_nome}, data-arg2=${linha2.ue_ct_A02_CODIGO}" href="javascript:void(0);">
+<th:block th:text="${linha2.oEmpresaModel_A01_nome2}"></th:block>
+</a><br/>
+
+</th:block>
+
+</th:block>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/compartilhado/css/principal.css}" />
+<script type="text/javascript" th:src="@{/autenticacao/js/funcoesLogin.js}" th:inline="javascript"></script>
+</head>
+<body>
+
+<div class="card" id="telaLogin">
+  <div class="card-body">
+  <form id="pdLoginForm" action="../autenticacao/loginIni" method="post">
+  <input type="hidden" name="pdUsuario" id="pdUsuario" value="" />
+  <input type="hidden" name="liCodini" id="liCodini" value="" />
+  <div class="mb-3">
+    <label class="form-label">Nova Senha: </label>
+    <input type="password" name="pdNovaSenha" id="pdNovaSenha" th:value="${pagina.txt_pdNovaSenha}" class="form-control" placeholder="Nova Senha..." />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Confirmar Nova Senha: </label>
+    <input type="password" name="pdConfNovaSenha" id="pdConfNovaSenha" onkeypress="submeterForm(2, event);" th:value="${pagina.txt_pdConfNovaSenha}" class="form-control" placeholder="Confirmação da Nova Senha..." />
+  </div>
+  <button type="button" onclick="enviarPdLoginIni(1);" class="btn btn-paradecision btn-block">Enviar</button>
+  <div id="pdMensagens" th:style="${'display:' + pagina.txt_pdMsgDisplay + ';'}"><br/><th:block th:text="${pagina.txt_pdMensagens}"></th:block></div>
+  <th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+  </form>
+  </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+	var jsPdAcao = [[${pagina.txt_pdAcao}]];
+	document.getElementById("pdUsuario").value = parent.document.getElementById("pdUsuSessao").value;
+	document.getElementById("liCodini").value = parent.document.getElementById("pdCodini").value;
+	if (jsPdAcao == "envLoginIni") {
+		// ###### Preenchendo Campos de Controle ######
+		document.getElementById("ct_A02_USUARIO").value = [[${pagina.oUsuarioModel_A02_usuario}]];
+		document.getElementById("ct_A02_CODIGO").value = [[${pagina.oUsuarioModel_A02_codigo}]];
+		document.getElementById("ct_A01_NOME").value = "Empresa X";
+		document.getElementById("ct_A01_CODIGO").value = "1";
+		// ############################################
+		enviarPdLoginIni(2);
+	}
+</script>
+</body>
+</html>

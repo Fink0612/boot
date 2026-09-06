@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/compartilhado/css/principal.css}" />
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesGerais.js}" th:inline="javascript"></script>
+<title>Zeen Storm</title>
+</head>
+
+<body>
+<input type="hidden" name="pdCodini" id="pdCodini" />
+<th:block th:replace="~{compartilhado/header :: conteudo}"></th:block>
+
+<iframe id="indIFrame" src="" width="100%" style="height:90vh;">
+    Your browser doesn't support iframes
+</iframe>
+<script type="text/javascript" th:inline="javascript">
+	var jsCodini = [[${pagina.indCodini}]];
+	var jsIFrame = [[${pagina.indIFrame}]];
+	var jsPdUsuSessao = [[${pagina.indUsuSessao}]];
+	var indIFrame = document.getElementById("indIFrame");
+	document.getElementById("pdCodini").value = jsCodini;
+	if (jsPdUsuSessao != "") {
+		var jsPdNomeUsuSessao = [[${pagina.indNomeUsuSessao}]];
+		var pdUsuSessao = document.getElementById("pdUsuSessao");
+		var pdNomeUsuSessao = document.getElementById("pdNomeUsuSessao");
+		var txt_user_session = document.getElementById("txt_user_session");
+		pdUsuSessao.value = jsPdUsuSessao;
+		pdNomeUsuSessao.value = jsPdNomeUsuSessao;
+		txt_user_session.innerHTML = jsPdNomeUsuSessao.toUpperCase();
+	}
+	//-------------------------------------------
+	indIFrame.src = jsIFrame;
+</script>
+</body>
+</html>

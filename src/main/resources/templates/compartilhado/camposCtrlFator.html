@@ -1,0 +1,13 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="conteudo">
+<!-- ----------------------------------------------------- -->
+<!-- FATOR -->
+<div id="cmpControleFator" style="display:none;">
+A06_COD<input type="text" name="ct_A06_CODIGO" id="ct_A06_CODIGO" value="" />
+<!-- ----------------------------------------------------- -->
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+document.getElementById("ct_A06_CODIGO").value = [[${controleFator.ct_A06_CODIGO}]];
+</script>
+
+</th:block>

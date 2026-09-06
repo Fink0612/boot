@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/compartilhado/css/principal.css}" />
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesGerais.js}" th:inline="javascript"></script>
+<title>Tomada de Decisão Colaborativa - Teste IP</title>
+</head>
+
+<body>
+<input type="hidden" name="pdCodini" id="pdCodini" />
+<th:block th:replace="~{compartilhado/header :: conteudo}"></th:block>
+
+<h2>
+Address: <th:block th:text="${pagina.endereco}"></th:block><br/>Host Name: <th:block th:text="${pagina.hostname}"></th:block><br/>
+</h2>
+</body>
+</html>

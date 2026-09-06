@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<link rel="stylesheet" type="text/css" th:href="@{/pareceres/css/parecer.css}"/>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesCadastro.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesConfirm.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/pareceres/js/funcoesPareceres.js}" th:inline="javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{compartilhado/confirmControle :: conteudo}"></th:block>
+
+<a onclick="abrirEmpresa_Usu_Agendas('AgendaFatoresForm')" href="javascript:void(0);">Voltar para Lista de Agendas</a>
+
+<table class="tabTitForm"><tr>
+<td>
+<table>
+<tr><td><b>EMPRESA:</b></td><td><span id="afp_A01_NOME"></span></td></tr>
+<tr><td><b>AGENDA:</b></td><td><span id="afp_A04_TITULO"></span><br/></td></tr>
+<tr><td><b>STATUS:</b></td><td><span id="afp_A04_TXT_STATUS"></span></td></tr>
+</table>
+</td>
+<td style="text-align:right;"><span class="stlCodForm">AgeFatPar</span></td>
+</tr></table>
+<br/>
+
+<form id="AgendaFatoresForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlFator :: conteudo}"></th:block>
+<div id="afp_editarDadosUsuariosAgendaFatores" style="display:none;">
+<a onclick="editarDadosUsuariosAgendaFatores()" href="javascript:void(0);">Selecionar Participantes e seus Perfis para esta Agenda</a><br/>
+<a onclick="verificarPareceresPendentes()" href="javascript:void(0);">Verificar os Pareceres Pendentes</a>
+</div>
+<br/>
+<div id="afp_SalvarPareceresFatores" style="display:none;">
+<a onclick="salvarPareceresFatores()" href="javascript:void(0);">Salvar Pareceres</a>
+</div>
+<h3>LISTA DE CRITÉRIOS PARA ESTA AGENDA</h3>
+<table id="tabParec">
+<tr style="text-align: left;">
+<th>Título</th>
+<th>Descrição</th>
+<th>Grau de Confiança</th>
+<th>Dúvida na Resposta</th>
+</tr>
+
+<th:block th:each="linha1 : ${pagina['linhas1']}">
+
+<th:block th:each="linha2 : ${linha1['linhas2']}">
+
+<tr>
+<td>
+<input type="hidden" th:name="${'afp_A06_CODIGO_' + linha2.ii}" th:value="${linha2.num_afp_A06_CODIGO}" size="5" />
+<th:block th:text="${linha2.oFatorModel_A06_titulo}"></th:block>
+</td>
+<td><th:block th:text="${linha2.oFatorModel_A06_descricao}"></th:block></td>
+<td><ul>
+
+<th:block th:each="linha3 : ${linha2['linhas3']}">
+
+<li>
+<a th:class="${linha3.chkMark + ' ' + linha3.corCert}" th:id="${'CertL' + linha3.ii + 'C' + linha3.kk}" 
+onclick="selecCerteza(Number(this.dataset.arg0), Number(this.dataset.arg1), Number(this.dataset.arg2))" th:attr="data-arg0=${linha3.mm}, data-arg1=${linha3.ii2}, data-arg2=${linha3.kk2}" href="javascript:void(0);"><th:block th:text="${linha3.kk3}"></th:block></a>
+</li>
+
+</th:block>
+
+</ul>
+<input type="hidden" th:name="${'afp_A07_CERTEZA_' + linha2.ii2}" th:id="${'afp_A07_CERTEZA_' + linha2.ii3}" 
+th:value="${linha2.strCerteza}" size="5" />
+</td>
+<td><ul>
+
+<th:block th:each="linha4 : ${linha2['linhas4']}">
+
+<li>
+<a th:class="${linha4.chkMark + ' ' + linha4.corContr}" th:id="${'ContL' + linha4.ii + 'C' + linha4.kk}" 
+onclick="selecContradicao(Number(this.dataset.arg0), Number(this.dataset.arg1), Number(this.dataset.arg2))" th:attr="data-arg0=${linha4.mm}, data-arg1=${linha4.ii2}, data-arg2=${linha4.kk2}" href="javascript:void(0);"><th:block th:text="${linha4.kk3}"></th:block></a>
+</li>
+
+</th:block>
+
+</ul>
+<input type="hidden" th:name="${'afp_A07_CONTRADICAO_' + linha2.ii4}" th:id="${'afp_A07_CONTRADICAO_' + linha2.ii5}" 
+th:value="${linha2.strContradicao}" size="5" />
+</td>
+</tr>
+
+</th:block>
+
+</th:block>
+
+</table>
+
+<br/>
+<div id="afp_encerrarAgenda" style="display:none;">
+<a onclick="abreConfirmMensagem('Confirma o Encerramento desta Agenda?', 'encerrAg');" 
+href="javascript:void(0);">Encerrar Agenda</a><br/>
+</div>
+</form>
+<script type="text/javascript" th:inline="javascript">
+//-----------------------------------------------------------------
+document.getElementById("ct_A04_TITULO").value = [[${pagina.afp_A04_TITULO}]];
+document.getElementById("ct_A04_STATUS_DT_LIMITE").value = [[${pagina.afp_A04_STATUS_DT_LIMITE}]];
+document.getElementById("ct_A04_DATA_LIMITE").value = [[${pagina.afp_A04_DATA_LIMITE}]];
+document.getElementById("ct_A04_STATUS").value = [[${pagina.afp_A04_STATUS}]];
+document.getElementById("ct_A04_TXT_STATUS").value = [[${pagina.afp_A04_TXT_STATUS}]];
+//-----------------------------------------------------------------
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR").value = [[${pagina.afp_A05_PERFIL_TITULAR}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_FACILITADOR").value = [[${pagina.afp_A05_PERFIL_FACILITADOR}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA").value = [[${pagina.afp_A05_PERFIL_ESPECIALISTA}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ANALISTA").value = [[${pagina.afp_A05_PERFIL_ANALISTA}]];
+//-----------------------------------------------------------------
+document.getElementById("ct_QTD_FATORES_AGENDA").value = [[${pagina.qtdFatoresAgenda}]];
+//-----------------------------------------------------------------
+var afp_A01_NOME = document.getElementById("afp_A01_NOME");
+afp_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var afp_A04_TITULO = document.getElementById("afp_A04_TITULO");
+afp_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var afp_A04_TXT_STATUS = document.getElementById("afp_A04_TXT_STATUS");
+afp_A04_TXT_STATUS.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
+//  -----------------------------------------------------------------
+//  ### controle de permição de visualização da lista de Usuários ###
+var afp_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+var afp_A05_PERFIL_ESPECIALISTA = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA");
+if (afp_A05_PERFIL_TITULAR.value == "1") {
+	var afp_editarDadosUsuariosAgendaFatores = document.getElementById("afp_editarDadosUsuariosAgendaFatores");
+	afp_editarDadosUsuariosAgendaFatores.style.display = "";
+	var afp_encerrarAgenda = document.getElementById("afp_encerrarAgenda");
+	afp_encerrarAgenda.style.display = "";
+}
+if (afp_A05_PERFIL_TITULAR.value == "1" || afp_A05_PERFIL_ESPECIALISTA.value == "1") {
+	var afp_SalvarPareceresFatores = document.getElementById("afp_SalvarPareceresFatores");
+	afp_SalvarPareceresFatores.style.display = "";
+}
+</script>
+</body>
+</html>

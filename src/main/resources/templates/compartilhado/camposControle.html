@@ -1,0 +1,39 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="conteudo">
+<!-- ----------------------------------------------------- -->
+<!-- Campos de Controle - Geral para todas as Páginas -->
+<!-- A01 - TABELA DE EMPRESA -->
+<!-- A02 - TABELA DE USUÁRIO -->
+<!-- A03 - TABELA DE EMPRESA USUÁRIO PERFIL -->
+<!-- ----------------------------------------------------- -->
+<!-- USUÁRIO -->
+<div id="cmpControle" style="display:none;">
+A02_COD:<input type="text" name="ct_A02_CODIGO" id="ct_A02_CODIGO" value="" />
+A02_USU<input type="text" name="ct_A02_USUARIO" id="ct_A02_USUARIO" value="" />
+<!-- EMPRESA -->
+QTD_EMPR<input type="text" name="ct_QTD_EMPRESAS" id="ct_QTD_EMPRESAS" value="" />
+A01_COD<input type="text" name="ct_A01_CODIGO" id="ct_A01_CODIGO" value="" />
+A01_NOM<input type="text" name="ct_A01_NOME" id="ct_A01_NOME" value="" />
+<!-- PERFIL DO USUÁRIO NA EMPRESA -->
+A03_PRF_PVB<input type="text" name="ct_A03_PERFIL_PARAVIVERBEM" id="ct_A03_PERFIL_PARAVIVERBEM" value="" />
+A03_PRF_ADM<input type="text" name="ct_A03_PERFIL_ADMINISTRADOR" id="ct_A03_PERFIL_ADMINISTRADOR" value="" />
+A03_PRF_CHF<input type="text" name="ct_A03_PERFIL_CHEFE" id="ct_A03_PERFIL_CHEFE" value="" />
+A03_PRF_PDR<input type="text" name="ct_A03_PERFIL_PADRAO" id="ct_A03_PERFIL_PADRAO" value="" />
+<!-- CONTROLE DE FLUXO -->
+ACAO<input type="text" name="pdAcao" id="pdAcao" value="" />
+<!-- ----------------------------------------------------- -->
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+document.getElementById("ct_A02_CODIGO").value = [[${controle.ct_A02_CODIGO}]];
+document.getElementById("ct_A02_USUARIO").value = [[${controle.ct_A02_USUARIO}]];
+document.getElementById("ct_QTD_EMPRESAS").value = [[${controle.ct_QTD_EMPRESAS}]];
+document.getElementById("ct_A01_CODIGO").value = [[${controle.ct_A01_CODIGO}]];
+document.getElementById("ct_A01_NOME").value = [[${controle.ct_A01_NOME}]];
+document.getElementById("ct_A03_PERFIL_PARAVIVERBEM").value = [[${controle.ct_A03_PERFIL_PARAVIVERBEM}]];
+document.getElementById("ct_A03_PERFIL_ADMINISTRADOR").value = [[${controle.ct_A03_PERFIL_ADMINISTRADOR}]];
+document.getElementById("ct_A03_PERFIL_CHEFE").value = [[${controle.ct_A03_PERFIL_CHEFE}]];
+document.getElementById("ct_A03_PERFIL_PADRAO").value = [[${controle.ct_A03_PERFIL_PADRAO}]];
+document.getElementById("pdAcao").value = [[${controle.ct_pdAcao}]];
+</script>
+
+</th:block>

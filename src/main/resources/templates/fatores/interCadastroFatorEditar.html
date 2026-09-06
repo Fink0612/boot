@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+</head>
+<body>
+
+<table class="tabTitForm"><tr>
+<td>&nbsp;</td>
+<td style="text-align:right;"><span class="stlCodForm">intCadFatEdit</span></td>
+</tr></table>
+
+<form id="interCadastroFatorForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlFator :: conteudo}"></th:block>
+<div id="cjInterMensagem" style="display:none;">
+<span id="interMensagem" style="color:red; font-size:20px; font-family:verdana;"></span><br/>
+<span id="interBotaoVoltar" style="display:none;">
+<input type="button" value="Voltar" onclick="fecharInterCadastroFator(2)" />
+</span>
+<span id="interBotaoOK" style="display:none;">
+<input type="button" value="OK" onclick="fecharInterCadastroFator(1)" />
+</span>
+</div>
+</form>
+
+<script type="text/javascript" th:inline="javascript">
+var okMetodo = [[${pagina.okMetodo}]];
+var proximoFrame = "#";
+var cjInterMensagem = document.getElementById("cjInterMensagem"); 
+cjInterMensagem.style.display = "";
+if (okMetodo == "OK") {
+	//var interMensagem = document.getElementById("interMensagem"); 
+	//interMensagem.innerHTML = "Fator alterado com sucesso!";
+	//var interBotaoOK = document.getElementById("interBotaoOK"); 
+	//interBotaoOK.style.display = "";
+	var proximoFrame = "../agendas/AgendaFatores";
+	document.getElementById("pdAcao").value = "";
+	document.getElementById("interCadastroFatorForm").action = proximoFrame;
+	document.getElementById("interCadastroFatorForm").submit();
+} else {
+	var interMensagem = document.getElementById("interMensagem"); 
+	interMensagem.innerHTML = "Problemas com a Altera&ccedil;&atilde;o do Fator!";
+	var interBotaoVoltar = document.getElementById("interBotaoVoltar"); 
+	interBotaoVoltar.style.display = "";
+}
+</script>
+</body>
+</html>

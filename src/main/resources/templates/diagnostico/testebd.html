@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>TESTE</title>
+</head>
+
+<body>
+
+<input type="hidden" name="pdCodini" id="pdCodini" />
+
+<h1>Teste de Acesso a Banco de Dados</h1>
+<h2><th:block th:text="${pagina.tbd}"></th:block></h2>
+<h3>Atual: <th:block th:text="${pagina.abd_conFac_ipAtual}"></th:block></h3>
+<h3>Prncipal: <th:block th:text="${pagina.abd_conFac_ipPrincipal}"></th:block></h3>
+<h3>Server: <th:block th:text="${pagina.abd_conFac_ipServer}"></th:block></h3>
+<h3>URL: <th:block th:text="${pagina.abd_conFac_url}"></th:block></h3>
+</body>
+</html>

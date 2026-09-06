@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Banco local: binarios, dados e credenciais
+.local/
+config/banco-local.properties

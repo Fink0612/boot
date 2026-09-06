@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesCtrl.js}" th:inline="javascript"></script>
+</head>
+<body>
+
+<table class="tabTitForm"><tr>
+<td>
+<a onclick="atualizarPagina('EmpresaAgendas', 'EmpresaAgendasForm')" href="javascript:void(0);">Atualizar esta Página</a>
+<div id="ea_abrirUsuarioEmpresas" style="display:none;">
+<a onclick="abrirUsuarioEmpresas()" href="javascript:void(0);">Voltar para Lista de Empresas</a>
+</div>
+</td>
+<td style="text-align:right;"><span class="stlCodForm">EmpAge</span></td>
+</tr></table>
+
+<p><b>EMPRESA: </b> <span id="ea_A01_NOME"></span></p>
+<form id="EmpresaAgendasForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
+<div id="ea_abrirEmpresaUsuarios" style="display:none;">
+<a onclick="abrirEmpresaUsuarios()" href="javascript:void(0);">Ver Usuários Cadastrados</a>
+</div>
+<div id="ea_cadastrarAgenda" style="display:none;">
+<a onclick="cadastrarNovaAgenda()" href="javascript:void(0);">Cadastrar Nova Agenda</a>
+</div>
+<br/><span class="stlTitForm">LISTA DE AGENDAS:</span>
+<table>
+<tr style="text-align: left;">
+<th>Título da Agenda</th>
+<th>Descrição da Agenda</th>
+<th>Status</th>
+</tr>
+
+<th:block th:each="linha1 : ${pagina['linhas1']}">
+
+<th:block th:each="linha2 : ${linha1['linhas2']}">
+
+<tr>
+<td><a onclick="abrirAgenda(this.dataset.arg0,
+ this.dataset.arg1, 
+ this.dataset.arg2)" th:attr="data-arg0=${linha2.oAgendaModel_A04_codigo}, data-arg1=${linha2.oAgendaModel_A04_titulo}, data-arg2=${linha2.oAgendaModel_A04_status}" href="javascript:void(0);">
+<th:block th:text="${linha2.oAgendaModel_A04_titulo2}"></th:block></a></td>
+<td><th:block th:text="${linha2.oAgendaModel_A04_descricao}"></th:block></td>
+<td><th:block th:text="${linha2.txtStatus}"></th:block></td>
+</tr>
+
+</th:block>
+
+</th:block>
+
+</table>
+</form>
+<script type="text/javascript" th:inline="javascript">
+apagarCmpCtrlAgenda();
+var ea_A01_NOME = document.getElementById("ea_A01_NOME");
+ea_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+//-----------------------------------------------------------------
+var ea_A03_PERFIL_PARAVIVERBEM = document.getElementById("ct_A03_PERFIL_PARAVIVERBEM");
+var ea_A03_PERFIL_ADMINISTRADOR = document.getElementById("ct_A03_PERFIL_ADMINISTRADOR");
+var ea_A03_PERFIL_PADRAO = document.getElementById("ct_A03_PERFIL_PADRAO");
+//-----------------------------------------------------------------
+//### contorle de permição para voltar à lista de Empresas ###
+var ea_abrirUsuarioEmpresas = document.getElementById("ea_abrirUsuarioEmpresas");
+var ea_ct_QTD_EMPRESAS = document.getElementById("ct_QTD_EMPRESAS");
+var ea_QTD_EMPRESAS = 0;
+if (ehNumero(ea_ct_QTD_EMPRESAS.value)) {
+	ea_QTD_EMPRESAS = parseInt(ea_ct_QTD_EMPRESAS.value);
+}
+if (ea_QTD_EMPRESAS > "1") {
+	ea_abrirUsuarioEmpresas.style.display = "";
+}
+//-----------------------------------------------------------------
+//### contorle de permição de acessar a lista de Usuários da Empresa ###
+var ea_abrirEmpresaUsuarios = document.getElementById("ea_abrirEmpresaUsuarios");
+if (ea_A03_PERFIL_PARAVIVERBEM.value == "1" || ea_A03_PERFIL_ADMINISTRADOR.value == "1") {
+	ea_abrirEmpresaUsuarios.style.display = "";
+}
+//-----------------------------------------------------------------
+//### contorle de permição de cadastrar nova Agenda ###
+var ea_cadastrarAgenda = document.getElementById("ea_cadastrarAgenda");
+if (ea_A03_PERFIL_PARAVIVERBEM.value == "1" || ea_A03_PERFIL_PADRAO.value == "1") {
+	ea_cadastrarAgenda.style.display = "";
+}
+</script>
+</body>
+</html>

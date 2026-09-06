@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesConfirm.js}" th:inline="javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{compartilhado/confirmControle :: conteudo}"></th:block>
+
+<a onclick="abrirEmpresa_Usu_Agendas('AgendaFatoresForm')" href="javascript:void(0);">Voltar para Lista de Agendas</a>
+
+<table class="tabTitForm"><tr>
+<td>
+<table>
+<tr><td><b>EMPRESA:</b></td><td><span id="au_A01_NOME"></span></td></tr>
+<tr><td><b>AGENDA:</b></td><td><span id="au_A04_TITULO"></span><br/></td></tr>
+<tr><td><b>STATUS:</b></td><td><span id="au_A04_TXT_STATUS"></span></td></tr>
+</table>
+</td>
+<td style="text-align:right;"><span class="stlCodForm">AgeFatRes</span></td>
+</tr></table>
+
+<form id="AgendaFatoresForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlFator :: conteudo}"></th:block>
+<h3>RESULTADOS</h3>
+
+<table>
+<tr><td><b>Viabilidade:</b></td><td><th:block th:text="${pagina.Math_abs_oAgendaModel_A04_certeza_resultado}"></th:block> %</td></tr>
+<tr><td><b>Dúvida:</b></td><td><th:block th:text="${pagina.Math_abs_oAgendaModel_A04_contradicao_resultado}"></th:block> %</td></tr>
+<tr><td><b>Resultado Geral:</b></td><td><th:block th:text="${pagina.oAgendaModel_A04_resultado}"></th:block></td></tr>
+</table>
+
+<div id="afr_CalcularResultados" style="display:none;">
+<a onclick="abreConfirmMensagem('Confirma o Cálculo dos Resultados desta Agenda?', 'calcResAg');" 
+href="javascript:void(0);">Calcular Resultados</a><br/>
+</div>
+<h3>LISTA DE CRITÉRIOS PARA ESTA AGENDA</h3>
+<table>
+<tr style="text-align: left;">
+<th>Título</th>
+<th>Autor</th>
+<th>Descrição</th>
+<th>Viabilidade</th>
+<th>Dúvida</th>
+<th>Resultado Parcial</th>
+</tr>
+
+<th:block th:each="linha1 : ${pagina['linhas1']}">
+
+<th:block th:each="linha2 : ${linha1['linhas2']}">
+
+<tr>
+<td><th:block th:text="${linha2.oFatorModel_A06_titulo}"></th:block></td>
+<td><th:block th:text="${linha2.oUsuarioModel_A02_nome}"></th:block></td>
+<td><th:block th:text="${linha2.oFatorModel_A06_descricao}"></th:block></td>
+<td><th:block th:text="${linha2.Math_abs_oFatorModel_A06_certeza_resultante_fator}"></th:block> %</td>
+<td><th:block th:text="${linha2.Math_abs_oFatorModel_A06_contradicao_resultante_fator}"></th:block> %</td>
+<td><th:block th:text="${linha2.oFatorModel_A06_resultado_fator}"></th:block></td>
+</tr>
+
+</th:block>
+
+</th:block>
+
+</table>
+</form>
+<script type="text/javascript" th:inline="javascript">
+//-----------------------------------------------------------------
+document.getElementById("ct_A04_TITULO").value = [[${pagina.au_A04_TITULO}]];
+document.getElementById("ct_A04_STATUS_DT_LIMITE").value = [[${pagina.au_A04_STATUS_DT_LIMITE}]];
+document.getElementById("ct_A04_DATA_LIMITE").value = [[${pagina.au_A04_DATA_LIMITE}]];
+document.getElementById("ct_A04_STATUS").value = [[${pagina.au_A04_STATUS}]];
+document.getElementById("ct_A04_TXT_STATUS").value = [[${pagina.au_A04_TXT_STATUS}]];
+//-----------------------------------------------------------------
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR").value = [[${pagina.au_A05_PERFIL_TITULAR}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_FACILITADOR").value = [[${pagina.au_A05_PERFIL_FACILITADOR}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ESPECIALISTA").value = [[${pagina.au_A05_PERFIL_ESPECIALISTA}]];
+document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_ANALISTA").value = [[${pagina.au_A05_PERFIL_ANALISTA}]];
+//-----------------------------------------------------------------
+var au_A01_NOME = document.getElementById("au_A01_NOME");
+au_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var au_A04_TITULO = document.getElementById("au_A04_TITULO");
+au_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+var au_A04_TXT_STATUS = document.getElementById("au_A04_TXT_STATUS");
+au_A04_TXT_STATUS.innerHTML = document.getElementById("ct_A04_TXT_STATUS").value;
+//  -----------------------------------------------------------------
+//  ### controle de permição de visualização da lista de Usuários ###
+var afp_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+if (afp_A05_PERFIL_TITULAR.value == "1") {
+	var afr_CalcularResultados = document.getElementById("afr_CalcularResultados");
+	afr_CalcularResultados.style.display = "";
+}
+</script>
+</body>
+</html>

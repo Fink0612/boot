@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesCadastro.js}" th:inline="javascript"></script>
+</head>
+<body>
+
+<table class="tabTitForm"><tr>
+<td>
+<table>
+<tr><td><b>EMPRESA:</b></td><td><span id="au_A01_NOME"></span></td></tr>
+<tr><td><b>AGENDA:</b></td><td><span id="au_A04_TITULO"></span></td></tr>
+</table>
+</td>
+<td style="text-align:right;"><span class="stlCodForm">AgeUsuEdit</span></td>
+</tr></table>
+
+<form id="AgendaUsuariosForm" action="#" method="post">
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+<th:block th:replace="~{compartilhado/camposCtrlAgenda :: conteudo}"></th:block>
+<h3>LISTA DE PARTICIPANTES E SEUS RESPECTIVOS PERFIS PARA ESTA AGENDA</h3>
+<table>
+<tr style="text-align: left;">
+<th>Selec</th>
+<th>Nome do Usuário</th>
+<th>Titular</th>
+<th>Facilitador</th>
+<th>Especialista</th>
+<th>Analista</th>
+</tr>
+
+<th:block th:each="linha1 : ${pagina['linhas1']}">
+
+<th:block th:each="linha2 : ${linha1['linhas2']}">
+
+<tr>
+<td>
+<span style="display:none;">
+marc<input type="text" th:name="${'a02_marcado_' + linha2.emp}" th:value="${linha2.val_usu_marcado}" size="8" />
+a02Cod<input type="text" th:name="${'a02_codigo_' + linha2.emp2}" th:value="${linha2.val_a02_codigo}" size="8" />
+a05Cod<input type="text" th:name="${'a05_codigo_' + linha2.emp3}" th:value="${linha2.val_a05_codigo}" size="8" />
+</span>
+<input type="checkbox" th:name="${'usu_emp_' + linha2.emp4}" value="1" th:checked="${linha2.checkUsu != ''}" />
+</td>
+<td><th:block th:text="${linha2.oEmpUsuarioModel_A02_nome}"></th:block></td>
+<td>
+<input type="hidden" th:name="${'aux_per_T_' + linha2.emp5}" th:value="${linha2.ncheckT}" />
+<span class="cCheckTitular" style="display:none;">
+<input type="checkbox" th:name="${'usu_per_T_' + linha2.emp6}" value="1" th:checked="${linha2.checkT != ''}" />
+</span>
+<span class="cTextTitular" style="display:inline;"><th:block th:text="${linha2.ncheckT2}"></th:block></span>
+</td>
+<td>
+<input type="hidden" th:name="${'aux_per_F_' + linha2.emp7}" th:value="${linha2.ncheckF}" />
+<input type="checkbox" th:name="${'usu_per_F_' + linha2.emp8}" value="1" th:checked="${linha2.checkF != ''}" />
+</td>
+<td>
+<input type="hidden" th:name="${'aux_per_E_' + linha2.emp9}" th:value="${linha2.ncheckE}" />
+<input type="checkbox" th:name="${'usu_per_E_' + linha2.emp10}" value="1" th:checked="${linha2.checkE != ''}" />
+</td>
+<td>
+<input type="hidden" th:name="${'aux_per_A_' + linha2.emp11}" th:value="${linha2.ncheckA}" />
+<input type="checkbox" th:name="${'usu_per_A_' + linha2.emp12}" value="1" th:checked="${linha2.checkA != ''}" />
+</td>
+</tr>
+
+</th:block>
+
+</th:block>
+
+</table>
+<input type="hidden" name="qtdUsuariosEmpresa" th:value="${pagina.qtdUsuariosEmpresa}"/>
+<input type="button" id="salvar" value="Salvar e Sair" onclick="salvarUsuariosAgenda()" />
+<input type="button" id="cancelar" value="Cancelar e Sair" onclick="cancelarUsuariosAgenda()" />
+</form>
+<script type="text/javascript" th:inline="javascript">
+//-----------------------------------------------------------------
+var au_A01_NOME = document.getElementById("au_A01_NOME");
+au_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+var au_A04_TITULO = document.getElementById("au_A04_TITULO");
+au_A04_TITULO.innerHTML = document.getElementById("ct_A04_TITULO").value;
+//  -----------------------------------------------------------------
+//  ### contorle de permição de visualização da lista de Usuários ###
+var au_A05_PERFIL_TITULAR = document.getElementById("ct_A05_PERFIL_AGENDA_USUARIO_TITULAR");
+var au_editarDadosUsuarios = document.getElementById("au_editarDadosUsuarios");
+if (au_A05_PERFIL_TITULAR.value == "1") {
+	au_editarDadosUsuarios.style.display = "";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/forms.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/compartilhado/css/print.css}" media="print">
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesFluxo.js}" th:inline="javascript"></script>
+<script type="text/javascript" th:src="@{/compartilhado/js/funcoesCadastro.js}" th:inline="javascript"></script>
+</head>
+<body>
+
+<table class="tabTitForm"><tr>
+<td>
+<span class="stlTitForm">CADASTRO DE USUÁRIO</span>
+</td>
+<td style="text-align:right;"><span class="stlCodForm">CadUsu</span></td>
+</tr></table>
+
+<p><b>EMPRESA: </b><span id="u_A01_NOME"></span></p>
+<form id="CadastroUsuarioForm" action="#" method="post" autocomplete="off">
+<span id="u_Mensagens" style="display:none; color:red;"></span>
+<table><tr>
+<td><label for="u_a02_nome">Nome: </label>
+</td><td><input type="text" name="u_a02_nome" id="u_a02_nome" value="" size="40" /><br/>
+</td></tr><tr>
+<td><label for="u_a02_email">E-Mail: </label>
+</td><td><input type="email" name="u_a02_email" id="u_a02_email" value="" size="40" /><br/>
+</td></tr><tr>
+<td><label for="u_a02_usuario">Usuário: </label>
+</td><td><input type="text" name="u_a02_usuario" id="u_a02_usuario" value="" size="20" /><br/>
+</td></tr><tr>
+<td><label for="u_a02_senha">Senha: </label>
+</td><td><input type="password" name="u_a02_senha" id="u_a02_senha" value="" size="20" /><br/>
+</td></tr>
+</table>
+<input type="checkbox" checked="checked" name="u_a02_status" id="u_a02_status" value="1" />
+<label for="u_a02_status"> Status Ativo</label><br/>
+<span>------------------------------------------------</span><br/>
+<label for="perfis">Perfil do Usuário: </label><br/>
+<input type="checkbox" name="eup_a03_perfil_chefe" id="eup_a03_perfil_chefe" value="1" />
+<label for="eup_a03_perfil_chefe"> Chefe</label><br/>
+<input type="checkbox" name="eup_a03_perfil_padrao" id="eup_a03_perfil_padrao" value="1" />
+<label for="eup_a03_perfil_padrao"> Padrão</label><br/>
+<span>------------------------------------------------</span><br/>
+<input type="button" id="salvar" value="Salvar e Sair" onclick="salvarCadastroUsuario(1)" />
+<input type="button" id="cancelar" value="Cancelar e Sair" onclick="cancelarCadastroUsuario(1)" />
+<br/>
+<th:block th:replace="~{compartilhado/camposControle :: conteudo}"></th:block>
+</form>
+<script type="text/javascript" th:inline="javascript">
+var u_A01_NOME = document.getElementById("u_A01_NOME");
+u_A01_NOME.innerHTML = document.getElementById("ct_A01_NOME").value;
+</script>
+</body>
+</html>
