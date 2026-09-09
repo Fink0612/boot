@@ -35,7 +35,12 @@ target/
 backend/.local/
 backend/config/banco-local.properties
 backend/config/*.local.properties
-
+backend/target/
+backend/dependencias/back/repository/
+backend/dependencias/back/maven/
+backend/dependencias/front/cache/
 
 # Frontend: dependências e build
+frontend/node_modules/
+frontend/dist/
 frontend/.env.local
