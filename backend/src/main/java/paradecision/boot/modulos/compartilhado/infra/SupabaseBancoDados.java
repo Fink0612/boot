@@ -7,13 +7,11 @@ import java.time.Duration;
 import java.util.*;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.core.type.TypeReference;
 
 /** Supabase Data API/PostgREST por HTTPS. A chave nunca sai do backend. */
 @Component
-@ConditionalOnProperty(name="app.banco",havingValue="supabase")
 public class SupabaseBancoDados implements BancoDados {
   private final String url;
   private final String chave;

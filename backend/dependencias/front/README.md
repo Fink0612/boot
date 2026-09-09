@@ -1,1 +1,1 @@
-O cache fica em `cache/`. A instalação offline usa `npm ci --offline --cache ../dependencias/front/cache` dentro de `front/`. Não altere manualmente o lockfile. Prepare novamente o cache quando adicionar ou atualizar pacotes.
+El cache de dependencias del frontend npm queda en `cache/`. La instalación offline usa `npm ci --offline --cache ../dependencias/front/cache` (así lo hace `scripts/instalar-dependencias.ps1`/`.sh` con `-Frontend`). No alteres manualmente el lockfile. Vuelve a preparar el cache cuando agregues o actualices paquetes (con `-Online`).

@@ -20,7 +20,7 @@ import paradecision.boot.modulos.empresas.entity.EmpresaUsuarioPerfil;
 import paradecision.boot.modulos.agendas.repository.*;
 import paradecision.boot.modulos.agendas.entity.Agenda;
 import paradecision.boot.modulos.compartilhado.infra.FalhaPersistencia;
-@SpringBootTest(properties={"spring.config.import=optional:file:config/teste-inexistente.properties","app.banco=mysql"})
+@SpringBootTest(properties={"spring.config.import=optional:file:config/teste-inexistente.properties"})
 class ApiRestTests {
   @Autowired WebApplicationContext context;
   @MockitoBean UsuarioRepository usuarios;
@@ -60,8 +60,8 @@ class ApiRestTests {
     var a=new Agenda();a.setA04_codigo(4);a.setA01_codigo(8);a.setA04_status(0);var p=new EmpresaUsuarioPerfil();p.setA03_perfil_administrador(1);when(agendas.selectAgenda(any())).thenReturn(a);when(empresas.selectEmpresaUsuario(any())).thenReturn(p);
     mvc.perform(patch("/api/agendas/4/status").session(sessao()).header("X-Requested-With","XMLHttpRequest").contentType("application/json").content("{\"acao\":\"encerrar\"}")).andExpect(status().isConflict());verify(agendas,never()).updateStatusAgenda(any());
   }
-  @Test void swaggerDocumentaSomenteApiENaoAtivaMvcLegado() throws Exception {
+  @Test void swaggerDocumentaSomenteApiENaoServeFrontend() throws Exception {
     mvc.perform(get("/v3/api-docs")).andExpect(status().isOk()).andExpect(jsonPath("$.paths['/api/agendas/{id}']").exists()).andExpect(jsonPath("$.paths['/usuarios/interCadastroUsuario']").doesNotExist());
-    mvc.perform(get("/usuarios/interCadastroUsuario")).andExpect(status().isNotFound());mvc.perform(get("/")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/app/index.html"));
+    mvc.perform(get("/usuarios/interCadastroUsuario")).andExpect(status().isNotFound());mvc.perform(get("/app/index.html")).andExpect(status().isNotFound());
   }
 }

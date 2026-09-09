@@ -1,15 +1,27 @@
 services:
   - type: web
-    name: zeen-storm
+    name: zeen-storm-api
     runtime: docker
     plan: free
+    rootDir: backend
     dockerfilePath: ./Dockerfile
     dockerContext: .
-    healthCheckPath: /
+    healthCheckPath: /v3/api-docs
     envVars:
-      - key: DB_URL
-        value: jdbc:mysql://mysql-1b84e46-jonathanfink195-5c75.b.aivencloud.com:16979/defaultdb?sslMode=VERIFY_IDENTITY&serverTimezone=UTC&connectTimeout=10000&socketTimeout=30000&trustCertificateKeyStoreUrl=file:/app/aiven-truststore.p12&trustCertificateKeyStoreType=PKCS12&trustCertificateKeyStorePassword=changeit
-      - key: DB_USER
-        value: avnadmin
-      - key: DB_PASSWORD
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+
+  - type: web
+    name: zeen-storm-front
+    runtime: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
         sync: false

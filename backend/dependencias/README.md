@@ -1,13 +1,43 @@
-# Dependências para a escola
+# Dependências para a escola / rede bloqueada
 
-- `back/repository`: repositório Maven completo (JARs, POMs, plugins e dependências transitivas).
-- `back/maven`: distribuição Maven portátil, preparada pelo script.
-- `front/cache`: cache npm utilizado com o `front/package-lock.json`.
+Este projeto **não precisa de internet** para compilar: las dependencias se transportan junto con la carpeta del proyecto en `dependencias/`.
 
-Em uma rede liberada, execute `scripts/preparar-dependencias.ps1`. Depois copie **a pasta do projeto inteira**, incluindo estes diretórios ignorados pelo Git. Copiar apenas os JARs não é suficiente para Maven offline. Os binários ficam fora do Git para não sobrecarregar o repositório.
+- `back/repository`: repositorio Maven completo (JARs, POMs, plugins y dependencias transitivas) usado en modo `-o` (offline).
+- `back/maven`: distribución Maven portátil (apache-maven-3.9.6), sin instalación ni root.
+- `front/cache`: cache npm para `npm ci --offline` (solo si además desarrollas el frontend en esa máquina).
 
-Na escola: `scripts/empacotar.ps1 -Offline`. Isso reinstala o frontend a partir do cache, gera os arquivos React, executa os testes e produz o JAR com o frontend incluído. Execute com JDK 21: `java -jar target/boot-0.0.1-SNAPSHOT.jar`.
+## Preparar (en una red liberada, la primera vez)
 
-É necessário preparar o cache npm no mesmo sistema/arquitetura de destino (este cache é Windows x64). JDK 21 e Node 22.12+ precisam estar instalados. O JAR pronto exige apenas JDK 21; não usa Maven, npm ou CDN em execução.
+```powershell
+cd backend
+.\scripts\instalar-dependencias.ps1 -Online       # en Windows
+# o en Debian/Ubuntu:
+./scripts/instalar-dependencias.sh --online       # recarga caches de Maven/npm
+```
 
-Supabase por HTTPS ainda requer internet. Para trabalhar totalmente sem internet, configure MySQL local.
+Luego copia **la carpeta del proyecto entera** (incluye `dependencias/`, que está fuera del Git). Copiar solo los JARs no basta.
+
+## En la escuela (Debian, sin internet, sin root)
+
+```bash
+cd backend
+./scripts/instalar-dependencias.sh          # en modo offline por defecto
+./scripts/instalar-dependencias.sh --solo-jar   # si ya tienes el JAR, no recompila
+```
+
+En Windows equivalente:
+
+```powershell
+.\scripts\instalar-dependencias.ps1
+.\scripts\instalar-dependencias.ps1 -SoloJar
+```
+
+Requiere únicamente tener `java` (JDK 21) en el PATH. No hace falta Maven instalado ni permisos de administrador.
+
+## Ejecutar el backend
+
+```bash
+java -jar target/boot-0.0.1-SNAPSHOT.jar
+```
+
+Nota: el JAR ya contiene la API; si publicas el frontend en otra máquina, ese frontend debe apuntar a la API con `VITE_API_URL` y el backend debe tener `app.cors-origins` con la URL del frontend. Para solo usar la API, basta el JAR.

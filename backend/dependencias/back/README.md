@@ -1,1 +1,1 @@
-O script `scripts/preparar-dependencias.ps1` preenche `repository/` e `maven/`. Transporte ambos para a escola, inclusive os arquivos POM e metadados. O Maven Wrapper original pode tentar acessar a internet para baixar a distribuição; os scripts preferem o Maven portátil desta pasta.
+El script `scripts/instalar-dependencias.ps1` (o `.sh`) usa `back/maven` (Maven portátil) y `back/repository` (repositorio local). Transporte ambas carpetas con el proyecto. Copiar solo los JARs no basta para Maven offline.

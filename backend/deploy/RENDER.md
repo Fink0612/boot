@@ -1,16 +1,27 @@
 # Publicar no Render
 
-1. Envie este projeto para seu repositório Git, incluindo Dockerfile, render.yaml e deploy/aiven-ca.pem.
+São dois serviços, definidos no `render.yaml` na raiz do repositório:
+
+| Serviço | Pasta | O que roda |
+|---|---|---|
+| `zeen-storm-api` | `backend/` | API REST em Docker (Java 21, Spring Boot) |
+| `zeen-storm-front` | `frontend/` | Frontend React estático (Vite) |
+
+## Passo a passo
+
+1. Envie este repositório para o Git, incluindo `render.yaml`, `backend/` e `frontend/`.
 2. No Render, escolha **New > Blueprint**, conecte o repositório e selecione a branch.
-3. Informe **DB_PASSWORD** com a senha MySQL da Aiven e confirme a criação.
-4. Após o deploy terminar, abra a URL `.onrender.com` fornecida pelo Render.
+3. No formulário, informe as variáveis marcadas com `sync: false`:
+   - **API**: `SUPABASE_URL` (ex.: `https://seuprojeto.supabase.co`), `SUPABASE_SECRET_KEY` (chave do servidor) e `CORS_ORIGINS` (URL pública do frontend, ex.: `https://zeen-storm-front.onrender.com`).
+   - **Frontend**: `VITE_API_URL` (URL pública da API, ex.: `https://zeen-storm-api.onrender.com`).
+4. Confirme a criação. Render faz o build do Docker (`backend/Dockerfile`) e do Vite (`frontend/`).
 
-Se usar **New > Web Service**, selecione o runtime **Docker**, Dockerfile `./Dockerfile` e copie DB_URL e DB_USER do render.yaml. Adicione DB_PASSWORD separadamente. Não é necessário informar comando de build ou start.
+## Antes de publicar
 
-A raiz selecionada no Render deve conter o pom.xml e o Dockerfile. O build usa Java 21, compila pelo Maven Wrapper e executa os testes. A imagem final executa apenas o JAR, com usuário sem privilégios. A aplicação escuta a variável PORT do Render; fora dele usa 8080.
+- Aplique o esquema no Supabase (veja `banco/README.md`).
+- Se o Supabase tiver restrição de IP, permita os endereços de saída do Render.
+- O frontend chama a API pelo `VITE_API_URL`. Na mesma origem de `CORS_ORIGINS`, a API responde com `Access-Control-Allow-Origin: <origem>` e aceita a cookie de sessão.
 
-O MySQL continua hospedado na Aiven. Nenhum dado ou senha local entra na imagem. O certificado público está em deploy/aiven-ca.pem; o truststore é gerado durante o build e usado para validar o certificado e o hostname. Atualize o certificado se a CA do serviço mudar.
+O health check `/v3/api-docs` verifica a resposta HTTP do backend; não testa o banco. Após publicar, teste o login em `VITE_API_URL/api/autenticacao/login`.
 
-O health check `/` verifica a resposta HTTP; não testa o banco. Após publicar, teste o login com sua conta existente. Se a Aiven tiver restrição de IP, permita os endereços de saída informados pelo Render.
-
-Referências: https://render.com/docs/docker e https://render.com/docs/blueprint-spec
+Referências: https://render.com/docs/docker, https://render.com/docs/static-sites e https://render.com/docs/blueprint-spec

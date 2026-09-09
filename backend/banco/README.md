@@ -1,20 +1,24 @@
-# Banco local
+# Banco: Supabase (PostgreSQL)
 
-MySQL 8.4.11 portátil, escutando apenas em 127.0.0.1:3306. Banco: `ssdparaviverbem`.
+El backend usa Supabase como único banco de datos, vía la Data API/PostgREST por HTTPS. No hay MySQL ni JDBC.
+
+## Esquema
+
+- `banco/supabase.sql` — esquema PostgreSQL completo: siete tablas, seis views de la API REST, RLS (solo `service_role`) y el seed inicial (empresa de estudios y admin).
+
+Para aplicarlo, abra el SQL Editor de Supabase y pegue el contenido de `banco/supabase.sql`, o ejecútelo con `psql`:
 
 ```powershell
-.\scripts\preparar-banco.ps1
-.\scripts\banco.ps1 status
-.\scripts\banco.ps1 parar
-.\scripts\banco.ps1 iniciar
+psql "$env:DATABASE_URL" -f banco\supabase.sql
 ```
 
-Execute na raiz do projeto. A preparação cria uma Empresa de Estudos e o administrador `admin`. As senhas geradas ficam em `.local/acessos.json`. O usuário MySQL da aplicação é `zeen_app`, com permissões limitadas ao banco. A configuração fica em `config/banco-local.properties`. Ambos estão fora do Git.
+## Configuración
 
-Os dados persistem em `.local/mysql-data`, inclusive após `mvn clean` ou reiniciar o banco. Após reiniciar o computador, execute o comando iniciar. A preparação pode ser repetida sem apagar dados nem trocar senhas.
+La aplicación se conecta con la **chave do servidor** (`sb_secret_...`). Copie `config/banco-exemplo.properties` a `config/banco-local.properties` y complete:
 
-O esquema foi reconstruído das consultas Java porque o projeto não continha o SQL original. São sete tabelas, quatro views e duas procedures de compatibilidade. Não foram importados dados antigos.
+```properties
+supabase.url=https://SEU-PROJETO.supabase.co
+supabase.secret-key=sb_secret_...
+```
 
-A aplicação deve ser iniciada a partir da raiz do projeto. Também aceita DB_URL, DB_USER e DB_PASSWORD ou `-Ddb.config=caminho` antes de `-jar`.
-
-Distribuição oficial: https://dev.mysql.com/downloads/mysql/8.4.html . O script confere o MD5 publicado do arquivo fixado em 8.4.11 antes de extrair.
+La URL y la chave también pueden venir de las variables `SUPABASE_URL` y `SUPABASE_SECRET_KEY` (usadas por Render). La chave nunca sale del backend; `anon` y `authenticated` no tienen acceso a las tablas.

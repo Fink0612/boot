@@ -25,21 +25,17 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
 
-# Banco local: binarios, dados e credenciais
-.local/
-config/banco-local.properties
-dependencias/back/repository/
-dependencias/back/maven/
-dependencias/front/cache/
-front/node_modules/
-front/dist/
-config/*.local.properties
-front/.env.local
-src/main/resources/static/app/
+# Backend: binários, dados e credenciais
+backend/.local/
+backend/config/banco-local.properties
+backend/config/*.local.properties
+
+
+# Frontend: dependências e build
+frontend/.env.local
