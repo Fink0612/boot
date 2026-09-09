@@ -35,3 +35,11 @@ build/
 # Banco local: binarios, dados e credenciais
 .local/
 config/banco-local.properties
+dependencias/back/repository/
+dependencias/back/maven/
+dependencias/front/cache/
+front/node_modules/
+front/dist/
+config/*.local.properties
+front/.env.local
+src/main/resources/static/app/

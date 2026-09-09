@@ -27,6 +27,7 @@ import paradecision.boot.modulos.usuarios.entity.Usuario;
 import paradecision.boot.modulos.usuarios.repository.*;
 
 /** HTTP, services reais e Thymeleaf; apenas o acesso ao banco é simulado. */
+@org.springframework.test.context.ActiveProfiles("legado")
 @SpringBootTest
 class FrontendFluxosTests {
   @Autowired WebApplicationContext context;

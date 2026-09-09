@@ -9,6 +9,7 @@ import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 import paradecision.boot.modulos.empresas.service.pagina.EmpresaUsuariosPaginaService;
 
 /** Adaptador MVC: recebe HTTP, delega ao serviço e escolhe a view. */
+@org.springframework.context.annotation.Profile("legado")
 @Controller
 public class EmpresaUsuariosPaginaController {
   private final EmpresaUsuariosPaginaService service;

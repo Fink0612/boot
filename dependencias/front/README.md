@@ -1,0 +1,1 @@
+O cache fica em `cache/`. A instalação offline usa `npm ci --offline --cache ../dependencias/front/cache` dentro de `front/`. Não altere manualmente o lockfile. Prepare novamente o cache quando adicionar ou atualizar pacotes.

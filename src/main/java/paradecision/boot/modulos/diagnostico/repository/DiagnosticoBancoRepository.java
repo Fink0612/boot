@@ -1,23 +1,15 @@
 package paradecision.boot.modulos.diagnostico.repository;
 
 import org.springframework.stereotype.Repository;
-import paradecision.boot.modulos.compartilhado.infra.ConnectionFactory;
+import paradecision.boot.modulos.compartilhado.infra.BancoDados;
 import paradecision.boot.modulos.diagnostico.dto.DiagnosticoBanco;
 
 @Repository
 public class DiagnosticoBancoRepository {
+  private final BancoDados banco;
+  public DiagnosticoBancoRepository(BancoDados banco){this.banco=banco;}
   public DiagnosticoBanco verificar() {
-    var fabrica = new ConnectionFactory();
-    String mensagem;
-    try (var conexao = fabrica.getConnection()) {
-      mensagem =
-          conexao != null
-              ? "Sucesso!! Banco de Dados Conectado!"
-              : "OPS!! Problemas com acesso ao Banco de Dados!";
-    } catch (java.sql.SQLException excecao) {
-      mensagem = "OPS!! Problemas com acesso ao Banco de Dados!";
-    }
-    return new DiagnosticoBanco(
-        mensagem, fabrica.ipAtual, fabrica.ipPrincipal, fabrica.ipServer, fabrica.url);
+    banco.listar("empresa_01", java.util.Map.of("a01_codigo",-1));
+    return new DiagnosticoBanco("Banco conectado", "", "", "", "");
   }
 }

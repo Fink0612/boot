@@ -45,31 +45,31 @@ public class ConnectionFactory {
     ipPrincipal =
             ipServer =
                     ipAtual =
-                            "mysql-1b84e46-jonathanfink195-5c75.b.aivencloud.com";
+                            "localhost";
 
-    portaServer = "16979";
+    portaServer = "3306";
 
-    base_dados = "defaultdb";
+    base_dados = "ssdparaviverbem";
 
     url = valor(
             config,
             "db.url",
             "DB_URL",
-            "jdbc:mysql://mysql-1b84e46-jonathanfink195-5c75.b.aivencloud.com:16979/defaultdb?sslMode=REQUIRED"
+            "jdbc:mysql://localhost:3306/ssdparaviverbem?connectTimeout=10000&socketTimeout=30000&serverTimezone=America/Sao_Paulo"
     );
 
     login = valor(
             config,
             "db.user",
             "DB_USER",
-            "avnadmin"
+            "root"
     );
 
     senha = valor(
             config,
             "db.password",
             "DB_PASSWORD",
-            "COLOQUE_A_SENHA_DA_AIVEN_AQUI"
+            ""
     );
   }
 
@@ -108,7 +108,7 @@ public class ConnectionFactory {
 
       System.err.println(erro);
 
-      return null;
+      throw new FalhaPersistencia(excecao);
     }
   }
 }

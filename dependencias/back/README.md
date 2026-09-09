@@ -1,0 +1,1 @@
+O script `scripts/preparar-dependencias.ps1` preenche `repository/` e `maven/`. Transporte ambos para a escola, inclusive os arquivos POM e metadados. O Maven Wrapper original pode tentar acessar a internet para baixar a distribuição; os scripts preferem o Maven portátil desta pasta.

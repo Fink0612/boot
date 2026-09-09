@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /** Campos de navegação compartilhados pelos formulários, sem consultas ao banco. */
+@org.springframework.context.annotation.Profile("legado")
 @ControllerAdvice
 public class FragmentosAdvice {
   @ModelAttribute("controle")

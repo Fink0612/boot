@@ -1,0 +1,14 @@
+import {useState} from 'react';
+import {agendas} from './api.js';
+import {AgendaForm} from './Agendas.jsx';
+import Participantes from './Participantes.jsx';
+import Resultados from './Resultados.jsx';
+import Fatores from '../fatores/Fatores.jsx';
+import Pareceres from '../pareceres/Pareceres.jsx';
+import {useConsulta,Consulta,Status,Aviso} from '../compartilhado/components.jsx';
+export default function AgendaDetalhe({id,empresa,usuario,voltar}) {
+  const c=useConsulta(()=>Promise.all([agendas.buscar(id),agendas.participantes(id)]),[id]);
+  const [aba,setAba]=useState('fatores'),[editar,setEditar]=useState(false),[erro,setErro]=useState(''),[ocupado,setOcupado]=useState(false);
+  async function acao(fn){setErro('');setOcupado(true);try{await fn();c.recarregar()}catch(e){setErro(e.message)}finally{setOcupado(false)}}
+  return <><button className="voltar" onClick={voltar}>← Voltar às agendas</button><Consulta consulta={c}>{([a,participantes])=>{const perfil=participantes.find(p=>p.usuario.id===usuario.id)?.perfil||{};const podeEditar=empresa.podeGerenciar||perfil.titular||perfil.facilitador;return <><div className="titulo"><div><p className="eyebrow">AGENDA #{a.id}</p><h1>{a.titulo}</h1><p className="subtitulo">{a.descricao}</p></div><Status valor={a.status}/></div>{a.dataLimite&&<p>Prazo: {a.dataLimite.split('-').reverse().join('/')}</p>}<Aviso erro={erro}/>{podeEditar&&<div className="acoes acoes-agenda">{a.status!==9&&<button onClick={()=>setEditar(!editar)}>Editar agenda</button>}{a.status===0&&<button disabled={ocupado} onClick={()=>acao(()=>agendas.fluxo(id,'encaminhar'))}>Encaminhar agenda</button>}{a.status===1&&<button disabled={ocupado} onClick={()=>acao(()=>agendas.fluxo(id,'liberar'))}>Liberar pareceres</button>}{a.status===2&&<button disabled={ocupado} onClick={()=>{if(window.confirm('Encerrar o recebimento de pareceres?'))acao(()=>agendas.fluxo(id,'encerrar'))}}>Encerrar agenda</button>}<button className="primario" disabled={ocupado} onClick={()=>acao(()=>agendas.calcular(id))}>{ocupado?'Processando…':'Calcular resultados'}</button></div>}{editar&&<section className="card"><AgendaForm inicial={a} cancelar={()=>setEditar(false)} salvar={async d=>{await agendas.editar(id,d);setEditar(false);c.recarregar()}}/></section>}<nav className="abas" aria-label="Seções da agenda">{[['fatores','Fatores'],['participantes','Participantes'],['pareceres','Meus pareceres'],['resultados','Resultados']].map(([key,label])=><button key={key} aria-current={aba===key?'page':undefined} onClick={()=>setAba(key)}>{label}</button>)}</nav>{aba==='fatores'&&<Fatores agenda={a} podeEditar={podeEditar}/>} {aba==='participantes'&&<Participantes agenda={a} empresa={empresa} podeEditar={podeEditar} onChange={c.recarregar}/>} {aba==='pareceres'&&<Pareceres agenda={a} podeAvaliar={perfil.especialista}/>} {aba==='resultados'&&<Resultados agenda={a}/>}</>}}</Consulta></>
+}

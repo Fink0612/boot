@@ -17,7 +17,7 @@ public class UsuarioService {
     dadosUsuarioAuxiliares.setA02_usuario(dadosUsuario.getA02_usuario());
     dadosUsuarioAuxiliares = this.usuarioRepository.selectUserLogin(dadosUsuarioAuxiliares);
     if (dadosUsuarioAuxiliares.getA02_codigo() > 0) {
-      if (!(dadosUsuarioAuxiliares.getA02_senha().equals(dadosUsuario.getA02_senha()))) {
+      if (!(Senhas.conferir(dadosUsuario.getA02_senha(), dadosUsuarioAuxiliares.getA02_senha()))) {
         dadosUsuarioAuxiliares = new Usuario();
       }
     }
@@ -62,3 +62,4 @@ public class UsuarioService {
     return dadosUsuario;
   }
 }
+

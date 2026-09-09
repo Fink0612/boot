@@ -9,6 +9,7 @@ import paradecision.boot.modulos.compartilhado.dto.DadosFormulario;
 import paradecision.boot.modulos.agendas.service.pagina.InterAgendaUsuariosPaginaService;
 
 /** Adaptador MVC: recebe HTTP, delega ao serviço e escolhe a view. */
+@org.springframework.context.annotation.Profile("legado")
 @Controller
 public class InterAgendaUsuariosPaginaController {
   private final InterAgendaUsuariosPaginaService service;

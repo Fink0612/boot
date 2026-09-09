@@ -1,152 +1,21 @@
 package paradecision.boot.modulos.agendas.repository;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 import org.springframework.stereotype.Repository;
-import paradecision.boot.modulos.compartilhado.infra.ConnectionFactory;
-import paradecision.boot.modulos.agendas.dto.AgendaFatoresDados;
-import paradecision.boot.modulos.agendas.entity.Agenda;
-import paradecision.boot.modulos.fatores.entity.Fator;
-import paradecision.boot.modulos.usuarios.entity.Usuario;
-
+import paradecision.boot.modulos.compartilhado.infra.*;
+import paradecision.boot.modulos.agendas.entity.*;
+import paradecision.boot.modulos.agendas.dto.*;
+import paradecision.boot.modulos.empresas.entity.*;
+import paradecision.boot.modulos.empresas.dto.*;
+import paradecision.boot.modulos.usuarios.entity.*;
+import paradecision.boot.modulos.usuarios.dto.*;
+import paradecision.boot.modulos.fatores.entity.*;
+import paradecision.boot.modulos.pareceres.entity.*;
+import static paradecision.boot.modulos.compartilhado.infra.Registro.campos;
 @Repository
 public class AgendaFatoresRepository {
-
-  public AgendaFatoresDados selectFatoresDaAgenda(AgendaFatoresDados dadosAgendaFatores) {
-    Fator dadosFator;
-    ArrayList<Fator> listaFator = new ArrayList<Fator>();
-    Usuario dadosUsuario;
-    ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
-    Connection conexaoBanco = new ConnectionFactory().getConnection();
-    String instrucaoSql = "SELECT * FROM VW_AGENDAS_FATORES WHERE A04_CODIGO = ?;";
-    try {
-      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
-      comandoPreparado.setLong(1, dadosAgendaFatores.getoAgendaModel().getA04_codigo());
-      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
-      while (resultadoConsulta.next()) {
-        dadosFator = new Fator();
-        dadosFator.setA06_codigo(resultadoConsulta.getLong("A06_CODIGO"));
-        dadosFator.setA06_titulo(resultadoConsulta.getString("A06_TITULO"));
-        dadosFator.setA06_descricao(resultadoConsulta.getString("A06_DESCRICAO"));
-        dadosFator.setA06_num_sequencia(resultadoConsulta.getInt("A06_NUM_SEQUENCIA"));
-        dadosFator.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
-        dadosFator.setA06_certeza_resultante_fator(resultadoConsulta.getLong("A06_CERTEZA_RESULTANTE_FATOR"));
-        dadosFator.setA06_contradicao_resultante_fator(
-            resultadoConsulta.getLong("A06_CONTRADICAO_RESULTANTE_FATOR"));
-        dadosFator.setA06_resultado_fator(resultadoConsulta.getString("A06_RESULTADO_FATOR"));
-        dadosFator.setA06_dt_cadastro(resultadoConsulta.getDate("A06_DT_CADASTRO"));
-        dadosFator.setA06_dt_ultima_alteracao(resultadoConsulta.getDate("A06_DT_ULTIMA_ALTERACAO"));
-        listaFator.add(dadosFator);
-        dadosUsuario = new Usuario();
-        dadosUsuario.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
-        dadosUsuario.setA02_nome(resultadoConsulta.getString("A02_NOME"));
-        listaUsuario.add(dadosUsuario);
-      }
-      dadosAgendaFatores.setArrFatorModel(listaFator);
-      dadosAgendaFatores.setArrUsuarioModel(listaUsuario);
-      comandoPreparado.close();
-    } catch (Exception excecao) {
-      System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AFP-S1)");
-    }
-    fechaCon(conexaoBanco);
-    return dadosAgendaFatores;
-  }
-
-  public ArrayList<Fator> getArrFatoresModel(Agenda dadosAgenda) {
-    Fator dadosFator;
-    ArrayList<Fator> listaFator = new ArrayList<Fator>();
-    Connection conexaoBanco = new ConnectionFactory().getConnection();
-    String instrucaoSql = "SELECT * FROM FATOR_06 WHERE A04_CODIGO = ?;";
-    try {
-      PreparedStatement comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
-      comandoPreparado.setLong(1, dadosAgenda.getA04_codigo());
-      ResultSet resultadoConsulta = comandoPreparado.executeQuery();
-      while (resultadoConsulta.next()) {
-        dadosFator = new Fator();
-        dadosFator.setA06_codigo(resultadoConsulta.getLong("A06_CODIGO"));
-        dadosFator.setA06_titulo(resultadoConsulta.getString("A06_TITULO"));
-        dadosFator.setA06_descricao(resultadoConsulta.getString("A06_DESCRICAO"));
-        dadosFator.setA06_num_sequencia(resultadoConsulta.getInt("A06_NUM_SEQUENCIA"));
-        dadosFator.setA02_codigo(resultadoConsulta.getLong("A02_CODIGO"));
-        dadosFator.setA06_certeza_resultante_fator(resultadoConsulta.getLong("A06_CERTEZA_RESULTANTE_FATOR"));
-        dadosFator.setA06_contradicao_resultante_fator(
-            resultadoConsulta.getLong("A06_CONTRADICAO_RESULTANTE_FATOR"));
-        dadosFator.setA06_resultado_fator(resultadoConsulta.getString("A06_RESULTADO_FATOR"));
-        dadosFator.setA06_dt_cadastro(resultadoConsulta.getDate("A06_DT_CADASTRO"));
-        dadosFator.setA06_dt_ultima_alteracao(resultadoConsulta.getDate("A06_DT_ULTIMA_ALTERACAO"));
-        listaFator.add(dadosFator);
-      }
-      comandoPreparado.close();
-    } catch (Exception excecao) {
-      System.out.println(":: ERRO :: Problemas com a leitura de dados no BD...(AFP-S2)");
-    }
-    fechaCon(conexaoBanco);
-    return listaFator;
-  }
-
-  public String updateGrausFatoresDaAgenda(AgendaFatoresDados dadosAgendaFatores) {
-    String mensagemAcao = "NOK";
-    Fator dadosFator;
-    Agenda dadosAgenda;
-    ArrayList<Fator> listaFator = dadosAgendaFatores.getArrFatorModel();
-    Connection conexaoBanco = new ConnectionFactory().getConnection();
-    String instrucaoSql = "";
-    try {
-      PreparedStatement comandoPreparado;
-      int quantidadeFatores = listaFator.size();
-      dadosAgenda = dadosAgendaFatores.getoAgendaModel();
-      if (dadosAgenda.getA04_codigo() > 0 && quantidadeFatores > 0) {
-        // ---- ATUALIZANDO A AGENDA -------
-        instrucaoSql = "UPDATE AGENDA_04 SET ";
-        instrucaoSql += "A04_CERTEZA_RESULTADO=?, ";
-        instrucaoSql += "A04_CONTRADICAO_RESULTADO=?, ";
-        instrucaoSql += "A04_RESULTADO=? ";
-        instrucaoSql += "WHERE A04_CODIGO=?;";
-        comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
-        comandoPreparado.setDouble(1, dadosAgenda.getA04_certeza_resultado());
-        comandoPreparado.setDouble(2, dadosAgenda.getA04_contradicao_resultado());
-        comandoPreparado.setString(3, dadosAgenda.getA04_resultado());
-        comandoPreparado.setLong(4, dadosAgenda.getA04_codigo());
-        comandoPreparado.execute();
-        comandoPreparado.close();
-        // ---- ATUALIZANDO OS FATORES -------
-        instrucaoSql = "UPDATE FATOR_06 SET ";
-        instrucaoSql += "A06_CERTEZA_RESULTANTE_FATOR=?, ";
-        instrucaoSql += "A06_CONTRADICAO_RESULTANTE_FATOR=?, ";
-        instrucaoSql += "A06_RESULTADO_FATOR=? ";
-        instrucaoSql += "WHERE A06_CODIGO=?;";
-        for (int indiceRegistro = 0; indiceRegistro < quantidadeFatores; indiceRegistro++) {
-          dadosFator = listaFator.get(indiceRegistro);
-          if (dadosFator.getA06_codigo() > 0) {
-            comandoPreparado = conexaoBanco.prepareStatement(instrucaoSql);
-            comandoPreparado.setDouble(1, dadosFator.getA06_certeza_resultante_fator());
-            comandoPreparado.setDouble(2, dadosFator.getA06_contradicao_resultante_fator());
-            comandoPreparado.setString(3, dadosFator.getA06_resultado_fator());
-            comandoPreparado.setLong(4, dadosFator.getA06_codigo());
-            comandoPreparado.execute();
-            comandoPreparado.close();
-          }
-        }
-        mensagemAcao = "OK";
-      }
-    } catch (Exception excecao) {
-      System.out.println(":: ERRO :: Problemas com a Altera��o de dados no BD...(AFP)");
-    }
-    fechaCon(conexaoBanco);
-    return mensagemAcao;
-  }
-
-  // ......PARA LIDAR COM O BANCO DE DADOS..........
-
-  private void fechaCon(Connection conexaoBanco) {
-    if (conexaoBanco == null) return;
-    try {
-      conexaoBanco.close();
-    } catch (SQLException excecao) {
-      excecao.printStackTrace();
-    }
-  }
+  private final BancoDados banco;
+  public AgendaFatoresRepository(BancoDados banco) { this.banco = banco; }
+  public AgendaFatoresDados selectFatoresDaAgenda(AgendaFatoresDados v) { for(var r:banco.listar("vw_agendas_fatores",campos("a04_codigo",v.getoAgendaModel().getA04_codigo()))) { v.getArrFatorModel().add(Mapeamento.Fator(r)); v.getArrUsuarioModel().add(Mapeamento.Usuario(r)); } return v; }
+  public ArrayList<Fator> getArrFatoresModel(Agenda v) { return new ArrayList<>(banco.listar("fator_06",campos("a04_codigo",v.getA04_codigo())).stream().map(Mapeamento::Fator).toList()); }
+  public String updateGrausFatoresDaAgenda(AgendaFatoresDados v) { var a=v.getoAgendaModel(); banco.atualizar("agenda_04",campos("a04_codigo",a.getA04_codigo()),campos("a04_certeza_resultado",a.getA04_certeza_resultado(),"a04_contradicao_resultado",a.getA04_contradicao_resultado(),"a04_resultado",a.getA04_resultado())); for(var f:v.getArrFatorModel()) banco.atualizar("fator_06",campos("a06_codigo",f.getA06_codigo()),campos("a06_certeza_resultante_fator",f.getA06_certeza_resultante_fator(),"a06_contradicao_resultante_fator",f.getA06_contradicao_resultante_fator(),"a06_resultado_fator",f.getA06_resultado_fator())); return "OK"; }
 }

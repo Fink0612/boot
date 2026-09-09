@@ -1,0 +1,3 @@
+import {empresas} from './api.js';
+import {useConsulta,Consulta} from '../compartilhado/components.jsx';
+export default function Empresas({onSelect}){const c=useConsulta(empresas.listar);return <><p className="eyebrow">VISÃO GERAL</p><h1>Suas empresas</h1><p className="subtitulo">Escolha uma empresa para acompanhar as decisões da equipe.</p><Consulta consulta={c}>{lista=>lista.length?<div className="cards">{lista.map(e=><button className="empresa card" key={e.id} onClick={()=>onSelect(e)}><span className="icone">{e.nome?.slice(0,1)}</span><h2>{e.nome}</h2><p>{e.descricao||'Espaço de decisões colaborativas'}</p><span className="abrir">Abrir agendas →</span></button>)}</div>:<div className="vazio">Você ainda não está vinculado a uma empresa.</div>}</Consulta></>}

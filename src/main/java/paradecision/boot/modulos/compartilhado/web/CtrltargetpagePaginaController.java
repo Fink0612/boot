@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /** Camada web de ctrltargetpage: prepara os dados; o HTML fica no template. */
+@org.springframework.context.annotation.Profile("legado")
 @Controller
 public class CtrltargetpagePaginaController {
   @RequestMapping(

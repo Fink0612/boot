@@ -19,6 +19,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 /** Renderiza todas as telas com listas vazias e preenchidas, sem usar o banco. */
+@org.springframework.test.context.ActiveProfiles("legado")
 @SpringBootTest
 class FrontendTemplatesTests {
   @Autowired SpringTemplateEngine engine;
